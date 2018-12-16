@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  list-style-type: none;
 }
 
 .App-logo {
@@ -21,6 +22,10 @@
 .App-link {
   color: #61dafb;
 }
+
+.summonerName{
+    color: #0000ff;
+  }
 
 @keyframes App-logo-spin {
   from {
