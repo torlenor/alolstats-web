@@ -2,12 +2,9 @@ import React, { Component } from 'react';
 
 import './App.css';
 
-import Header from './Header.js'
-import Content from './Content.js'
 import Champion from './Champion.js'
+import NavigationBar from './Navbar.js'
 
-import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 
@@ -18,7 +15,6 @@ var freeRotation1 = {"freeChampionIds":[13,34,35,44,51,60,68,80,84,99,126,150,16
 var champion1 = {"version":"8.24.1","id":"Aatrox","key":"266","name":"Aatrox","title":"the Darkin Blade","blurb":"Once honored defenders of Shurima against the Void, Aatrox and his brethren would eventually become an even greater threat to Runeterra, and were defeated only by cunning mortal sorcery. But after centuries of imprisonment, Aatrox was the first to find...","info":{"attack":8,"defense":4,"magic":3,"difficulty":4},"image":{"full":"Aatrox.png","sprite":"champion0.png","group":"champion","x":0,"y":0,"w":48,"h":48}}
 
 const API = 'http://localhost:8000/v1/champion/bykey?key=';
-const DEFAULT_QUERY = '1'
 
 const styles = theme => ({
     root: {
@@ -80,7 +76,8 @@ class App extends Component {
       <div className="App">
           {/* <Header title="Summoner" />
           <Content summoner={summoner1} /> */}
-          <Header title="Free Champions Rotation" />
+          {/* <Header title="Free Champions Rotation" /> */}
+          <NavigationBar />
 
           {/* {hits.map((hit) => //{
             <li key={hit.id}>
