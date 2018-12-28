@@ -19,25 +19,25 @@ class NavigationBar extends Component {
               <LinkContainer to="/freerotation">
                     <NavItem>Free Rotation</NavItem>
                 </LinkContainer>
-                <LinkContainer to="/champions">
+                {/* <LinkContainer to="/champions">
                     <NavItem>Champions</NavItem>
-                </LinkContainer>
+                </LinkContainer> */}
                 <LinkContainer to="/summoners">
                     <NavItem>Summoners</NavItem>
                 </LinkContainer>
-                <LinkContainer to="/matches">
+                {/* <LinkContainer to="/matches">
                     <NavItem>Matches</NavItem>
-                </LinkContainer>
+                </LinkContainer> */}
             </Nav>
 
-            <Nav pullRight>
+            {/* <Nav pullRight>
                 <LinkContainer to="/signup">
                     <NavItem>Signup</NavItem>
                 </LinkContainer>
                 <LinkContainer to="/login">
                     <NavItem>Login</NavItem>
                 </LinkContainer>
-            </Nav>
+            </Nav> */}
             </Navbar.Collapse>
             </Navbar>
           </div>

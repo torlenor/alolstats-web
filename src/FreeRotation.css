@@ -1,0 +1,13 @@
+@media all and (min-width: 480px) {
+    .FreeRotation {
+      padding: 10px 0;
+      padding-top: 10px;
+      text-align: center;
+      margin: 0 auto;
+      max-width: 800px;
+    }
+
+    .grid {
+        margin: 10px auto;
+      }
+}

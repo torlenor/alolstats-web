@@ -1,11 +1,11 @@
 @media all and (min-width: 480px) {
-    .Summoner {
+    .League {
       padding: 0px 0;
       padding-top: 10px;
       text-align: center;
     }
   
-    .Summoner form {
+    .League form {
       margin: 0 auto;
       max-width: 320px;
     }

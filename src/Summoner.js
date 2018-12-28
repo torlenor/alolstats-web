@@ -2,20 +2,44 @@ import React, { Component } from 'react';
 
 import "./Summoner.css"
 
+import League from "./League"
+
+const API = 'http://localhost:8000/v1/summoner/byname?name=';
+
 class Summoner extends Component {
-    render() {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            summoner: {},
+            leagues: []
+          };
+      }
+
+      componentDidMount() {
         const {summoner} = this.props;
+        fetch(API + summoner)
+        .then(response => response.json())
+        .then(data => this.setState({ summoner: data, leagues: data.leagues }));
+    }
+
+    render() {
+        const { summoner, leagues } = this.state;
+
+        if (typeof leagues !== 'undefined') {
+        console.log(leagues[0])
+        }
 
       return (
         <div className="content">
 
-          <div className="Summoner">
+        <div className="Summoner">
   
             <div className="profileIcon">
                 <img
                 alt=''
                 style={{width: 100, height: 100}}
-    resizeMode="strech"
+    resizemode="strech"
                 src={`http://ddragon.leagueoflegends.com/cdn/8.24.1/img/profileicon/${summoner.profileIconId}.png`} />
             </div>
 
@@ -36,6 +60,14 @@ class Summoner extends Component {
                 Last updated: {summoner.timestamp}
                 </span>
             </div>
+
+
+            <ul>
+        {leagues.map(hit =>
+          <League league={hit} />
+        )}
+      </ul>
+        
           </div>
         </div>
       )
