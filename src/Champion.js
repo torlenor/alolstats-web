@@ -18,10 +18,7 @@ class Champion extends Component {
             <span className="championName">
             {champion.name}
             </span>
-
-            {/* <span className="championInfo">
-            {champion.info}
-            </span> */}
+            
           </div>
   
         </div>

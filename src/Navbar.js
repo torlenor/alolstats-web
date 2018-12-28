@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import { Nav, Navbar, NavItem } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 
 class NavigationBar extends Component {
     render() {
@@ -15,15 +16,27 @@ class NavigationBar extends Component {
               </Navbar.Header>
               <Navbar.Collapse>
               <Nav>
-                <NavItem href="/signup">Free Rotation</NavItem>
-                <NavItem href="/login">Champions</NavItem>
-                <NavItem href="/login">Summoners</NavItem>
-                <NavItem href="/login">Matches</NavItem>
+              <LinkContainer to="/freerotation">
+                    <NavItem>Free Rotation</NavItem>
+                </LinkContainer>
+                <LinkContainer to="/champions">
+                    <NavItem>Champions</NavItem>
+                </LinkContainer>
+                <LinkContainer to="/summoners">
+                    <NavItem>Summoners</NavItem>
+                </LinkContainer>
+                <LinkContainer to="/matches">
+                    <NavItem>Matches</NavItem>
+                </LinkContainer>
             </Nav>
 
             <Nav pullRight>
-                <NavItem href="/signup">Signup</NavItem>
-                <NavItem href="/login">Login</NavItem>
+                <LinkContainer to="/signup">
+                    <NavItem>Signup</NavItem>
+                </LinkContainer>
+                <LinkContainer to="/login">
+                    <NavItem>Login</NavItem>
+                </LinkContainer>
             </Nav>
             </Navbar.Collapse>
             </Navbar>

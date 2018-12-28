@@ -1,0 +1,12 @@
+@media all and (min-width: 480px) {
+    .Summoner {
+      padding: 0px 0;
+      padding-top: 0px;
+      text-align: center;
+    }
+  
+    .Summoner form {
+      margin: 0 auto;
+      max-width: 320px;
+    }
+  }

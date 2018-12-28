@@ -1,0 +1,10 @@
+@media all and (min-width: 480px) {
+    .Summoners {
+      padding: 0px 0;
+    }
+  
+    .Summoners form {
+      margin: 0 auto;
+      max-width: 320px;
+    }
+  }
