@@ -15,8 +15,6 @@ before_script:
 
 create_docker_image:
   stage: build_image
-  dependencies: 
-    - build_static
   tags:
     - docker-from-docker
   script:
