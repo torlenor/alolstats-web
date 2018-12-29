@@ -4,7 +4,8 @@ import "./Summoner.css"
 
 import League from "./League"
 
-const API = 'http://localhost:8000/v1/summoner/byname?name=';
+const API_URL = `${process.env.REACT_APP_API_BASE_URL}`;
+const API = `${API_URL}/v1/summoner/byname?name=`;
 
 class Summoner extends Component {
     constructor(props) {
