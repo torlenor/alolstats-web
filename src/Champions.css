@@ -1,0 +1,17 @@
+@media all and (min-width: 480px) {
+    .Champions {
+      padding: 10px 0;
+      margin: 0 auto;
+      max-width: 800;
+    }
+  
+    .Champions form {
+      margin: 0 auto;
+      max-width: 320px;
+    }
+
+    .Champions championStats {
+        margin: 0 auto;
+        max-width: 320px;
+      }
+  }

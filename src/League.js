@@ -3,10 +3,6 @@ import React, { Component } from 'react';
 import "./League.css"
 
 class League extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         const {league} = this.props;
 

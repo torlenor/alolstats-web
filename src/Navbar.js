@@ -19,9 +19,9 @@ class NavigationBar extends Component {
               <LinkContainer to="/freerotation">
                     <NavItem>Free Rotation</NavItem>
                 </LinkContainer>
-                {/* <LinkContainer to="/champions">
+                <LinkContainer to="/champions">
                     <NavItem>Champions</NavItem>
-                </LinkContainer> */}
+                </LinkContainer>
                 <LinkContainer to="/summoners">
                     <NavItem>Summoners</NavItem>
                 </LinkContainer>
