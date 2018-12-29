@@ -4,6 +4,8 @@ import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 
 import "./Champions.css";
 
+const API_URL = `${process.env.REACT_APP_API_BASE_URL}`;
+
 export default class Champions extends Component {
     constructor(props) {
       super(props);
