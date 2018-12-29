@@ -62,7 +62,7 @@ export default class Champions extends Component {
                     className="championStats"
                     alt=''
                     style={{width: 1024}}
-                    src={`http://localhost:8000/v1/stats/plots/champion/byname?name=${this.state.championName}&gameversion=8.24`} />
+                    src={`${API_URL}/v1/stats/plots/champion/byname?name=${this.state.championName}&gameversion=8.24`} />
                 </div>
             </div>;
     } else {
