@@ -21,6 +21,7 @@ create_docker_image:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN git.abyle.org:5000
     - docker pull $CONTAINER_IMAGE:latest || true
     - docker build --cache-from $CONTAINER_IMAGE:latest --tag $CONTAINER_IMAGE:$CI_COMMIT_SHA .
+    - docker tag $CONTAINER_IMAGE:$CI_COMMIT_SHA $CONTAINER_IMAGE:latest_dev
     - docker push $CONTAINER_IMAGE:$CI_COMMIT_SHA
 
 deploy_testing:
