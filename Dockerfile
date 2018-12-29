@@ -5,7 +5,7 @@ WORKDIR /usr/src/alolstats-web
 ENV PATH /usr/src/alolstats-web/node_modules/.bin:$PATH
 COPY package.json /usr/src/alolstats-web/package.json
 RUN npm install --silent
-RUN npm install react-scripts@1.1.1 -g --silent
+RUN npm install react-scripts@2.1.1 -g --silent
 COPY . /usr/src/alolstats-web
 RUN npm run build
 
