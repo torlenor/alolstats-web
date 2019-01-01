@@ -10,12 +10,10 @@
       max-width: 320px;
     }
     
-      .championStatsImage {
-        margin: 0 auto;
-        padding: 10px 0;
-        display: block;
+      .ChampionStats {
         margin-left: auto;
         margin-right: auto;
-        width: 100%;
+        margin: auto;
+        padding: 10px;
       }
   }
