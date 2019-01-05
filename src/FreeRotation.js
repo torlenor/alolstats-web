@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 import './FreeRotation.css';
 
@@ -14,63 +14,73 @@ const API = `${API_URL}/v1/champion/bykey?key=`;
 export default class FreeRotation extends Component {
     constructor(props) {
         super(props);
-    
+
         this.state = {
-          hits: [],
+            hits: [],
+            error: false
         };
-      }
+    }
 
     componentDidMount() {
         var self = this;
 
         fetch(FreeRotationAPI)
-        .then(response => response.json())
-        .then(data => {
+            .then(response => response.json())
+            .then(data => {
 
+                if (data.freeChampionIds === null) {
+                    self.setState({error: true})
+                    return
+                }
 
-            data.freeChampionIds.forEach(function(champKey)
-            {
-                fetch(API + champKey)
-                .then((response) => {
-                    if(response.ok) {
-                      return response.json();
-                    } else {
-                      throw new Error('Server response wasn\'t OK');
-                    }
-                  })
-                .then((json) => {
-                    var newHits = self.state.hits.slice();
-                    newHits.push(json);
-        
-                    self.setState({
-                        hits: newHits
+                data
+                    .freeChampionIds
+                    .forEach(function (champKey) {
+                        fetch(API + champKey).then((response) => {
+                            if (response.ok) {
+                                return response.json();
+                            } else {
+                                throw new Error('Server response wasn\'t OK');
+                            }
+                        }).then((json) => {
+                            var newHits = self
+                                .state
+                                .hits
+                                .slice();
+                            newHits.push(json);
+
+                            self.setState({hits: newHits});
+                        })
                     });
-                })
-            });
 
-        })
+            })
     }
-    
-  render() {
-    const { hits } = this.state;
 
-    return (
-        <div className="FreeRotation">
-            <Grid
-                container
-                className="demo"
-                justify="center"
-                spacing={16}
-            >
-                {hits.map(value => (
-                <Grid key={value.key} item>
-                    <Paper className="paper">
-                        <Champion champion={value} />
-                    </Paper>
+    render() {
+        const {hits} = this.state;
+
+        let page;
+
+        if (this.state.error) {
+            page = <div className="FreeRotation">Ooops, something bad happened!<br></br><br></br>Error receiving Free Rotation, please try again later!</div>
+        } else {
+            page = <div className="FreeRotation">
+                <Grid container className="demo" justify="center" spacing={16}>
+                    {hits.map(value => (
+                        <Grid key={value.key} item>
+                            <Paper className="paper">
+                                <Champion champion={value}/>
+                            </Paper>
+                        </Grid>
+                    ))}
                 </Grid>
-                ))}
-            </Grid>
-        </div>
-    );
-  }
+            </div>
+        }
+
+        return (
+            <div>
+                <h2>{page}</h2>
+            </div>
+        );
+    }
 }
