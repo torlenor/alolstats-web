@@ -1,19 +1,8 @@
 @media all and (min-width: 480px) {
-    .Champions {
-      padding: 10px 0;
-      margin: 0 auto;
-      max-width: 800;
+    .content {
+        /* height: 10em; */
+        display: flex;
+        /* align-items: center; */
+        justify-content: center;
     }
-  
-    .Champions form {
-      margin: 0 auto;
-      max-width: 320px;
-    }
-    
-      .ChampionStats {
-        margin-left: auto;
-        margin-right: auto;
-        margin: auto;
-        padding: 10px;
-      }
-  }
+}

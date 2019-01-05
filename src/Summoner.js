@@ -20,14 +20,16 @@ class Summoner extends Component {
 
     componentDidMount() {
         const {summoner} = this.props;
-        fetch(API + summoner).then(response => {
-            if (response.status === 200) {
-                response.json();
-            } else {
-                this.setState({error: true});
-                return {};
+        fetch(API + summoner)
+            .then(response => {
+                if (response.status === 200) {
+                    response.json();
+                } else {
+                    this.setState({error: true});
+                    return {};
+                    }
                 }
-            })
+            )
             .then(data => this.setState({summoner: data, leagues: data.leagues}))
             .catch(this.setState({error: true}));
     }
