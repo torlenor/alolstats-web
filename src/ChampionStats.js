@@ -62,14 +62,37 @@ class ChampionStats extends Component {
             </div>;
         } else {
             var data = championstats.lanerolepercentageplotly;
+
+            // data[0].text = ['WP: Text A', 'WP: Text B', 'WP: Text C', 'WP: Text D', 'WP: Text E'];
+            // data[0].textposition = 'auto';
+
+            // data[1].text = ['Text A', 'Text B', 'Text C', 'Text D', 'Text E'];
+            // data[1].textposition = 'auto';
+
+            // data[2].text = ['Text A', 'Text B', 'Text C', 'Text D', 'Text E'];
+            // data[2].textposition = 'auto';
+
+            // data[3].text = ['Text A', 'Text B', 'Text C', 'Text D', 'Text E'];
+            // data[3].textposition = 'auto';
+
+            console.log(data);
+
             var layout = {
                 barmode: 'stack',
                 width: 800,
                 height: 600,
+                xaxis: {
+                    title: {
+                        text: 'Lane'
+                    }
+                },
                 yaxis: {
+                    title: {
+                        text: 'Percentage [%]',
+                    },
                     range: [0, 100]
                 },
-                title: `<b>${championstats.championname}</b> Most Played Lanes/Roles`
+                title: `Champion Role Distribution for <b>${championstats.championname}</b>`
             };
 
             page = <div className="content">
