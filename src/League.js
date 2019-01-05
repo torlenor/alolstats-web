@@ -6,20 +6,18 @@ class League extends Component {
     render() {
         const {league} = this.props;
 
-        console.log(league)
-
       return (
         <div className="content">
 
         <div className="League">
   
-            <div className="profileIcon">
+            {/* <div className="leagueTierIcon">
                 <img
                 alt=''
                 style={{width: 100, height: 100}}
     resizemode="strech"
                 src={`http://ddragon.leagueoflegends.com/cdn/8.24.1/img/profileicon/${league.profileIconId}.png`} />
-            </div>
+            </div> */}
 
             <div> 
             <span className="queueType">

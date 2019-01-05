@@ -16,7 +16,8 @@ export default class FreeRotation extends Component {
         super(props);
 
         this.state = {
-            hits: [],
+            didMount: false,
+            hits: null,
             error: false
         };
     }
@@ -24,36 +25,50 @@ export default class FreeRotation extends Component {
     componentDidMount() {
         var self = this;
 
-        fetch(FreeRotationAPI)
-            .then(response => response.json())
-            .then(data => {
+        fetch(FreeRotationAPI).then(response => {
+            if (response.status === 200) {
+                let json = response.json();
+                return json;
+            } else {
+                this.setState({error: true});
+                return null;
+            }
+        }).then(data => {
 
-                if (data.freeChampionIds === null) {
-                    self.setState({error: true})
-                    return
-                }
+            if (data.freeChampionIds === null) {
+                this.setState({error: true, didMount: true})
+                return
+            }
 
-                data
-                    .freeChampionIds
-                    .forEach(function (champKey) {
-                        fetch(API + champKey).then((response) => {
-                            if (response.ok) {
-                                return response.json();
-                            } else {
-                                throw new Error('Server response wasn\'t OK');
-                            }
-                        }).then((json) => {
-                            var newHits = self
+            data
+                .freeChampionIds
+                .forEach(function (champKey) {
+                    fetch(API + champKey).then((response) => {
+                        if (response.ok) {
+                            return response.json();
+                        } else {
+                            throw new Error('Server response wasn\'t OK');
+                        }
+                    }).then((json) => {
+                        let newHits;
+                        if (self.state.hits === null) {
+                            newHits = [];
+                            newHits.push(json);
+                            self.setState({hits: newHits});
+                        } else {
+                            newHits = self
                                 .state
                                 .hits
                                 .slice();
                             newHits.push(json);
-
                             self.setState({hits: newHits});
-                        })
-                    });
-
-            })
+                        }
+                    })
+                });
+            self.setState({didMount: true});
+        }).catch(error => {
+            this.setState({error: true, didMount: true})
+        });
     }
 
     render() {
@@ -61,8 +76,16 @@ export default class FreeRotation extends Component {
 
         let page;
 
-        if (this.state.error) {
-            page = <div className="FreeRotation">Ooops, something bad happened!<br></br><br></br>Error receiving Free Rotation, please try again later!</div>
+        if (this.state.didMount === false) {
+            page = <div className="content">
+                <div className="FreeRotation">
+                    Loading Free Rotation...<br></br>
+                    Please wait...
+                </div>
+            </div>;
+        } else if (this.state.error || hits === null) {
+            page = <div className="FreeRotation">Ooops, something bad happened!<br></br>
+                <br></br>Error receiving Free Rotation, please try again later!</div>
         } else {
             page = <div className="FreeRotation">
                 <Grid container className="demo" justify="center" spacing={16}>

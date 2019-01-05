@@ -12,7 +12,8 @@ class ChampionStats extends Component {
         super(props);
 
         this.state = {
-            championstats: {},
+            didMount: false,
+            championstats: null,
             error: false
         };
     }
@@ -21,17 +22,21 @@ class ChampionStats extends Component {
         const {champion} = this.props;
         fetch(API + champion + VERSION).then(response => {
             if (response.status === 200) {
-                response.json();
+                let json = response.json();
+                return json;
             } else {
                 this.setState({error: true});
-                return {};
-                }
-            })
-            .then(data => this.setState({championstats: data}))
-            .catch(function (error) {
-                console.log(error);
-                this.setState({error: true});
-            });
+                return null;
+            }
+        }).then(data => {
+            if (data !== null) {
+                this.setState({championstats: data, error: false, didMount: true});
+            } else {
+                this.setState({error: true, didMount: true});
+            }
+        }).catch(error => {
+            this.setState({error: true, didMount: true})
+        });
     }
 
     render() {
@@ -41,9 +46,16 @@ class ChampionStats extends Component {
 
         let page;
 
-        if (this.state.error) {
+        if (this.state.didMount === false) {
             page = <div className="content">
-                <div className="Summoner">
+                <div className="ChampionStats">
+                    Loading Champion informations...<br></br>
+                    Please wait...
+                </div>
+            </div>;
+        } else if (this.state.error || championstats === null) {
+            page = <div className="content">
+                <div className="ChampionStats">
                     Ooops, something bad happened!<br></br>
                     <br></br>Error receiving Champion Stats, please try again later!
                 </div>
@@ -60,9 +72,17 @@ class ChampionStats extends Component {
                 title: `<b>${championstats.championname}</b> Most Played Lanes/Roles`
             };
 
-            page = <div className="ChampionStats">
-                <Plot data={data} layout={layout}/>
-            </div>
+            page = <div className="content">
+                <div className="ChampionStats">
+                    <div>
+                        <span className="ChampionStatsInformations">
+                            Only unranked and ranked PvP games on Summoners Rift with game version 8.24 are
+                            considered - {championstats.samplesize} total games analyzed
+                        </span>
+                    </div>
+                    <Plot data={data} layout={layout}/>
+                </div>
+            </div>;
         }
 
         return (
