@@ -11,6 +11,7 @@ RUN npm run build
 
 # production environment
 FROM nginx:1.15.8-alpine
+COPY ./dockerfiles/nginx_image/etc/nginx/conf.d/* /etc/nginx/conf.d/
 COPY --from=builder /usr/src/alolstats-web/build /usr/share/nginx/html
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
