@@ -5,7 +5,8 @@ import "./ChampionStats.css"
 
 const API_URL = `${process.env.REACT_APP_API_BASE_URL}`;
 const API = `${API_URL}/v1/stats/champion/byname?name=`;
-const VERSION = "&gameversion=8.24";
+const GAMEVERSION = "9.1"
+const VERSION = `&gameversion=${GAMEVERSION}`;
 
 class ChampionStats extends Component {
     constructor(props) {
@@ -99,7 +100,7 @@ class ChampionStats extends Component {
                 <div className="ChampionStats">
                     <div>
                         <span className="ChampionStatsInformations">
-                            Only unranked and ranked PvP games on Summoners Rift with game version 8.24 are
+                            Only unranked and ranked PvP games on Summoners Rift with game version {GAMEVERSION} are
                             considered - {championstats.samplesize} total games analyzed
                         </span>
                     </div>
