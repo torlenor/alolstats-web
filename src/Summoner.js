@@ -85,7 +85,7 @@ class Summoner extends Component {
 
                     <div>
                         <Grid container className="demo" justify="center" spacing={16}>
-                            {leagues.map(hit => (
+                            {leagues.LeaguePosition.map(hit => (
                                 <Grid key={hit.queueType} item>
                                     <Paper className="paper">
                                         <League key={hit.rank} league={hit}/>
