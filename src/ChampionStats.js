@@ -19,6 +19,27 @@ class ChampionStats extends Component {
         };
     }
 
+    componentWillReceiveProps(props) {
+        const {champion} = props;
+        fetch(API + champion + VERSION).then(response => {
+            if (response.status === 200) {
+                let json = response.json();
+                return json;
+            } else {
+                this.setState({error: true});
+                return null;
+            }
+        }).then(data => {
+            if (data !== null) {
+                this.setState({championstats: data, error: false, didMount: true});
+            } else {
+                this.setState({error: true, didMount: true});
+            }
+        }).catch(error => {
+            this.setState({error: true, didMount: true})
+        });
+      }
+
     componentDidMount() {
         const {champion} = this.props;
         fetch(API + champion + VERSION).then(response => {
@@ -42,8 +63,6 @@ class ChampionStats extends Component {
 
     render() {
         const {championstats} = this.state;
-
-        console.log(championstats)
 
         let page;
 

@@ -1,14 +1,15 @@
 @media all and (min-width: 480px) {
     .Champions {
-      padding: 10px 0;
-      margin: 0 auto;
-      max-width: 800;
+        padding: 10px 0;
+        margin: 0 auto;
+        max-width: 320px;
     }
-  
-    .Champions form {
-      margin: 0 auto;
-      max-width: 320px;
-    }
+
+    .searchButton {
+        padding: 10px 0;
+        margin: 0 auto;
+        max-width: 320px;
+      }
     
       .championStatsImage {
         margin: 0 auto;
