@@ -4,7 +4,7 @@ import Plot from 'react-plotly.js';
 import "./ChampionStats.css"
 
 const API_URL = `${process.env.REACT_APP_API_BASE_URL}`;
-const API = `${API_URL}/v1/stats/champion/byname?name=`;
+const API = `${API_URL}/v1/stats/champion/byid?id=`;
 const GAMEVERSION = "9.1"
 const VERSION = `&gameversion=${GAMEVERSION}`;
 
