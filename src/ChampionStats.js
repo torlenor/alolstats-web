@@ -5,7 +5,7 @@ import "./ChampionStats.css"
 
 const API_URL = `${process.env.REACT_APP_API_BASE_URL}`;
 const API = `${API_URL}/v1/stats/champion/byid?id=`;
-const GAMEVERSION = "9.1"
+const GAMEVERSION = "9.2"
 const VERSION = `&gameversion=${GAMEVERSION}`;
 
 class ChampionStats extends Component {
