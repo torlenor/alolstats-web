@@ -35,7 +35,6 @@ export default class Champions extends Component {
                 return null;
             }
         }).then(data => {
-            console.log(data);
             let newHits = [];
             for (var key in data) {
                         if (data.hasOwnProperty(key)) {

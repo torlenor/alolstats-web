@@ -96,7 +96,7 @@ class Champion extends Component {
         } else {
             page = <div className="Champion">
             <Typography variant="h4" gutterBottom component="h2">
-                {this.props.match.params.champion}
+                {championstats.championname}
             </Typography>
             <Grid container spacing={24} justify="center"style={{
 margin: 0,
