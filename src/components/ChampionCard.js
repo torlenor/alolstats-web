@@ -51,7 +51,7 @@ function ChampionCard(props) {
         </Typography>
         <CardMedia
           className={classes.media}
-          image={`http://ddragon.leagueoflegends.com/cdn/${champion.version}/img/champion/${champion.id}.png`}
+          image={`https://ddragon.leagueoflegends.com/cdn/${champion.version}/img/champion/${champion.id}.png`}
           title={`${champion.name}`}
         />
         <Typography component={'span'} className={classes.pos} color="textSecondary">
