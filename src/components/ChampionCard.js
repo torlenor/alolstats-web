@@ -32,9 +32,15 @@ function ChampionCard(props) {
 
   const {champion} = props;
 
-  champion.roles = [
-      "Top", "Jungler"
-  ];
+//   champion.roles = [
+//       "Top", "Jungler"
+//   ];
+
+    if (champion.roles === null) {
+        champion.roles = []
+    }
+
+    // console.log(champion)
 
   return (
     <Card className={classes.card}>

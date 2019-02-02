@@ -5,7 +5,7 @@ import './Champions.css';
 import ChampionCard from './ChampionCard.js'
 
 import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
+// import Paper from "@material-ui/core/Paper";
 
 import Typography from '@material-ui/core/Typography';
 
@@ -75,9 +75,9 @@ export default class Champions extends Component {
                 <Grid container className="demo" justify="center" spacing={16}>
                     {hits.map(value => (
                         <Grid key={value.key} item>
-                            <Paper className="paper">
+                            {/* <Paper className="paper"> */}
                                 <ChampionCard champion={value}/>
-                            </Paper>
+                            {/* </Paper> */}
                         </Grid>
                     ))}
                 </Grid>
