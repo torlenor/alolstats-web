@@ -1,12 +1,7 @@
 import React, {Component} from 'react';
 import Plot from 'react-plotly.js';
 
-import "./ChampionStats.css"
-
-const API_URL = `${process.env.REACT_APP_API_BASE_URL}`;
-const API = `${API_URL}/v1/stats/champion/byid?id=`;
-const GAMEVERSION = "9.2"
-const VERSION = `&gameversion=${GAMEVERSION}`;
+import Typography from '@material-ui/core/Typography';
 
 class ChampionStats extends Component {
     constructor(props) {
@@ -19,46 +14,8 @@ class ChampionStats extends Component {
         };
     }
 
-    componentWillReceiveProps(props) {
-        const {champion} = props;
-        fetch(API + champion + VERSION).then(response => {
-            if (response.status === 200) {
-                let json = response.json();
-                return json;
-            } else {
-                this.setState({error: true});
-                return null;
-            }
-        }).then(data => {
-            if (data !== null) {
-                this.setState({championstats: data, error: false, didMount: true});
-            } else {
-                this.setState({error: true, didMount: true});
-            }
-        }).catch(error => {
-            this.setState({error: true, didMount: true})
-        });
-      }
-
     componentDidMount() {
-        const {champion} = this.props;
-        fetch(API + champion + VERSION).then(response => {
-            if (response.status === 200) {
-                let json = response.json();
-                return json;
-            } else {
-                this.setState({error: true});
-                return null;
-            }
-        }).then(data => {
-            if (data !== null) {
-                this.setState({championstats: data, error: false, didMount: true});
-            } else {
-                this.setState({error: true, didMount: true});
-            }
-        }).catch(error => {
-            this.setState({error: true, didMount: true})
-        });
+        this.setState({championstats: this.props.championStats, error: false, didMount: true});
     }
 
     render() {
@@ -95,12 +52,9 @@ class ChampionStats extends Component {
             // data[3].text = ['Text A', 'Text B', 'Text C', 'Text D', 'Text E'];
             // data[3].textposition = 'auto';
 
-            console.log(data);
-
             var layout = {
                 barmode: 'stack',
-                width: 800,
-                height: 600,
+                autosize: true,
                 xaxis: {
                     title: {
                         text: 'Lane'
@@ -112,19 +66,19 @@ class ChampionStats extends Component {
                     },
                     range: [0, 100]
                 },
-                title: `Champion Role Distribution for <b>${championstats.championname}</b>`
             };
 
             page = <div className="content">
                 <div className="ChampionStats">
-                    <div>
-                        <span className="ChampionStatsInformations">
-                            Only unranked and ranked PvP games on Summoners Rift with game version {GAMEVERSION} are
+                    <Typography variant="h5" gutterBottom component="h3">
+                        Role Distribution Plot
+                    </Typography>
+                    <Typography>
+                            Only unranked and ranked PvP games on Summoners Rift with game version {championstats.gameversion} are
                             considered - {championstats.samplesize} total games analyzed
-                        </span>
+                    </Typography>
                     </div>
-                    <Plot data={data} layout={layout}/>
-                </div>
+                    <Plot useResizeHandler style={{ width: '95%', height: '100%' }} data={data} layout={layout}/>
             </div>;
         }
 

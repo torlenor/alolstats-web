@@ -1,12 +1,13 @@
 @media all and (min-width: 480px) {
-    .League {
-      padding: 0px 0;
+    .Champions {
+      padding: 10px 0;
       padding-top: 10px;
       text-align: center;
-    }
-  
-    .League form {
       margin: 0 auto;
-      max-width: 320px;
+      max-width: 800px;
     }
-  }
+
+    .grid {
+        margin: 10px auto;
+      }
+}

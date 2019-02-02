@@ -1,8 +1,0 @@
-@media all and (min-width: 480px) {
-    .content {
-        /* height: 10em; */
-        display: flex;
-        /* align-items: center; */
-        justify-content: center;
-    }
-}
