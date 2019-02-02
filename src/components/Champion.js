@@ -107,7 +107,7 @@ width: '100%',
                         <ChampionTextStatistics championStats={championstats}/>
                     </Paper>
                 </Grid>
-                <Grid item xs={8}>
+                <Grid item xs>
                     <Paper>
                         <ChampionStats championStats={championstats}/>
                     </Paper>
