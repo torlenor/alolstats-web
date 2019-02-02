@@ -3,9 +3,8 @@ FROM node:11.9.0 as builder
 RUN mkdir /usr/src/alolstats-web
 WORKDIR /usr/src/alolstats-web
 ENV PATH /usr/src/alolstats-web/node_modules/.bin:$PATH
-COPY package.json /usr/src/alolstats-web/package.json
-RUN yarn install
 COPY . /usr/src/alolstats-web
+RUN yarn install --silent
 RUN yarn build
 
 # production environment
