@@ -134,14 +134,14 @@ function ButtonAppBar(props) {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+          {/* <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
           {/* <Typography variant="h6" color="inherit" >
             ALoLStats
           </Typography> */}
           <div>
-          <Button component={LinkHome} color="inherit">Home</Button>
+          {/* <Button component={LinkHome} color="inherit">Home</Button> */}
           <Button component={LinkFreeRotation} color="inherit">Free Rotation</Button>
           <Button component={LinkChampions} color="inherit">Champions</Button>
           </div>
