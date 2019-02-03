@@ -6,8 +6,8 @@ import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+// import IconButton from '@material-ui/core/IconButton';
+// import MenuIcon from '@material-ui/icons/Menu';
 
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -61,7 +61,7 @@ const styles = theme => ({
     },
 });
 
-const LinkHome = props => <Link to="/" {...props} />
+// const LinkHome = props => <Link to="/" {...props} />
 const LinkFreeRotation = props => <Link to="/freerotation" {...props} />
 const LinkChampions = props => <Link to="/champions" {...props} />
 
