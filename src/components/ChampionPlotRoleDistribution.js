@@ -1,4 +1,7 @@
 import React, {Component} from 'react';
+
+import "./ChampionPlotRoleDistribution.css"
+
 import Plot from 'react-plotly.js';
 
 import Typography from '@material-ui/core/Typography';
@@ -68,7 +71,7 @@ class ChampionStats extends Component {
                 },
             };
 
-            page = <div className="content">
+            page = <div className="ChampionStats">
                 <div className="ChampionStats">
                     <Typography variant="h5" gutterBottom component="h3">
                         Role Distribution Plot
@@ -78,7 +81,7 @@ class ChampionStats extends Component {
                             considered - {championstats.samplesize} total games analyzed
                     </Typography>
                     </div>
-                    <Plot useResizeHandler style={{ width: '95%', height: '100%' }} data={data} layout={layout}/>
+                    <Plot useResizeHandler style={{ width: '100%', height: '100%' }} data={data} layout={layout}/>
             </div>;
         }
 

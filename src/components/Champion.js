@@ -70,6 +70,7 @@ class Champion extends Component {
             this.setState({error: true, didMount: true})
         });
     }
+      
 
     render() {
         const {championstats} = this.state;
@@ -98,10 +99,8 @@ class Champion extends Component {
             <Typography variant="h4" gutterBottom component="h2">
                 {championstats.championname}
             </Typography>
-            <Grid container spacing={24} justify="center"style={{
-margin: 0,
-width: '100%',
-}}>
+            <div style={{ padding: 12 }}>
+            <Grid container spacing={24} justify="center">
                 <Grid item xs>
                     <Paper>
                         <ChampionTextStatistics championStats={championstats}/>
@@ -113,6 +112,7 @@ width: '100%',
                     </Paper>
                 </Grid>
             </Grid>
+            </div>
 
         </div>;
         }
