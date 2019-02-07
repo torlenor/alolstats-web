@@ -17,6 +17,10 @@ class ChampionStats extends Component {
         };
     }
 
+    componentWillReceiveProps(props) {
+        this.setState({championstats: props.championStats, error: false, didMount: true});
+    }
+
     componentDidMount() {
         this.setState({championstats: this.props.championStats, error: false, didMount: true});
     }

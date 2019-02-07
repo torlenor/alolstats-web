@@ -8,10 +8,11 @@ import Grid from '@material-ui/core/Grid';
 
 import Typography from '@material-ui/core/Typography';
 
+const DEFAULTGAMEVERSION = "9.3"
+
 const API_URL = `${process.env.REACT_APP_API_BASE_URL}`;
 const API = `${API_URL}/v1/stats/champion/byid?id=`;
-const GAMEVERSION = "9.2"
-const VERSION = `&gameversion=${GAMEVERSION}`;
+const VERSIONPARAMETER = `&gameversion=`;
 
 class Champion extends Component {
 
@@ -25,11 +26,16 @@ class Champion extends Component {
         };
     }
 
-    componentWillReceiveProps(props) {
+    fetchChampion(props) {
         let champion = props.match.params.champion;
-        console.log(champion)
+        let version = "";
+        if (props.parentProps.selectedVersion !== undefined) {
+            version = props.parentProps.selectedVersion;
+        } else {
+            version = DEFAULTGAMEVERSION;
+        }
         
-        fetch(API + champion + VERSION).then(response => {
+        fetch(API + champion + VERSIONPARAMETER + version).then(response => {
             if (response.status === 200) {
                 let json = response.json();
                 return json;
@@ -46,29 +52,14 @@ class Champion extends Component {
         }).catch(error => {
             this.setState({error: true, didMount: true})
         });
+    }
+
+    componentWillReceiveProps(props) {
+        this.fetchChampion(props);
       }
 
     componentDidMount() {
-        let champion = this.props.match.params.champion;
-        console.log(champion)
-
-        fetch(API + champion + VERSION).then(response => {
-            if (response.status === 200) {
-                let json = response.json();
-                return json;
-            } else {
-                this.setState({error: true});
-                return null;
-            }
-        }).then(data => {
-            if (data !== null) {
-                this.setState({championstats: data, error: false, didMount: true});
-            } else {
-                this.setState({error: true, didMount: true});
-            }
-        }).catch(error => {
-            this.setState({error: true, didMount: true})
-        });
+        this.fetchChampion(this.props);
     }
       
 

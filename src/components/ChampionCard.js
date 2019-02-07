@@ -40,8 +40,6 @@ function ChampionCard(props) {
         champion.roles = []
     }
 
-    // console.log(champion)
-
   return (
     <Card className={classes.card}>
     <CardActionArea component={props => <Link to={`/champions/${champion.id}`} {...props}/>}>
