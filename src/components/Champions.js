@@ -23,10 +23,17 @@ export default class Champions extends Component {
         };
     }
 
-    componentDidMount() {
+    fetchChampions(props) {
         var self = this;
 
-        fetch(ChampionsAPI).then(response => {
+        let gameversionparameter = "";
+        if (props.parentProps.selectedVersion !== undefined) {
+            gameversionparameter = "?gameversion=" + props.parentProps.selectedVersion;
+        } else {
+            gameversionparameter = "";
+        }
+
+        fetch(ChampionsAPI + gameversionparameter).then(response => {
             if (response.status === 200) {
                 let json = response.json();
                 return json;
@@ -49,6 +56,14 @@ export default class Champions extends Component {
             this.setState({error: true, didMount: true});
             console.log(error);
         });
+    }
+
+    componentWillReceiveProps(props) {
+        this.fetchChampions(props);
+      }
+
+    componentDidMount() {
+        this.fetchChampions(this.props);
     }
 
     render() {

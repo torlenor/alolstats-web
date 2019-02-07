@@ -12,7 +12,10 @@ class MainPage extends Component {
         return (
             <Switch>
                 <Route path="/" exact component={Home} />
-                <Route path="/freerotation" exact component={FreeRotation} />
+
+                {/* <Route path="/freerotation" exact component={FreeRotation} /> */}
+                <Route path="/freerotation" exact render={()=><FreeRotation parentProps={this.props}/>}/>
+
                 {/* <Route path="/champions" exact component={Champions} /> */}
 
                 <Route path="/champions" exact render={()=><Champions parentProps={this.props}/>}/>
