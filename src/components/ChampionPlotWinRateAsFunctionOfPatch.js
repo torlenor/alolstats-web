@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 
-import "./ChampionPlotRoleDistribution.css"
+import "./ChampionPlotWinRateAsFunctionOfPatch.css"
 
 import Plot from 'react-plotly.js';
 
 import Typography from '@material-ui/core/Typography';
 
-class ChampionStats extends Component {
+class ChampionPlotWinRateAsFunctionOfPatch extends Component {
     constructor(props) {
         super(props);
 
@@ -45,40 +45,60 @@ class ChampionStats extends Component {
                 </div>
             </div>;
         } else {
-            var data = championstats.lanerolepercentageplotly;
+            // var data = championstats.lanerolepercentageplotly;
 
-            // data[0].text = ['WP: Text A', 'WP: Text B', 'WP: Text C', 'WP: Text D', 'WP: Text E'];
-            // data[0].textposition = 'auto';
+            var winRate = {
+                x: ["9.4", "9.3", "9.2", "9.1", "8.24"],
+                y: [45, 51, 52, 51.3],
+                type: 'scatter',
+                mode: 'lines+markers',
+                'line': {
+                    'color': 'rgb(0, 51, 204)'
+                },
+                'marker': {
+                    'color': 'rgb(0, 51, 204)'
+                },
+                name: 'Win Rate'
+              };
 
-            // data[1].text = ['Text A', 'Text B', 'Text C', 'Text D', 'Text E'];
-            // data[1].textposition = 'auto';
-
-            // data[2].text = ['Text A', 'Text B', 'Text C', 'Text D', 'Text E'];
-            // data[2].textposition = 'auto';
-
-            // data[3].text = ['Text A', 'Text B', 'Text C', 'Text D', 'Text E'];
-            // data[3].textposition = 'auto';
+              var banRate = {
+                x: ["9.4", "9.3", "9.2", "9.1", "8.24"],
+                y: [10, 15, 13, 17],
+                type: 'scatter',
+                mode: 'lines+markers',
+                'line': {
+                    'color': 'rgb(204, 0, 0)'
+                },
+                'marker': {
+                    'color': 'rgb(204, 0, 0)'
+                },
+                name: 'Ban Rate'
+              };
 
             var layout = {
-                barmode: 'stack',
                 autosize: true,
                 xaxis: {
+                    type: 'category',
                     title: {
-                        text: 'Lane'
-                    }
+                        text: 'Game Version'
+                    },
+                    categoryorder: 'array',
+                    categoryarray: winRate.x,
                 },
                 yaxis: {
                     title: {
-                        text: 'Percentage [%]',
+                        text: 'Win/Ban Rate [%]',
                     },
                     range: [0, 100]
                 },
             };
 
-            page = <div className="ChampionStats">
-                <div className="ChampionStats">
+            var data = [winRate, banRate];
+
+            page = <div className="ChampionPlotWinRateAsFunctionOfPatch">
+                <div className="ChampionPlotWinRateAsFunctionOfPatch">
                     <Typography variant="h5" gutterBottom component="h3">
-                        Role Distribution Plot for Game Version {championstats.gameversion}
+                        Win Rate / Ban Rate per Game Version
                     </Typography>
                     </div>
                     <Plot useResizeHandler style={{ width: '100%', height: '100%' }} data={data} layout={layout}/>
@@ -93,4 +113,4 @@ class ChampionStats extends Component {
     }
 }
 
-export default ChampionStats;
+export default ChampionPlotWinRateAsFunctionOfPatch;

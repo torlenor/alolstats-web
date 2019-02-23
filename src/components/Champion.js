@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 
 import ChampionStats from "./ChampionPlotRoleDistribution"
+import ChampionPlotWinRateAsFunctionOfPatch from "./ChampionPlotWinRateAsFunctionOfPatch"
 import ChampionTextStatistics from './ChampionTextStatistics';
 
 import Paper from '@material-ui/core/Paper';
@@ -100,6 +101,11 @@ class Champion extends Component {
                 <Grid item xs>
                     <Paper>
                         <ChampionStats championStats={championstats}/>
+                    </Paper>
+                </Grid>
+                <Grid item xs>
+                    <Paper>
+                        <ChampionPlotWinRateAsFunctionOfPatch championStats={championstats}/>
                     </Paper>
                 </Grid>
             </Grid>
