@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 import ChampionStats from "./ChampionPlotRoleDistribution"
-import ChampionPlotWinRateAsFunctionOfPatch from "./ChampionPlotWinRateAsFunctionOfPatch"
+// import ChampionPlotWinRateAsFunctionOfPatch from "./ChampionPlotWinRateAsFunctionOfPatch"
 import ChampionTextStatistics from './ChampionTextStatistics';
 
 import Paper from '@material-ui/core/Paper';
@@ -9,7 +9,7 @@ import Grid from '@material-ui/core/Grid';
 
 import Typography from '@material-ui/core/Typography';
 
-const DEFAULTGAMEVERSION = "9.3"
+const DEFAULTGAMEVERSION = "9.4"
 
 const API_URL = `${process.env.REACT_APP_API_BASE_URL}`;
 const API = `${API_URL}/v1/stats/champion/byid?id=`;
@@ -103,11 +103,11 @@ class Champion extends Component {
                         <ChampionStats championStats={championstats}/>
                     </Paper>
                 </Grid>
-                <Grid item xs>
+                {/* <Grid item xs>
                     <Paper>
                         <ChampionPlotWinRateAsFunctionOfPatch championStats={championstats}/>
                     </Paper>
-                </Grid>
+                </Grid> */}
             </Grid>
             </div>
 
