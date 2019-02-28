@@ -77,8 +77,6 @@ export default class Champions extends Component {
         if (filterText.length === 0) {
             this.setState({isFiltered: false});
             return
-        } else if (filterText.length < 1) {
-            return
         }
         const filtered = this.state.hits.filter(hit => {
             const roles = hit.roles.map(this.toLower)
@@ -88,7 +86,7 @@ export default class Champions extends Component {
                   return true;
               }
             }
-            return hit.id.toLowerCase().includes(filterText) === true;
+            return hit.id.toLowerCase().includes(filterText) === true || hit.name.toLowerCase().includes(filterText) === true ;
         }
         );
         this.setState({filteredHits: filtered, isFiltered: true})
@@ -120,8 +118,9 @@ export default class Champions extends Component {
                             id="outlined-full-width"
                             style={{ margin: 8 }}
                             label="Filter"
-                            placeholder="Enter name or role (minimum 2 chars)"
+                            placeholder="Enter name or role"
                             fullWidth
+                            autoFocus
                             onChange={this.handleChangeFilter}
                             margin="normal"
                             variant="outlined"
@@ -143,8 +142,9 @@ export default class Champions extends Component {
                 id="outlined-full-width"
                 style={{ margin: 8 }}
                 label="Filter"
-                placeholder="Enter name or role (minimum 2 chars)"
+                placeholder="Enter name or role"
                 fullWidth
+                autoFocus
                 onChange={this.handleChangeFilter}
                 margin="normal"
                 variant="outlined"
