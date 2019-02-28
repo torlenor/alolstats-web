@@ -19,6 +19,7 @@ class ChampionTextStatistics extends Component {
         const rows = [
             createData('Sample Size', championStats.samplesize + " Games"),
             createData('Win Rate', (100.0*championStats.winrate).toFixed(2) + " %"),
+            createData('Pick Rate', (100.0*championStats.pickrate).toFixed(2) + " %"),
             createData('Ban Rate', (100.0*championStats.banrate).toFixed(2) + " %"),
             createData('Average Kills', championStats.averagekills.toFixed(2) + " ± " + championStats.stddevkills.toFixed(2)),
             createData('Median Kills', championStats.mediankills),
