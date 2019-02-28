@@ -27,6 +27,11 @@ class ChampionTextStatistics extends Component {
             createData('Median Deaths', championStats.mediandeaths),
             createData('Average Assists', championStats.averageassists.toFixed(2) + " ± " + championStats.stddevassists.toFixed(2)),
             createData('Median Assists', championStats.medianassists),
+            createData('Average Gold Earned', championStats.average_goldearned.toFixed(0) + " ± " + championStats.stddev_goldearned.toFixed(0)),
+            createData('Average Minions Killed', championStats.average_totalminionskilled.toFixed(2) + " ± " + championStats.stddev_totalminionskilled.toFixed(2)),
+            createData('Average Total Damage Dealt', championStats.average_totaldamagedealt.toFixed(0) + " ± " + championStats.stddev_totaldamagedealt.toFixed(0)),
+            createData('Average Total Damage Taken', championStats.average_totaldamagetaken.toFixed(0) + " ± " + championStats.stddev_totaldamagetaken.toFixed(0)),
+            createData('Average Heals', championStats.average_totalheal.toFixed(0) + " ± " + championStats.stddev_totalheal.toFixed(0)),
           ];
       
         return (
