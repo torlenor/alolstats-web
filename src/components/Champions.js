@@ -5,7 +5,7 @@ import './Champions.css';
 import ChampionCard from './ChampionCard.js'
 
 import Grid from "@material-ui/core/Grid";
-// import Paper from "@material-ui/core/Paper";
+import TextField from '@material-ui/core/TextField';
 
 import Typography from '@material-ui/core/Typography';
 
@@ -19,6 +19,8 @@ export default class Champions extends Component {
         this.state = {
             didMount: false,
             hits: null,
+            filteredHits: null,
+            isFiltered: false,
             error: false
         };
     }
@@ -66,8 +68,36 @@ export default class Champions extends Component {
         this.fetchChampions(this.props);
     }
 
+    toLower(item) {
+        return item.toLowerCase();
+    }
+
+    handleChangeFilter = (event) => {
+        var filterText = event.target.value.toLowerCase()
+        if (filterText.length === 0) {
+            this.setState({isFiltered: false});
+            return
+        } else if (filterText.length < 1) {
+            return
+        }
+        console.log(this.state.hits)
+        const filtered = this.state.hits.filter(hit => {
+            const roles = hit.roles.map(this.toLower)
+            var i;
+            for (i = 0; i < roles.length; i++) { 
+              if (roles[i].includes(filterText)) {
+                  return true;
+              }
+            }
+            return hit.id.toLowerCase().includes(filterText) === true;
+        }
+        );
+        this.setState({filteredHits: filtered, isFiltered: true})
+    };
+
     render() {
         const {hits} = this.state;
+        const {filteredHits} = this.state;
 
         let page;
 
@@ -85,18 +115,52 @@ export default class Champions extends Component {
                     <br></br>Error receiving Champions, please try again later!
                     </Typography>
                 </div>
+        } else if (this.state.isFiltered === true && filteredHits !== null) {
+            page = <div className="Champions">
+                        <TextField
+                            id="outlined-full-width"
+                            style={{ margin: 8 }}
+                            label="Filter"
+                            placeholder="Enter name or role (minimum 2 chars)"
+                            fullWidth
+                            onChange={this.handleChangeFilter}
+                            margin="normal"
+                            variant="outlined"
+                            InputLabelProps={{
+                            shrink: true,
+                            }}
+                        />
+                        <Grid container className="demo" justify="center" spacing={16}>
+                            {filteredHits.map(value => (
+                                <Grid key={value.key} item>
+                                    <ChampionCard champion={value}/>
+                                </Grid>
+                            ))}
+                        </Grid>
+                    </div>
         } else {
             page = <div className="Champions">
-                <Grid container className="demo" justify="center" spacing={16}>
-                    {hits.map(value => (
-                        <Grid key={value.key} item>
-                            {/* <Paper className="paper"> */}
-                                <ChampionCard champion={value}/>
-                            {/* </Paper> */}
-                        </Grid>
-                    ))}
-                </Grid>
-            </div>
+            <TextField
+                id="outlined-full-width"
+                style={{ margin: 8 }}
+                label="Filter"
+                placeholder="Enter name or role (minimum 2 chars)"
+                fullWidth
+                onChange={this.handleChangeFilter}
+                margin="normal"
+                variant="outlined"
+                InputLabelProps={{
+                shrink: true,
+                }}
+            />
+            <Grid container className="demo" justify="center" spacing={16}>
+                {hits.map(value => (
+                    <Grid key={value.key} item>
+                        <ChampionCard champion={value}/>
+                    </Grid>
+                ))}
+            </Grid>
+        </div>
         }
 
         return (
