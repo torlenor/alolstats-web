@@ -80,7 +80,6 @@ export default class Champions extends Component {
         } else if (filterText.length < 1) {
             return
         }
-        console.log(this.state.hits)
         const filtered = this.state.hits.filter(hit => {
             const roles = hit.roles.map(this.toLower)
             var i;
