@@ -118,6 +118,7 @@ export default class Champions extends Component {
                             id="outlined-full-width"
                             style={{ margin: 8 }}
                             label="Filter"
+                            autoComplete='off'
                             placeholder="Enter name or role"
                             fullWidth
                             autoFocus
@@ -142,6 +143,7 @@ export default class Champions extends Component {
                 id="outlined-full-width"
                 style={{ margin: 8 }}
                 label="Filter"
+                autoComplete='off'
                 placeholder="Enter name or role"
                 fullWidth
                 autoFocus
