@@ -4,6 +4,7 @@ import ChampionStats from "./ChampionPlotRoleDistribution"
 // import ChampionPlotWinRateAsFunctionOfPatch from "./ChampionPlotWinRateAsFunctionOfPatch"
 import ChampionPlotDamagePerType from "./ChampionPlotDamagePerType"
 import ChampionTextStatistics from './ChampionTextStatistics';
+import ChampionTextStatisticsAdditional from './ChampionTextStatisticsAdditional';
 
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -115,6 +116,11 @@ class Champion extends Component {
                         <ChampionPlotWinRateAsFunctionOfPatch championStats={championstats}/>
                     </Paper>
                 </Grid> */}
+                <Grid item xs>
+                    <Paper>
+                        <ChampionTextStatisticsAdditional championStats={championstats}/>
+                    </Paper>
+                </Grid>
             </Grid>
             </div>
 
