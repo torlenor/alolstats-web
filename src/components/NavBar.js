@@ -17,6 +17,7 @@ import { Link } from 'react-router-dom'
 const styles = theme => ({
     root: {
         flexGrow: 1,
+        paddingBottom: 100,
     },
     grow: {
         flexGrow: 1,
@@ -141,7 +142,7 @@ class NavBar extends Component {
                     
                     return (
                         <div className={classes.root}>
-                        <AppBar position="static">
+                        <AppBar position="fixed">
                         <Toolbar>
                         {/* <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
                         <MenuIcon />
