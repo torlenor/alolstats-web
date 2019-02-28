@@ -70,12 +70,14 @@ class ChampionStats extends Component {
                 xaxis: {
                     title: {
                         text: 'Damage Type'
-                    }
+                    },
+                    fixedrange: true,
                 },
                 yaxis: {
                     title: {
                         text: 'Damage',
                     },
+                    fixedrange: true,
                 },
             };
 

@@ -64,13 +64,15 @@ class ChampionStats extends Component {
                 autosize: true,
                 xaxis: {
                     title: {
-                        text: 'Lane'
-                    }
+                        text: 'Lane',
+                    },
+                    fixedrange: true,
                 },
                 yaxis: {
                     title: {
                         text: 'Percentage [%]',
                     },
+                    fixedrange: true,
                     range: [0, 100]
                 },
             };
