@@ -27,6 +27,7 @@ const styles = theme => ({
         marginRight: 20,
     },
     input: {
+        marginTop: 10,
         marginLeft: 8,
         // flex: 1,
     },
