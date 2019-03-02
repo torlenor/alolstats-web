@@ -132,7 +132,7 @@ const useToolbarStyles = makeStyles(theme => ({
 
 const EnhancedTableToolbar = props => {
   const classes = useToolbarStyles();
-  const { numSelected } = props;
+  const { numSelected, gameVersion } = props;
 
   return (
     <Toolbar
@@ -147,7 +147,7 @@ const EnhancedTableToolbar = props => {
           </Typography>
         ) : (
           <Typography variant="h6" id="tableTitle">
-            Champions Summary
+            Champions Summary for Game Version {gameVersion}
           </Typography>
         )}
       </div>
@@ -284,7 +284,8 @@ function EnhancedTable(props) {
 
     return (
         <Paper className={classes.root}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+        <EnhancedTableToolbar numSelected={selected.length} 
+                gameVersion={props.gameVersion} />
         <div style={{margin: 5,}}>
             <TextField
                 id="outlined-full-width"

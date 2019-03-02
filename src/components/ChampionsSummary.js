@@ -13,13 +13,15 @@ function createData(name, key, sampleSize, winRate, pickRate, banRate, averageKi
 function ChampionsSummary(props) {
     const [data, setData] = useState([]);
     const [didLoad, setDidLoad] = useState(false);
+    const [fetchedGameVersion, setFetchedGameVersion] = useState("");
 
     let gameversionparameter = "";
+    let gameversion = "9.4";
     if (props.parentProps.selectedVersion !== undefined) {
-        gameversionparameter = "?gameversion=" + props.parentProps.selectedVersion;
-    } else {
-        gameversionparameter = "?gameversion=9.4";
+        gameversion = props.parentProps.selectedVersion;
     }
+
+    gameversionparameter = "?gameversion=" + gameversion;
 
     useEffect(() => {
         fetch(ChampionsStatsAPI + gameversionparameter).then(response => {
@@ -44,16 +46,17 @@ function ChampionsSummary(props) {
                 });
                 setData(rows);
                 setDidLoad(true);
+                setFetchedGameVersion(gameversion);
             } else {
                 setDidLoad(false);
             }
         }).catch(error => {
             setDidLoad(false);
         });
-    }, [gameversionparameter]); // Only re-run the effect if count changes
+    }, [gameversionparameter]);
 
     if (didLoad) {
-        return <div style={{margin: 5,}}><ChampionsSummaryTable data={data} /></div>;
+        return <div style={{margin: 5,}}><ChampionsSummaryTable data={data} gameVersion={fetchedGameVersion} /></div>;
     } else {
         return null;
     }
