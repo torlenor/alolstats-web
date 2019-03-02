@@ -5,6 +5,8 @@ import Home from "./Home";
 import FreeRotation from "./FreeRotation.js";
 import Champions from "./Champions";
 import Champion from "./Champion";
+import ChampionComparison from "./ChampionComparison";
+import ChampionsSummary from "./ChampionsSummary";
 import NotFound from "./NotFound";
 
 class MainPage extends Component {
@@ -13,14 +15,13 @@ class MainPage extends Component {
             <Switch>
                 <Route path="/" exact component={Home} />
 
-                {/* <Route path="/freerotation" exact component={FreeRotation} /> */}
                 <Route path="/freerotation" exact render={()=><FreeRotation parentProps={this.props}/>}/>
-
-                {/* <Route path="/champions" exact component={Champions} /> */}
 
                 <Route path="/champions" exact render={()=><Champions parentProps={this.props}/>}/>
 
-                {/* <Route path='/champions/:champion' component={Champion} /> */}
+                <Route path="/championcomparison" exact render={()=><ChampionComparison parentProps={this.props}/>}/>
+
+                <Route path="/championssummary" exact render={()=><ChampionsSummary parentProps={this.props}/>}/>
 
                 <Route
                     path='/champions/:champion'

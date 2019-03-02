@@ -7,10 +7,41 @@ import ChampionCard from './ChampionCard.js'
 import Grid from "@material-ui/core/Grid";
 import TextField from '@material-ui/core/TextField';
 
+import Checkbox from '@material-ui/core/Checkbox';
+
 import Typography from '@material-ui/core/Typography';
+
+import Fab from '@material-ui/core/Fab';
+
+import green from '@material-ui/core/colors/green';
+import grey from '@material-ui/core/colors/grey';
+
+import Icon from '@material-ui/core/Icon';
 
 const API_URL = `${process.env.REACT_APP_API_BASE_URL}`;
 const ChampionsAPI = `${API_URL}/v1/champions`;
+
+  const style = {
+    margin: 0,
+    top: 'auto',
+    right: 20,
+    bottom: 20,
+    left: 'auto',
+    position: 'fixed',
+    color: "white",
+    backgroundColor: green[500],
+};
+
+const style2 = {
+    margin: 0,
+    top: 'auto',
+    right: 150,
+    bottom: 20,
+    left: 'auto',
+    position: 'fixed',
+    color: "white",
+    backgroundColor: grey[500],
+};
 
 export default class Champions extends Component {
     constructor(props) {
@@ -21,9 +52,28 @@ export default class Champions extends Component {
             hits: null,
             filteredHits: null,
             isFiltered: false,
-            error: false
+            error: false,
+            isChecked: new Map(),
         };
     }
+
+    handleChange = name => event => {
+        var isChecked = this.state.isChecked;
+        isChecked[name] = true;
+        this.setState({isChecked: isChecked});
+      };
+
+      checkChecked = key => {
+          if (this.state.isChecked[key] !== true) {
+              return false;
+          } else {
+              return true;
+          }
+      };
+
+      unselectAll = event => {
+          this.setState({isChecked: new Map()});
+      };
 
     fetchChampions(props) {
         var self = this;
@@ -133,9 +183,17 @@ export default class Champions extends Component {
                             {filteredHits.map(value => (
                                 <Grid key={value.key} item>
                                     <ChampionCard champion={value}/>
+                                    <Checkbox checked={this.checkChecked(value.key)} onChange={this.handleChange(value.key)} value={value.key} />
                                 </Grid>
                             ))}
                         </Grid>
+                        <Fab variant="extended" aria-label="Delete" onClick={this.unselectAll} style={style2}>
+                            Unselect All
+                        </Fab>
+                        <Fab variant="extended" aria-label="Delete" style={style}>
+                            <Icon>compare</Icon>
+                            Compare
+                        </Fab>
                     </div>
         } else {
             page = <div className="Champions">
@@ -158,9 +216,17 @@ export default class Champions extends Component {
                 {hits.map(value => (
                     <Grid key={value.key} item>
                         <ChampionCard champion={value}/>
+                        <Checkbox checked={this.checkChecked(value.key)} onChange={this.handleChange(value.key)} value={value.key} />
                     </Grid>
                 ))}
             </Grid>
+            <Fab variant="extended" aria-label="Delete" onClick={this.unselectAll} style={style2}>
+                Unselect All
+            </Fab>
+            <Fab variant="extended" aria-label="Delete" style={style}>
+                <Icon>compare</Icon>
+                Compare
+            </Fab>
         </div>
         }
 

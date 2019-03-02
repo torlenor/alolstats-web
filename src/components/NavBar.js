@@ -63,11 +63,11 @@ const styles = theme => ({
     },
 });
 
-// const LinkHome = props => <Link to="/" {...props} />
 const LinkFreeRotation = props => <Link to="/freerotation" {...props} />
 const LinkChampions = props => <Link to="/champions" {...props} />
+// const LinkChampionComparison = props => <Link to="/championcomparison" {...props} />
+const LinkChampionsSummary = props => <Link to="/championssummary" {...props} />
 
-// function ButtonAppBar(props) {
 class NavBar extends Component {
     
     constructor(props) {
@@ -152,9 +152,10 @@ class NavBar extends Component {
                     ALoLStats
                 </Typography> */}
                 <div>
-                {/* <Button component={LinkHome} color="inherit">Home</Button> */}
-                <Button component={LinkFreeRotation} color="inherit">Free Rotation</Button>
-                <Button component={LinkChampions} color="inherit">Champions</Button>
+                    <Button component={LinkFreeRotation} color="inherit">Free Rotation</Button>
+                    <Button component={LinkChampions} color="inherit">Champions</Button>
+                    {/* <Button component={LinkChampionComparison} color="inherit">Comparison</Button> */}
+                    <Button component={LinkChampionsSummary} color="inherit">Summary</Button>
                 </div>
                 <div className={classes.grow}></div>
                 
