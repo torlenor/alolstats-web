@@ -257,12 +257,14 @@ function EnhancedTable(props) {
             return;
         }
         const filtered = data.filter(hit => {
-            const roles = hit.roles.map(toLower)
-            var i;
-            for (i = 0; i < roles.length; i++) { 
-            if (roles[i].includes(filterText)) {
-                return true;
-            }
+            if (hit.roles != null) {
+                const roles = hit.roles.map(toLower);
+                var i;
+                for (i = 0; i < roles.length; i++) {
+                    if (roles[i].includes(filterText)) {
+                        return true;
+                    }
+                }
             }
             return hit.key.toLowerCase().includes(filterText) === true || hit.name.toLowerCase().includes(filterText) === true ;
         }
