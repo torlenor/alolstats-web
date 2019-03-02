@@ -276,9 +276,11 @@ function EnhancedTable(props) {
 
     function renderRoles(roles) {
         var rolesStr = ""
-        roles.forEach( value => {
-            rolesStr += value + " ";
-        });
+        if (roles != null) {
+            roles.forEach( value => {
+                rolesStr += value + " ";
+            });
+        }
         return rolesStr;
     }
 

@@ -11,11 +11,13 @@ import Grid from '@material-ui/core/Grid';
 
 import Typography from '@material-ui/core/Typography';
 
-const DEFAULTGAMEVERSION = "9.4"
+const DEFAULTGAMEVERSION = "9.4";
+const DEFAULTLEAGUE = "ALL";
 
 const API_URL = `${process.env.REACT_APP_API_BASE_URL}`;
 const API = `${API_URL}/v1/stats/champion/byid?id=`;
 const VERSIONPARAMETER = `&gameversion=`;
+const LEAGUEPARAMETER = `&tier=`;
 
 class Champion extends Component {
 
@@ -31,14 +33,17 @@ class Champion extends Component {
 
     fetchChampion(props) {
         let champion = props.match.params.champion;
-        let version = "";
+        let version = DEFAULTGAMEVERSION;
         if (props.parentProps.selectedVersion !== undefined) {
             version = props.parentProps.selectedVersion;
-        } else {
-            version = DEFAULTGAMEVERSION;
+        }
+
+        let league = DEFAULTLEAGUE;
+        if (props.parentProps.selectedLeague !== undefined) {
+            league = props.parentProps.selectedLeague.toUpperCase();
         }
         
-        fetch(API + champion + VERSIONPARAMETER + version).then(response => {
+        fetch(API + champion + VERSIONPARAMETER + version + LEAGUEPARAMETER + league).then(response => {
             if (response.status === 200) {
                 let json = response.json();
                 return json;

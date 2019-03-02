@@ -76,7 +76,7 @@ class App extends Component {
     return (
       <div className="App">
         <NavBar versions={this.state.versions} leagues={this.state.leagues} handlerPatch={this.handlerPatch} handlerLeague={this.handlerLeague} />
-        <Routes versions={this.state.versions} leagues={this.state.leagues} selectedVersion={this.state.patch}/>
+        <Routes versions={this.state.versions} leagues={this.state.leagues} selectedVersion={this.state.patch} selectedLeague={this.state.league}/>
         <Footer />
       </div>
     );

@@ -14,17 +14,26 @@ function ChampionsSummary(props) {
     const [data, setData] = useState([]);
     const [didLoad, setDidLoad] = useState(false);
     const [fetchedGameVersion, setFetchedGameVersion] = useState("");
+    const [fetchedLeague, setFetchedLeague] = useState("");
 
     let gameversionparameter = "";
     let gameversion = "9.4";
     if (props.parentProps.selectedVersion !== undefined) {
         gameversion = props.parentProps.selectedVersion;
     }
-
     gameversionparameter = "?gameversion=" + gameversion;
 
+    let leagueParameter = "";
+    let league = "ALL";
+    console.log(props.parentProps);
+    if (props.parentProps.selectedLeague !== undefined) {
+        league = props.parentProps.selectedLeague;
+        league = league.toUpperCase();
+    }
+    leagueParameter = "&tier=" + league;
+
     useEffect(() => {
-        fetch(ChampionsStatsAPI + gameversionparameter).then(response => {
+        fetch(ChampionsStatsAPI + gameversionparameter + leagueParameter).then(response => {
             if (response.status === 200) {
                 let json = response.json();
                 return json;
@@ -47,16 +56,17 @@ function ChampionsSummary(props) {
                 setData(rows);
                 setDidLoad(true);
                 setFetchedGameVersion(gameversion);
+                setFetchedLeague(league);
             } else {
                 setDidLoad(false);
             }
         }).catch(error => {
             setDidLoad(false);
         });
-    }, [gameversionparameter]);
+    }, [gameversionparameter, leagueParameter]);
 
     if (didLoad) {
-        return <div style={{margin: 5,}}><ChampionsSummaryTable data={data} gameVersion={fetchedGameVersion} /></div>;
+        return <div style={{margin: 5,}}><ChampionsSummaryTable data={data} gameVersion={fetchedGameVersion} league={fetchedLeague} /></div>;
     } else {
         return null;
     }

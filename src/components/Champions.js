@@ -43,6 +43,10 @@ const ChampionsAPI = `${API_URL}/v1/champions`;
 //     backgroundColor: grey[500],
 // };
 
+const DEFAULTGAMEVERSION = "9.4";
+const DEFAULTLEAGUE = "ALL";
+const LEAGUEPARAMETER = `&tier=`;
+
 export default class Champions extends Component {
     constructor(props) {
         super(props);
@@ -79,13 +83,18 @@ export default class Champions extends Component {
         var self = this;
 
         let gameversionparameter = "";
+        let version = DEFAULTGAMEVERSION;
         if (props.parentProps.selectedVersion !== undefined) {
-            gameversionparameter = "?gameversion=" + props.parentProps.selectedVersion;
-        } else {
-            gameversionparameter = "";
+            version = props.parentProps.selectedVersion;
+        }
+        gameversionparameter = "?gameversion=" + version;
+
+        let league = DEFAULTLEAGUE;
+        if (props.parentProps.selectedLeague !== undefined) {
+            league = props.parentProps.selectedLeague.toUpperCase();
         }
 
-        fetch(ChampionsAPI + gameversionparameter).then(response => {
+        fetch(ChampionsAPI + gameversionparameter + LEAGUEPARAMETER + league).then(response => {
             if (response.status === 200) {
                 let json = response.json();
                 return json;
