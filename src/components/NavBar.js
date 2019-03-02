@@ -17,7 +17,7 @@ import { Link } from 'react-router-dom'
 const styles = theme => ({
     root: {
         flexGrow: 1,
-        paddingBottom: 100,
+        paddingBottom: 70,
     },
     grow: {
         flexGrow: 1,

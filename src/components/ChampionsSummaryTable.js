@@ -285,20 +285,22 @@ function EnhancedTable(props) {
     return (
         <Paper className={classes.root}>
         <EnhancedTableToolbar numSelected={selected.length} />
-        <TextField
-            id="outlined-full-width"
-            label="Filter"
-            autoComplete='off'
-            placeholder="Enter name or role"
-            fullWidth
-            autoFocus
-            onChange={handleChangeFilter}
-            margin="normal"
-            variant="outlined"
-            InputLabelProps={{
-            shrink: true,
-            }}
-        />
+        <div style={{margin: 5,}}>
+            <TextField
+                id="outlined-full-width"
+                label="Filter"
+                autoComplete='off'
+                placeholder="Enter name or role"
+                fullWidth
+                autoFocus
+                onChange={handleChangeFilter}
+                margin="normal"
+                variant="outlined"
+                InputLabelProps={{
+                shrink: true,
+                }}
+            />
+        </div>
         <div className={classes.tableWrapper}>
             <Table className={classes.table} aria-labelledby="tableTitle">
             <EnhancedTableHead
