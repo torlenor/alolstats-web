@@ -183,17 +183,17 @@ export default class Champions extends Component {
                             {filteredHits.map(value => (
                                 <Grid key={value.key} item>
                                     <ChampionCard champion={value}/>
-                                    <Checkbox checked={this.checkChecked(value.key)} onChange={this.handleChange(value.key)} value={value.key} />
+                                    {/* <Checkbox checked={this.checkChecked(value.key)} onChange={this.handleChange(value.key)} value={value.key} /> */}
                                 </Grid>
                             ))}
                         </Grid>
-                        <Fab variant="extended" aria-label="Delete" onClick={this.unselectAll} style={style2}>
+                        {/* <Fab variant="extended" aria-label="Delete" onClick={this.unselectAll} style={style2}>
                             Unselect All
                         </Fab>
                         <Fab variant="extended" aria-label="Delete" style={style}>
                             <Icon>compare</Icon>
                             Compare
-                        </Fab>
+                        </Fab> */}
                     </div>
         } else {
             page = <div className="Champions">
@@ -216,17 +216,17 @@ export default class Champions extends Component {
                 {hits.map(value => (
                     <Grid key={value.key} item>
                         <ChampionCard champion={value}/>
-                        <Checkbox checked={this.checkChecked(value.key)} onChange={this.handleChange(value.key)} value={value.key} />
+                        {/* <Checkbox checked={this.checkChecked(value.key)} onChange={this.handleChange(value.key)} value={value.key} /> */}
                     </Grid>
                 ))}
             </Grid>
-            <Fab variant="extended" aria-label="Delete" onClick={this.unselectAll} style={style2}>
+            {/* <Fab variant="extended" aria-label="Delete" onClick={this.unselectAll} style={style2}>
                 Unselect All
             </Fab>
             <Fab variant="extended" aria-label="Delete" style={style}>
                 <Icon>compare</Icon>
                 Compare
-            </Fab>
+            </Fab> */}
         </div>
         }
 
