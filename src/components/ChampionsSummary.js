@@ -53,7 +53,7 @@ function ChampionsSummary(props) {
     }, [gameversionparameter]); // Only re-run the effect if count changes
 
     if (didLoad) {
-        return <ChampionsSummaryTable data={data} />;
+        return <div style={{margin: 20,}}><ChampionsSummaryTable data={data} /></div>;
     } else {
         return null;
     }

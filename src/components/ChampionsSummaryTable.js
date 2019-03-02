@@ -177,9 +177,9 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     marginTop: 5 * 3,
   },
-//   table: {
-//     minWidth: 1020,
-//   },
+  table: {
+    minWidth: 1020,
+  },
   tableWrapper: {
     overflowX: 'auto',
   },
@@ -194,11 +194,14 @@ function EnhancedTable(props) {
     const [filteredData, setFilteredData] = React.useState(props.data);
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
+    const [filterText, setFilterText] = React.useState("");
 
     React.useEffect(() => {
+        setFilteredData(props.data);
         setData(props.data);
-        setRowsPerPage(props.data.length)
-    }, [props.data]);
+        setRowsPerPage(props.data.length);
+        changeFilter(filterText);
+    }, [props.data, filterText]);
 
     function handleRequestSort(event, property) {
         const isDesc = orderBy === property && order === 'desc';
@@ -208,7 +211,7 @@ function EnhancedTable(props) {
 
     function handleSelectAllClick(event) {
         if (event.target.checked) {
-        const newSelecteds = data.map(n => n.id);
+        const newSelecteds = filteredData.map(n => n.id);
         setSelected(newSelecteds);
         return;
         }
@@ -235,10 +238,6 @@ function EnhancedTable(props) {
     //     setSelected(newSelected);
     // }
 
-    function handleNameClick(event, id) {
-        console.log("open champion details: " + id);
-    }
-
     function handleChangePage(event, newPage) {
         setPage(newPage);
     }
@@ -251,11 +250,11 @@ function EnhancedTable(props) {
 
     // const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
 
-    function handleChangeFilter (event) {
-        var filterText = event.target.value.toLowerCase()
+    function changeFilter(newFilterText) {
+        setFilterText(newFilterText)
         if (filterText.length === 0) {
             setFilteredData(data);
-            return
+            return;
         }
         const filtered = data.filter(hit => {
             const roles = hit.roles.map(toLower)
@@ -269,6 +268,10 @@ function EnhancedTable(props) {
         }
         );
         setFilteredData(filtered);
+    }
+
+    function handleChangeFilter (event) {
+        changeFilter(event.target.value.toLowerCase())
     };
 
     function renderRoles(roles) {
@@ -281,9 +284,9 @@ function EnhancedTable(props) {
 
     return (
         <Paper className={classes.root}>
+        <EnhancedTableToolbar numSelected={selected.length} />
         <TextField
             id="outlined-full-width"
-            style={{ margin: 8 }}
             label="Filter"
             autoComplete='off'
             placeholder="Enter name or role"
@@ -296,7 +299,6 @@ function EnhancedTable(props) {
             shrink: true,
             }}
         />
-        <EnhancedTableToolbar numSelected={selected.length} />
         <div className={classes.tableWrapper}>
             <Table className={classes.table} aria-labelledby="tableTitle">
             <EnhancedTableHead
@@ -327,9 +329,9 @@ function EnhancedTable(props) {
                             onClick={event => handleClick(event, n.id)}
                         /> */}
                         </TableCell>
-                        <TableCell scope="row" padding="none" component={props => <Link to={`/champions/${n.key}`} {...props}/>} onClick={event => handleNameClick(event, n.id)}>
-                        <p><img src={`https://ddragon.leagueoflegends.com/cdn/9.4.1/img/champion/${n.key}.png`} height={32}  style={{float: "left",}} alt="Logo" />
-                        {n.name}</p>
+                        <TableCell scope="row" padding="none" component={props => <Link to={`/champions/${n.key}`} {...props}/>}>
+                            <p><img src={`https://ddragon.leagueoflegends.com/cdn/9.4.1/img/champion/${n.key}.png`} height={32}  style={{float: "left",}} alt="Logo" />
+                            {n.name}</p>
                         </TableCell>
                         <TableCell padding="none">{renderRoles(n.roles)}</TableCell>
                         <TableCell numeric>{n.sampleSize}</TableCell>
