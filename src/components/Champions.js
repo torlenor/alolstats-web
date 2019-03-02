@@ -7,41 +7,41 @@ import ChampionCard from './ChampionCard.js'
 import Grid from "@material-ui/core/Grid";
 import TextField from '@material-ui/core/TextField';
 
-import Checkbox from '@material-ui/core/Checkbox';
+// import Checkbox from '@material-ui/core/Checkbox';
 
 import Typography from '@material-ui/core/Typography';
 
-import Fab from '@material-ui/core/Fab';
+// import Fab from '@material-ui/core/Fab';
 
-import green from '@material-ui/core/colors/green';
-import grey from '@material-ui/core/colors/grey';
+// import green from '@material-ui/core/colors/green';
+// import grey from '@material-ui/core/colors/grey';
 
-import Icon from '@material-ui/core/Icon';
+// import Icon from '@material-ui/core/Icon';
 
 const API_URL = `${process.env.REACT_APP_API_BASE_URL}`;
 const ChampionsAPI = `${API_URL}/v1/champions`;
 
-  const style = {
-    margin: 0,
-    top: 'auto',
-    right: 20,
-    bottom: 20,
-    left: 'auto',
-    position: 'fixed',
-    color: "white",
-    backgroundColor: green[500],
-};
+//   const style = {
+//     margin: 0,
+//     top: 'auto',
+//     right: 20,
+//     bottom: 20,
+//     left: 'auto',
+//     position: 'fixed',
+//     color: "white",
+//     backgroundColor: green[500],
+// };
 
-const style2 = {
-    margin: 0,
-    top: 'auto',
-    right: 150,
-    bottom: 20,
-    left: 'auto',
-    position: 'fixed',
-    color: "white",
-    backgroundColor: grey[500],
-};
+// const style2 = {
+//     margin: 0,
+//     top: 'auto',
+//     right: 150,
+//     bottom: 20,
+//     left: 'auto',
+//     position: 'fixed',
+//     color: "white",
+//     backgroundColor: grey[500],
+// };
 
 export default class Champions extends Component {
     constructor(props) {

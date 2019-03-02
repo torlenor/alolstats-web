@@ -5,9 +5,9 @@ const API_URL = `${process.env.REACT_APP_API_BASE_URL}`;
 const ChampionsStatsAPI = `${API_URL}/v1/stats/champions`;
 
 let counter = 0;
-function createData(name, key, sampleSize, winRate, pickRate, banRate, averageKills, averageDeaths, averageAssists) {
+function createData(name, key, sampleSize, winRate, pickRate, banRate, averageKills, averageDeaths, averageAssists, roles) {
   counter += 1;
-  return { id: counter, key, name, sampleSize, winRate, pickRate, banRate, averageKills, averageDeaths, averageAssists };
+  return { id: counter, key, name, sampleSize, winRate, pickRate, banRate, averageKills, averageDeaths, averageAssists, roles };
 }
 
 function ChampionsSummary(props) {
@@ -38,7 +38,9 @@ function ChampionsSummary(props) {
                                                                                                 +(value.banrate*100).toFixed(2), 
                                                                                                 +(value.averagekills).toFixed(2), 
                                                                                                 +(value.averagedeaths).toFixed(2), 
-                                                                                                +(value.averageassists).toFixed(2));
+                                                                                                +(value.averageassists).toFixed(2),
+                                                                                                value.roles
+                                        );
                 });
                 setData(rows);
                 setDidLoad(true);

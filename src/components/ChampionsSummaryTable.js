@@ -16,6 +16,8 @@ import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 
+import TextField from '@material-ui/core/TextField';
+
 import Icon from '@material-ui/core/Icon';
 
 import { Link } from 'react-router-dom'
@@ -54,6 +56,10 @@ const rows = [
   { id: 'averageDeaths', numeric: true, disablePadding: false, label: 'Avg Deaths' },
   { id: 'averageAssists', numeric: true, disablePadding: false, label: 'Avg Assists' },
 ];
+
+function toLower(item) {
+    return item.toLowerCase();
+}
 
 function EnhancedTableHead(props) {
 //   const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } = props;
@@ -184,6 +190,7 @@ function EnhancedTable(props) {
     const [orderBy, setOrderBy] = React.useState('name');
     const [selected, setSelected] = React.useState([]);
     const [data, setData] = React.useState(props.data);
+    const [filteredData, setFilteredData] = React.useState(props.data);
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
@@ -243,8 +250,43 @@ function EnhancedTable(props) {
 
     // const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
 
+    function handleChangeFilter (event) {
+        var filterText = event.target.value.toLowerCase()
+        if (filterText.length === 0) {
+            setFilteredData(data);
+            return
+        }
+        const filtered = data.filter(hit => {
+            const roles = hit.roles.map(toLower)
+            var i;
+            for (i = 0; i < roles.length; i++) { 
+            if (roles[i].includes(filterText)) {
+                return true;
+            }
+            }
+            return hit.key.toLowerCase().includes(filterText) === true || hit.name.toLowerCase().includes(filterText) === true ;
+        }
+        );
+        setFilteredData(filtered);
+    };
+
     return (
         <Paper className={classes.root}>
+        <TextField
+            id="outlined-full-width"
+            style={{ margin: 8 }}
+            label="Filter"
+            autoComplete='off'
+            placeholder="Enter name or role"
+            fullWidth
+            autoFocus
+            onChange={handleChangeFilter}
+            margin="normal"
+            variant="outlined"
+            InputLabelProps={{
+            shrink: true,
+            }}
+        />
         <EnhancedTableToolbar numSelected={selected.length} />
         <div className={classes.tableWrapper}>
             <Table className={classes.table} aria-labelledby="tableTitle">
@@ -254,10 +296,10 @@ function EnhancedTable(props) {
                 orderBy={orderBy}
                 onSelectAllClick={handleSelectAllClick}
                 onRequestSort={handleRequestSort}
-                rowCount={data.length}
+                rowCount={filteredData.length}
             />
             <TableBody>
-                {stableSort(data, getSorting(order, orderBy))
+                {stableSort(filteredData, getSorting(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map(n => {
                     const isItemSelected = isSelected(n.id);
@@ -299,9 +341,9 @@ function EnhancedTable(props) {
             </Table>
         </div>
         <TablePagination
-            rowsPerPageOptions={[5, 10, 25, data.length]}
+            rowsPerPageOptions={[5, 10, 25, filteredData.length]}
             component="div"
-            count={data.length}
+            count={filteredData.length}
             rowsPerPage={rowsPerPage}
             page={page}
             backIconButtonProps={{
