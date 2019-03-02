@@ -48,6 +48,7 @@ function getSorting(order, orderBy) {
 
 const rows = [
   { id: 'name', numeric: false, disablePadding: true, label: 'Champion' },
+  { id: 'roles', numeric: false, disablePadding: true, label: 'Roles' },
   { id: 'sampleSize', numeric: true, disablePadding: false, label: 'Sample Size' },
   { id: 'winRate', numeric: true, disablePadding: false, label: 'Win Rate [%]' },
   { id: 'pickRate', numeric: true, disablePadding: false, label: 'Pick Rate [%]' },
@@ -270,6 +271,14 @@ function EnhancedTable(props) {
         setFilteredData(filtered);
     };
 
+    function renderRoles(roles) {
+        var rolesStr = ""
+        roles.forEach( value => {
+            rolesStr += value + " ";
+        });
+        return rolesStr;
+    }
+
     return (
         <Paper className={classes.root}>
         <TextField
@@ -322,6 +331,7 @@ function EnhancedTable(props) {
                         <p><img src={`https://ddragon.leagueoflegends.com/cdn/9.4.1/img/champion/${n.key}.png`} height={32}  style={{float: "left",}} alt="Logo" />
                         {n.name}</p>
                         </TableCell>
+                        <TableCell padding="none">{renderRoles(n.roles)}</TableCell>
                         <TableCell numeric>{n.sampleSize}</TableCell>
                         <TableCell numeric>{n.winRate}</TableCell>
                         <TableCell numeric>{n.pickRate}</TableCell>
