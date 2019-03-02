@@ -200,7 +200,7 @@ function EnhancedTable(props) {
         setFilteredData(props.data);
         setData(props.data);
         setRowsPerPage(props.data.length);
-        changeFilter(filterText);
+        changeFilter(filterText, props.data);
     }, [props.data, filterText]);
 
     function handleRequestSort(event, property) {
@@ -250,7 +250,7 @@ function EnhancedTable(props) {
 
     // const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
 
-    function changeFilter(newFilterText) {
+    function changeFilter(newFilterText, data) {
         setFilterText(newFilterText)
         if (filterText.length === 0) {
             setFilteredData(data);
@@ -271,7 +271,7 @@ function EnhancedTable(props) {
     }
 
     function handleChangeFilter (event) {
-        changeFilter(event.target.value.toLowerCase())
+        changeFilter(event.target.value.toLowerCase(), data)
     };
 
     function renderRoles(roles) {
