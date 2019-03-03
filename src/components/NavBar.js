@@ -26,9 +26,16 @@ const styles = theme => ({
         marginLeft: -12,
         marginRight: 20,
     },
-    input: {
+    inputPatch: {
         marginTop: 10,
         marginLeft: 8,
+        minWidth: 80,
+        // flex: 1,
+    },
+    inputLeague: {
+        marginTop: 10,
+        marginLeft: 8,
+        minWidth: 118,
         // flex: 1,
     },
     cssLabel: {
@@ -161,34 +168,33 @@ class NavBar extends Component {
                 
                 <MuiThemeProvider theme={theme}>
                 <TextField
-                select
-                variant="outlined"
-                label="Patch"
-                value={this.state.selectedPatch}
-                className={classes.input}
-                
-                onChange={this.handleChangePatch}>
-                {this.state.versions.map(option => (
-                    <MenuItem key={option} value={option}>
-                    {option}
-                    </MenuItem>
-                    ))
-                }
+                    select
+                    variant="outlined"
+                    label="Patch"
+                    value={this.state.selectedPatch}
+                    className={classes.inputPatch}
+                    onChange={this.handleChangePatch}>
+                    {this.state.versions.map(option => (
+                        <MenuItem key={option} value={option}>
+                        {option}
+                        </MenuItem>
+                        ))
+                    }
                 </TextField>
                 
                 <TextField
-                select
-                variant="outlined"
-                label="League"
-                value={this.state.selectedLeague}
-                className={classes.input}
-                onChange={this.handleChangeLeague}>
-                {this.state.leagues.map(option => (
-                    <MenuItem key={option} value={option}>
-                    {option}
-                    </MenuItem>
-                    ))
-                }
+                    select
+                    variant="outlined"
+                    label="League"
+                    value={this.state.selectedLeague}
+                    className={classes.inputLeague}
+                    onChange={this.handleChangeLeague}>
+                    {this.state.leagues.map(option => (
+                        <MenuItem key={option} value={option}>
+                        {option}
+                        </MenuItem>
+                        ))
+                    }
                 </TextField>
                 </MuiThemeProvider>
                 
