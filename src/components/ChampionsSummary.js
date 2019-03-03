@@ -25,7 +25,6 @@ function ChampionsSummary(props) {
 
     let leagueParameter = "";
     let league = "ALL";
-    console.log(props.parentProps);
     if (props.parentProps.selectedLeague !== undefined) {
         league = props.parentProps.selectedLeague;
         league = league.toUpperCase();

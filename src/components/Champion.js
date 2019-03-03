@@ -93,7 +93,6 @@ class Champion extends Component {
                     </Typography>
             </div>;
         } else {
-            console.log(championstats.statsperrole)
             page = <div className="Champion">
             <Typography variant="h4" gutterBottom component="h2">
                 {championstats.championname}
