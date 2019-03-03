@@ -7,6 +7,8 @@ import ChampionCard from './ChampionCard.js'
 import Grid from "@material-ui/core/Grid";
 import TextField from '@material-ui/core/TextField';
 
+import Progress from './Progress'
+
 // import Checkbox from '@material-ui/core/Checkbox';
 
 import Typography from '@material-ui/core/Typography';
@@ -158,12 +160,9 @@ export default class Champions extends Component {
         let page;
 
         if (this.state.didMount === false) {
-            page = <div className="Champions">
-                <Typography variant="h5" gutterBottom component="h3">
-                Loading Champions...<br></br>
-                    Please wait...
-                </Typography>
-            </div>;
+            page =  <div>
+                        <Progress text="Loading Champions..."/>
+                    </div>
         } else if (this.state.error || hits === null) {
             page = <div className="Champions">
                 <Typography variant="h5" gutterBottom component="h3">

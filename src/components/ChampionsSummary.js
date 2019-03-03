@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import ChampionsSummaryTable from './ChampionsSummaryTable'
 
+import Progress from './Progress'
+
 const API_URL = `${process.env.REACT_APP_API_BASE_URL}`;
 const ChampionsStatsAPI = `${API_URL}/v1/stats/champions`;
 
@@ -15,6 +17,7 @@ function ChampionsSummary(props) {
     const [didLoad, setDidLoad] = useState(false);
     const [fetchedGameVersion, setFetchedGameVersion] = useState("");
     const [fetchedLeague, setFetchedLeague] = useState("");
+    const [isUpdating, setIsUpdating] = useState(false);
 
     let gameversionparameter = "";
     let gameversion = "9.4";
@@ -32,6 +35,7 @@ function ChampionsSummary(props) {
     leagueParameter = "&tier=" + league;
 
     useEffect(() => {
+        setIsUpdating(true)
         fetch(ChampionsStatsAPI + gameversionparameter + leagueParameter).then(response => {
             if (response.status === 200) {
                 let json = response.json();
@@ -56,6 +60,7 @@ function ChampionsSummary(props) {
                 setDidLoad(true);
                 setFetchedGameVersion(gameversion);
                 setFetchedLeague(league);
+                setIsUpdating(false);
             } else {
                 setDidLoad(false);
             }
@@ -65,9 +70,9 @@ function ChampionsSummary(props) {
     }, [gameversionparameter, leagueParameter]);
 
     if (didLoad) {
-        return <div style={{margin: 5,}}><ChampionsSummaryTable data={data} gameVersion={fetchedGameVersion} league={fetchedLeague} /></div>;
+        return <div style={{margin: 5,}}><ChampionsSummaryTable data={data} gameVersion={fetchedGameVersion} league={fetchedLeague} isUpdating={isUpdating}/></div>;
     } else {
-        return null;
+        return <Progress text="Loading Champions Summary..."/>;
     }
 }
 

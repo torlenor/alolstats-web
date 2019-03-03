@@ -2,12 +2,11 @@ import React, {Component} from 'react';
 
 import './FreeRotation.css';
 
-import ChampionCard from './ChampionCard.js'
-
 import Grid from "@material-ui/core/Grid";
-// import Paper from "@material-ui/core/Paper";
-
 import Typography from '@material-ui/core/Typography';
+
+import ChampionCard from './ChampionCard.js'
+import Progress from './Progress'
 
 const API_URL = `${process.env.REACT_APP_API_BASE_URL}`;
 const FreeRotationAPI = `${API_URL}/v1/champion-rotations`;
@@ -81,12 +80,9 @@ export default class FreeRotation extends Component {
         let page;
 
         if (this.state.didMount === false) {
-            page = <div className="FreeRotation">
-                <Typography variant="h5" gutterBottom component="h3">
-                Loading Free Rotation...<br></br>
-                    Please wait...
-                </Typography>
-            </div>;
+            page =  <div>
+                        <Progress text="Loading Free Rotation..."/>
+                    </div>
         } else if (this.state.error || hits === null) {
             page = <div className="FreeRotation">
                 <Typography variant="h5" gutterBottom component="h3">

@@ -22,6 +22,8 @@ import Icon from '@material-ui/core/Icon';
 
 import { Link } from 'react-router-dom'
 
+import Progress from './Progress'
+
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -132,7 +134,7 @@ const useToolbarStyles = makeStyles(theme => ({
 
 const EnhancedTableToolbar = props => {
   const classes = useToolbarStyles();
-  const { numSelected } = props;
+  const { numSelected, isUpdating } = props;
 
   return (
     <Toolbar
@@ -146,10 +148,11 @@ const EnhancedTableToolbar = props => {
             {numSelected} selected
           </Typography>
         ) : (
-          <Typography variant="h6" id="tableTitle">
+          <Typography style={{display: 'inline-block'}} variant="h5" id="tableTitle">
             Champions Summary
           </Typography>
         )}
+        {isUpdating === true ? (<Progress size={30}/>) : (<div></div>)}
       </div>
       <div className={classes.spacer} />
       <div className={classes.actions}>
@@ -289,7 +292,7 @@ function EnhancedTable(props) {
     return (
         <Paper className={classes.root}>
         <EnhancedTableToolbar numSelected={selected.length} 
-                gameVersion={props.gameVersion} />
+                gameVersion={props.gameVersion} isUpdating={props.isUpdating}/>
         <div style={{margin: 5,}}>
             <TextField
                 id="outlined-full-width"
