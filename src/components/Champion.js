@@ -69,7 +69,6 @@ class Champion extends Component {
     componentDidMount() {
         this.fetchChampion(this.props);
     }
-      
 
     render() {
         const {championstats} = this.state;
@@ -94,6 +93,7 @@ class Champion extends Component {
                     </Typography>
             </div>;
         } else {
+            console.log(championstats.statsperrole)
             page = <div className="Champion">
             <Typography variant="h4" gutterBottom component="h2">
                 {championstats.championname}
@@ -125,7 +125,14 @@ class Champion extends Component {
                     <Paper>
                         <ChampionTextStatisticsAdditional championStats={championstats}/>
                     </Paper>
-                </Grid>
+                    </Grid>
+                    {championstats.roles !== null ? championstats.roles.map(value => (
+                        <Grid item xs>
+                            <Paper>
+                                <ChampionTextStatistics championStats={championstats.statsperrole[value]} role={value}/>
+                            </Paper>
+                        </Grid>
+                    )) : <div></div>}
             </Grid>
             </div>
 
