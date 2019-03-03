@@ -80,7 +80,7 @@ class ChampionStats extends Component {
             page = <div className="ChampionStats">
                 <div className="ChampionStats">
                     <Typography variant="h5" gutterBottom component="h3">
-                        Role Distribution Plot for Game Version {championstats.gameversion}
+                        Role Distribution Plot
                     </Typography>
                     </div>
                     <Plot useResizeHandler style={{ width: '100%', height: '100%' }} data={data} layout={layout}/>

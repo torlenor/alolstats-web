@@ -64,7 +64,7 @@ class ChampionTextStatistics extends Component {
         return (
         <div>
             <Typography variant="h5" gutterBottom component="h3">
-            {displayRole} Statistics for Game Version {championStats.gameversion}
+            {displayRole} Statistics
           </Typography>
 
           <Table>

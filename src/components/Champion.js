@@ -113,26 +113,18 @@ class Champion extends Component {
                         <ChampionPlotDamagePerType championStats={championstats}/>
                     </Paper>
                 </Grid>
-                {/* <Grid item xs>
-
-                </Grid> */}
-                {/* <Grid item xs>
-                    <Paper>
-                        <ChampionPlotWinRateAsFunctionOfPatch championStats={championstats}/>
-                    </Paper>
-                </Grid> */}
+                {championstats.roles !== null ? championstats.roles.map(value => (
+                    <Grid item xs>
+                        <Paper>
+                            <ChampionTextStatistics championStats={championstats.statsperrole[value]} role={value}/>
+                        </Paper>
+                    </Grid>
+                )) : <div></div>}
                 <Grid item xs>
                     <Paper>
                         <ChampionTextStatisticsAdditional championStats={championstats}/>
                     </Paper>
-                    </Grid>
-                    {championstats.roles !== null ? championstats.roles.map(value => (
-                        <Grid item xs>
-                            <Paper>
-                                <ChampionTextStatistics championStats={championstats.statsperrole[value]} role={value}/>
-                            </Paper>
-                        </Grid>
-                    )) : <div></div>}
+                </Grid>
             </Grid>
             </div>
 

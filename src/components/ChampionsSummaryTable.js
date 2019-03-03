@@ -132,7 +132,7 @@ const useToolbarStyles = makeStyles(theme => ({
 
 const EnhancedTableToolbar = props => {
   const classes = useToolbarStyles();
-  const { numSelected, gameVersion } = props;
+  const { numSelected } = props;
 
   return (
     <Toolbar
@@ -147,7 +147,7 @@ const EnhancedTableToolbar = props => {
           </Typography>
         ) : (
           <Typography variant="h6" id="tableTitle">
-            Champions Summary for Game Version {gameVersion}
+            Champions Summary
           </Typography>
         )}
       </div>
