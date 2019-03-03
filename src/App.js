@@ -5,6 +5,9 @@ import NavBar from './components/NavBar'
 import Routes from "./components/Routes";
 import Footer from "./components/Footer";
 
+const VERSION = `${process.env.REACT_APP_VERSION}`;
+const BUILD_DATE = `${process.env.REACT_APP_BUILD_DATE}`;
+
 const API_URL = `${process.env.REACT_APP_API_BASE_URL}`;
 const VERSIONS_API = `${API_URL}/v1/stats/versions`;
 const LEAGUES_API = `${API_URL}/v1/stats/leagues`;
@@ -77,7 +80,7 @@ class App extends Component {
       <div className="App">
         <NavBar versions={this.state.versions} leagues={this.state.leagues} handlerPatch={this.handlerPatch} handlerLeague={this.handlerLeague} />
         <Routes versions={this.state.versions} leagues={this.state.leagues} selectedVersion={this.state.patch} selectedLeague={this.state.league}/>
-        <Footer />
+        <Footer appVersion={VERSION} buildDate={BUILD_DATE}/>
       </div>
     );
   }
