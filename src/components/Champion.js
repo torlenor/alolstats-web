@@ -11,6 +11,8 @@ import Grid from '@material-ui/core/Grid';
 
 import Typography from '@material-ui/core/Typography';
 
+import Progress from './Progress'
+
 const DEFAULTGAMEVERSION = "9.4";
 const DEFAULTLEAGUE = "ALL";
 
@@ -80,10 +82,9 @@ class Champion extends Component {
                 <Typography variant="h4" gutterBottom component="h2">
                     {this.props.match.params.champion}
                 </Typography>
-                <Typography variant="h5" gutterBottom component="h3">
-                Loading Champion informations...<br></br>
-                    Please wait...
-                </Typography>
+                <div>
+                    <Progress text="Loading Champion Statistics..."/>
+                </div>
             </div>;
         } else if (this.state.error || championstats === null) {
             page = <div className="content">
