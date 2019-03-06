@@ -19,10 +19,14 @@ class App extends Component {
         super(props)
 
         this.state = {
-            didMount: false,
+            didMountVersions: false,
+            didMountLeagues: false,
+
             versions: [],
             leagues: [],
-            error: false,
+            
+            errorVersions: true,
+            errorLeagues: true,
 
             patch: "",
             league: "",
@@ -50,16 +54,18 @@ class App extends Component {
                 let json = response.json();
                 return json;
             } else {
-                this.setState({error: true});
+                this.setState({errorVersions: true, didMountVersions: true});
                 return null;
             }
         }).then(data => {
             if (data.versions.length > 0) {
-                this.setState({versions: data.versions, error: false, didMount: true});
-                this.handlerPatch(data.versions[0]);
+                this.setState({versions: data.versions, errorVersions: false, didMountVersions: true, patch: data.versions[0]});
+            } else {
+                console.log("Received empty versions response");
+                this.setState({errorVersions: true, didMountVersions: true});
             }
         }).catch(error => {
-            this.setState({error: true, didMount: true});
+            this.setState({errorVersions: true, didMountVersions: true});
             console.log(error);
         });
 
@@ -68,26 +74,28 @@ class App extends Component {
                 let json = response.json();
                 return json;
             } else {
-                this.setState({error: true});
+                this.setState({errorLeagues: true, didMountLeagues: false});
                 return null;
             }
         }).then(data => {
             if (data.leagues.length > 0) {
-                this.setState({leagues: data.leagues, error: false, didMount: true});
-                this.handlerLeague(data.leagues[0]);
+                this.setState({leagues: data.leagues, errorLeagues: false, didMountLeagues: true, league: data.leagues[0]});
+            } else {
+                console.log("Received empty leagues response");
+                this.setState({errorLeagues: true, didMountLeagues: true});
             }
         }).catch(error => {
-            this.setState({error: true, didMount: true});
+            this.setState({errorLeagues: true, didMountLeagues: true});
             console.log(error);
         });
     }
 
     render() {
         var page;
-        if (this.state.didMount === false) {
+        if (this.state.didMountVersions === false || this.state.didMountLeagues === false) {
             page =<div className="App">
                 </div>;
-        } else if (this.state.error) {
+        } else if (this.state.errorVersions || this.state.errorLeagues) {
             page = <div className="Champions">
             <Typography variant="h5" gutterBottom component="h3">
                     <br/>

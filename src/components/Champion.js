@@ -111,7 +111,7 @@ class Champion extends Component {
                     </Paper>
                 </Grid>
                 {championstats.roles !== null ? championstats.roles.map(value => (
-                    <Grid item xs>
+                    <Grid item xs key={value}>
                         <Paper>
                             <ChampionTextStatistics championStats={championstats.statsperrole[value]} role={value}/>
                         </Paper>
