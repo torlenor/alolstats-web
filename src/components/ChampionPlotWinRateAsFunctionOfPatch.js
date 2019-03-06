@@ -45,7 +45,6 @@ class ChampionPlotWinRateAsFunctionOfPatch extends Component {
                 </div>
             </div>;
         } else {
-            // var data = championstats.lanerolepercentageplotly;
             var winRate = {
                 x: ["9.4", "9.3", "9.2", "9.1", "8.24"],
                 y: [45, 51, 52, 51.3],

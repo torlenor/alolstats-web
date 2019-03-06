@@ -340,7 +340,7 @@ function EnhancedTable(props) {
                         /> */}
                         </TableCell>
                         <TableCell scope="row" padding="none" component={props => <Link to={`/champions/${n.key}`} {...props}/>}>
-                            <p><img src={`https://ddragon.leagueoflegends.com/cdn/9.4.1/img/champion/${n.key}.png`} height={32}  style={{float: "left",}} alt="Logo" />
+                            <p><img src={`https://ddragon.leagueoflegends.com/cdn/9.5.1/img/champion/${n.key}.png`} height={32}  style={{float: "left",}} alt="Logo" />
                             {n.name}</p>
                         </TableCell>
                         <TableCell padding="none">{renderRoles(n.roles)}</TableCell>

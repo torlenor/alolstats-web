@@ -45,8 +45,6 @@ const ChampionsAPI = `${API_URL}/v1/champions`;
 //     backgroundColor: grey[500],
 // };
 
-const DEFAULTGAMEVERSION = "9.4";
-const DEFAULTLEAGUE = "ALL";
 const LEAGUEPARAMETER = `&tier=`;
 
 export default class Champions extends Component {
@@ -85,13 +83,13 @@ export default class Champions extends Component {
         var self = this;
 
         let gameversionparameter = "";
-        let version = DEFAULTGAMEVERSION;
+        let version = "";
         if (props.parentProps.selectedVersion !== undefined) {
             version = props.parentProps.selectedVersion;
         }
         gameversionparameter = "?gameversion=" + version;
 
-        let league = DEFAULTLEAGUE;
+        let league = "";
         if (props.parentProps.selectedLeague !== undefined) {
             league = props.parentProps.selectedLeague.toUpperCase();
         }

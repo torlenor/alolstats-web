@@ -20,7 +20,7 @@ function ChampionsSummary(props) {
     const [isUpdating, setIsUpdating] = useState(false);
 
     let gameversionparameter = "";
-    let gameversion = "9.4";
+    let gameversion = "";
     if (props.parentProps.selectedVersion !== undefined) {
         gameversion = props.parentProps.selectedVersion;
     }

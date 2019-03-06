@@ -13,9 +13,6 @@ import Typography from '@material-ui/core/Typography';
 
 import Progress from './Progress'
 
-const DEFAULTGAMEVERSION = "9.4";
-const DEFAULTLEAGUE = "ALL";
-
 const API_URL = `${process.env.REACT_APP_API_BASE_URL}`;
 const API = `${API_URL}/v1/stats/champion/byid?id=`;
 const VERSIONPARAMETER = `&gameversion=`;
@@ -35,12 +32,12 @@ class Champion extends Component {
 
     fetchChampion(props) {
         let champion = props.match.params.champion;
-        let version = DEFAULTGAMEVERSION;
+        let version = "";
         if (props.parentProps.selectedVersion !== undefined) {
             version = props.parentProps.selectedVersion;
         }
 
-        let league = DEFAULTLEAGUE;
+        let league = "";
         if (props.parentProps.selectedLeague !== undefined) {
             league = props.parentProps.selectedLeague.toUpperCase();
         }

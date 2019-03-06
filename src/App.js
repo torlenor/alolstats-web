@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 
+import Typography from '@material-ui/core/Typography';
+
 import NavBar from './components/NavBar'
 import Routes from "./components/Routes";
 import Footer from "./components/Footer";
@@ -20,22 +22,25 @@ class App extends Component {
             didMount: false,
             versions: [],
             leagues: [],
-            error: false
+            error: false,
+
+            patch: "",
+            league: "",
         };
     
         this.handlerPatch = this.handlerPatch.bind(this);
         this.handlerLeague = this.handlerLeague.bind(this);
     }
     
-    handlerPatch(someValue) {
+    handlerPatch(newSelectedPatch) {
         this.setState({
-            patch: someValue
+            patch: newSelectedPatch
         });
     }
 
-    handlerLeague(someValue) {
+    handlerLeague(newSelectedLeague) {
         this.setState({
-            league: someValue
+            league: newSelectedLeague
         });
     }
 
@@ -49,10 +54,9 @@ class App extends Component {
                 return null;
             }
         }).then(data => {
-            if (data.versions !== undefined && data.versions.length > 0) {
-                this.setState({versions: data.versions, selectedVersion: data.versions[0]});
-            } else {
-                this.setState({versions: data.versions});
+            if (data.versions.length > 0) {
+                this.setState({versions: data.versions, error: false, didMount: true});
+                this.handlerPatch(data.versions[0]);
             }
         }).catch(error => {
             this.setState({error: true, didMount: true});
@@ -68,21 +72,41 @@ class App extends Component {
                 return null;
             }
         }).then(data => {
-            this.setState({leagues: data.leagues});
+            if (data.leagues.length > 0) {
+                this.setState({leagues: data.leagues, error: false, didMount: true});
+                this.handlerLeague(data.leagues[0]);
+            }
         }).catch(error => {
             this.setState({error: true, didMount: true});
             console.log(error);
         });
     }
 
-  render() {
-    return (
-      <div className="App">
-        <NavBar versions={this.state.versions} leagues={this.state.leagues} handlerPatch={this.handlerPatch} handlerLeague={this.handlerLeague} />
-        <Routes versions={this.state.versions} leagues={this.state.leagues} selectedVersion={this.state.patch} selectedLeague={this.state.league}/>
-        <Footer appVersion={VERSION} buildDate={BUILD_DATE}/>
-      </div>
-    );
+    render() {
+        var page;
+        if (this.state.didMount === false) {
+            page =<div className="App">
+                </div>;
+        } else if (this.state.error) {
+            page = <div className="Champions">
+            <Typography variant="h5" gutterBottom component="h3">
+                    <br/>
+                    Sorry for the inconvenience!
+                    <br/>
+                    <br/>
+                    ALoLStats is currently in maintenance.
+                    <br/><br/>
+                    Please try again later.
+                </Typography>
+            </div>
+        } else {
+            page =<div className="App">
+                    <NavBar versions={this.state.versions} leagues={this.state.leagues} handlerPatch={this.handlerPatch} handlerLeague={this.handlerLeague} />
+                    <Routes versions={this.state.versions} leagues={this.state.leagues} selectedVersion={this.state.patch} selectedLeague={this.state.league}/>
+                    <Footer appVersion={VERSION} buildDate={BUILD_DATE}/>
+                </div>;
+        }
+        return(page);
   }
 }
 
