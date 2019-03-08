@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import ChampionsSummaryTable from './ChampionsSummaryTable'
 
+import Typography from '@material-ui/core/Typography';
+
 import Progress from './Progress'
 
 const API_URL = `${process.env.REACT_APP_API_BASE_URL}`;
@@ -15,6 +17,7 @@ function createData(name, key, sampleSize, winRate, pickRate, banRate, averageKi
 function ChampionsSummary(props) {
     const [data, setData] = useState([]);
     const [didLoad, setDidLoad] = useState(false);
+    const [error, setError] = useState(false);
     const [fetchedGameVersion, setFetchedGameVersion] = useState("");
     const [fetchedLeague, setFetchedLeague] = useState("");
     const [isUpdating, setIsUpdating] = useState(false);
@@ -41,7 +44,8 @@ function ChampionsSummary(props) {
                 let json = response.json();
                 return json;
             } else {
-                setDidLoad(false);
+                setDidLoad(true);
+                setError(true);
                 return null;
             }
         }).then(jsonData => {
@@ -58,19 +62,24 @@ function ChampionsSummary(props) {
                 });
                 setData(rows);
                 setDidLoad(true);
+                setError(false);
                 setFetchedGameVersion(gameversion);
                 setFetchedLeague(league);
                 setIsUpdating(false);
             } else {
-                setDidLoad(false);
+                setDidLoad(true);
+                setError(true);
             }
         }).catch(error => {
-            setDidLoad(false);
+            setDidLoad(true);
+            setError(true);
         });
     }, [gameversionparameter, leagueParameter]);
 
-    if (didLoad) {
+    if (didLoad && !error) {
         return <div style={{margin: 5,}}><ChampionsSummaryTable data={data} gameVersion={fetchedGameVersion} league={fetchedLeague} isUpdating={isUpdating}/></div>;
+    } else if ( didLoad && error) {
+        return <div><Typography variant="h5" gutterBottom component="h3">Ooops, something bad happened!<br></br><br></br>Error receiving Champions Summary, please try again later!</Typography></div>;
     } else {
         return <Progress text="Loading Champions Summary..."/>;
     }
