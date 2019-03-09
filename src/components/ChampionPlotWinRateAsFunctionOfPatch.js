@@ -57,9 +57,24 @@ function ChampionHistoryWin(props) {
                     text: 'Win Rate [%]',
                 },
                 fixedrange: true,
-                range: [0, 100]
+                range: [30, 70]
             },
             dragmode: false,
+            'shapes': [
+                {
+                    'type': 'line',
+                    'xref': 'paper',
+                    'x0': 0,
+                    'y0': 50,
+                    'x1': 1,
+                    'y1': 50,
+                    'line': {
+                        'color': 'rgb(80, 80, 80)',
+                        'width': 1,
+                        // 'dash': 'dot',
+                    },
+                },
+            ]
         };
 
         const config={'displayModeBar': false};
