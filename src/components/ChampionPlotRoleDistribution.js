@@ -62,6 +62,13 @@ class ChampionStats extends Component {
             var layout = {
                 barmode: 'stack',
                 autosize: true,
+                margin: {
+                    l: 60,
+                    r: 20,
+                    t: 20,
+                    b: 60,
+                    autoexpand: false,
+                },
                 xaxis: {
                     title: {
                         text: 'Lane',
@@ -77,13 +84,15 @@ class ChampionStats extends Component {
                 },
             };
 
+            const config={'displayModeBar': false};
+
             page = <div className="ChampionStats">
                 <div className="ChampionStats">
                     <Typography variant="h5" gutterBottom component="h3">
                         Role Distribution
                     </Typography>
                     </div>
-                    <Plot useResizeHandler style={{ width: '100%', height: '100%' }} data={data} layout={layout}/>
+                    <Plot useResizeHandler style={{ width: '100%', height: '100%' }} data={data} layout={layout} config={config}/>
             </div>;
         }
 

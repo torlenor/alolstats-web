@@ -64,9 +64,17 @@ class ChampionStats extends Component {
                   },
               };
 
-            var layout = {
+            const layout = {
                 barmode: 'stack',
                 autosize: true,
+                margin: {
+                    l: 60,
+                    r: 20,
+                    t: 20,
+                    b: 60,
+                    autoexpand: false,
+                },
+                displayModeBar: false,
                 xaxis: {
                     title: {
                         text: 'Damage Type'
@@ -81,7 +89,9 @@ class ChampionStats extends Component {
                 },
             };
 
-            var data = [damageData];
+            const config={'displayModeBar': false};
+
+            const data = [damageData];
 
             page = <div className="ChampionPlotDamagePerType">
                 <div className="ChampionPlotDamagePerType">
@@ -89,7 +99,7 @@ class ChampionStats extends Component {
                         Damage Per Type
                     </Typography>
                     </div>
-                    <Plot useResizeHandler style={{ width: '100%', height: '100%' }} data={data} layout={layout}/>
+                    <Plot useResizeHandler style={{ width: '100%', height: '100%' }} data={data} layout={layout} config={config}/>
             </div>;
         }
 

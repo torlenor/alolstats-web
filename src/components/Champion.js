@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 
 import ChampionStats from "./ChampionPlotRoleDistribution"
-// import ChampionPlotWinRateAsFunctionOfPatch from "./ChampionPlotWinRateAsFunctionOfPatch"
+import ChampionHistoryWin from "./ChampionPlotWinRateAsFunctionOfPatch"
+import ChampionHistoryPickBan from "./ChampionPlotPickBanRateAsFunctionOfPatch"
 import ChampionPlotDamagePerType from "./ChampionPlotDamagePerType"
 import ChampionTextStatistics from './ChampionTextStatistics';
 import ChampionTextStatisticsAdditional from './ChampionTextStatisticsAdditional';
@@ -18,19 +19,28 @@ const API = `${API_URL}/v1/stats/champion/byid?id=`;
 const VERSIONPARAMETER = `&gameversion=`;
 const LEAGUEPARAMETER = `&tier=`;
 
+const CHAMPION_HISTORY_API = `${API_URL}/v1/stats/championhistory/byid?id=`;
+
 class Champion extends Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
-            didMount: false,
+            didMountChampion: false,
+            errorChampion: false,
             championstats: null,
-            error: false
+
+            didMountChampionHistory: false,
+            errorChampionHistory: false,
+            championHistoryData: null,
+
+            parentProps: props,
         };
     }
 
     fetchChampion(props) {
+        this.setState( {parentProps: props});
         let champion = props.match.params.champion;
         let version = "";
         if (props.parentProps.selectedVersion !== undefined) {
@@ -47,34 +57,67 @@ class Champion extends Component {
                 let json = response.json();
                 return json;
             } else {
-                this.setState({error: true});
+                this.setState({errorChampion: true});
                 return null;
             }
         }).then(data => {
             if (data !== null) {
-                this.setState({championstats: data, error: false, didMount: true});
+                this.setState({championstats: data, errorChampion: false, didMountChampion: true});
             } else {
-                this.setState({error: true, didMount: true});
+                this.setState({errorChampion: true, didMountChampion: true});
             }
         }).catch(error => {
-            this.setState({error: true, didMount: true})
+            this.setState({errorChampion: true, didMountChampion: true})
+        });
+    }
+
+    fetchChampionHistory(props) {
+        let champion = props.match.params.champion;
+        let version = "";
+        if (props.parentProps.selectedVersion !== undefined) {
+            version = props.parentProps.selectedVersion;
+        }
+
+        let league = "";
+        if (props.parentProps.selectedLeague !== undefined) {
+            league = props.parentProps.selectedLeague.toUpperCase();
+        }
+        
+        fetch(CHAMPION_HISTORY_API + champion + VERSIONPARAMETER + version + LEAGUEPARAMETER + league).then(response => {
+            if (response.status === 200) {
+                let json = response.json();
+                return json;
+            } else {
+                this.setState({errorChampionHistory: true});
+                return null;
+            }
+        }).then(data => {
+            if (data !== null) {
+                this.setState({championHistoryData: data, errorChampionHistory: false, didMountChampionHistory: true});
+            } else {
+                this.setState({errorChampionHistory: true, didMountChampionHistory: true});
+            }
+        }).catch(error => {
+            this.setState({errorChampionHistory: true, didMountChampionHistory: true})
         });
     }
 
     componentWillReceiveProps(props) {
         this.fetchChampion(props);
+        this.fetchChampionHistory(props);
       }
 
     componentDidMount() {
         this.fetchChampion(this.props);
+        this.fetchChampionHistory(this.props);
     }
 
     render() {
-        const {championstats} = this.state;
+        const {championstats, championHistoryData} = this.state;
 
         let page;
 
-        if (this.state.didMount === false) {
+        if (this.state.didMountChampion === false || this.state.didMountHistory === false) {
             page = <div className="content">
                 <Typography variant="h4" gutterBottom component="h2">
                     {this.props.match.params.champion}
@@ -83,7 +126,7 @@ class Champion extends Component {
                     <Progress text="Loading Champion Statistics..."/>
                 </div>
             </div>;
-        } else if (this.state.error || championstats === null) {
+        } else if (this.state.errorChampion || this.state.errorChampionHistory || championstats === null || championHistoryData === null || championstats === undefined || championHistoryData === undefined) {
             page = <div className="content">
                 <Typography variant="h5" gutterBottom component="h3">
                     Ooops, something bad happened!<br></br>
@@ -114,6 +157,21 @@ class Champion extends Component {
                     <Grid item xs key={value}>
                         <Paper>
                             <ChampionTextStatistics championStats={championstats.statsperrole[value]} role={value}/>
+                        </Paper>
+                    </Grid>
+                )) : <div></div>}
+                <Grid item xs>
+                        <Paper>
+                            <ChampionHistoryWin championHistoryData={championHistoryData}/>
+                        </Paper>
+                        <Paper>
+                            <ChampionHistoryPickBan championHistoryData={championHistoryData}/>
+                        </Paper>
+                    </Grid>
+                {championstats.roles !== null ? championstats.roles.map(value => (
+                    <Grid item xs key={value}>
+                        <Paper>
+                            <ChampionHistoryWin championHistoryData={championHistoryData.historyperrole[value]} role={value}/>
                         </Paper>
                     </Grid>
                 )) : <div></div>}

@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 
 const MAX_VERSIONS = 5;
 
-function ChampionHistoryWin(props) {
+function ChampionHistoryPickBan(props) {
     var displayRole = "";
     if (props.role !== undefined) {
         displayRole = props.role;
@@ -13,19 +13,33 @@ function ChampionHistoryWin(props) {
         displayRole = "Overall";
     }
 
-    const winRate = 
-        {
+    const pickRate = {
             x: props.championHistoryData.versions.slice(0, MAX_VERSIONS),
-            y: props.championHistoryData.winRateHistory.slice(0, MAX_VERSIONS).map(value => value*100),
+            y: props.championHistoryData.pickRateHistory.slice(0, MAX_VERSIONS).map(value => value*100),
             type: 'scatter',
             mode: 'lines+markers',
             'line': {
-                'color': 'rgb(19, 160, 49)'
+                'color': 'rgb(0, 51, 204)'
             },
             'marker': {
-                'color': 'rgb(19, 160, 49)'
+                'color': 'rgb(0, 51, 204)'
             },
-            name: 'Win Rate'
+            name: 'Pick Rate'
+            };
+
+    const banRate = 
+        {
+            x: props.championHistoryData.versions.slice(0, MAX_VERSIONS),
+            y: props.championHistoryData.banRateHistory.slice(0, MAX_VERSIONS).map(value => value*100),
+            type: 'scatter',
+            mode: 'lines+markers',
+            'line': {
+                'color': 'rgb(204, 0, 0)'
+            },
+            'marker': {
+                'color': 'rgb(204, 0, 0)'
+            },
+            name: 'Ban Rate'
             };
 
     const layout = 
@@ -45,28 +59,28 @@ function ChampionHistoryWin(props) {
                     text: 'Game Version'
                 },
                 categoryorder: 'array',
-                categoryarray: winRate.x,
+                categoryarray: pickRate.x,
             },
             yaxis: {
                 title: {
-                    text: 'Win Rate [%]',
-                },
-                range: [0, 100]
+                    text: 'Pick/Ban Rate [%]',
+                },  
+                range: [0, Math.ceil((Math.max(...banRate.y, ...pickRate.y)+1) / 10.0) * 10.0]
             },
         };
 
-        const config={'displayModeBar': false};
+        const plotData = [pickRate, banRate];
 
-        const plotData = [winRate];
+        const config={'displayModeBar': false};
 
         return <div className="ChampionPlotWinRateAsFunctionOfPatch">
             <div className="ChampionPlotWinRateAsFunctionOfPatch">
                 <Typography variant="h5" gutterBottom component="h3">
-                    {displayRole} Win Rate
+                    {displayRole} Pick / Ban Rate
                 </Typography>
                 </div>
                 <Plot useResizeHandler style={{ minWidth: '400px', width: '100%', height: '100%' }} data={plotData} layout={layout} config={config}/>
         </div>;
 }
 
-export default ChampionHistoryWin;
+export default ChampionHistoryPickBan;
