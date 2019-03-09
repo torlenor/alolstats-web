@@ -164,6 +164,7 @@ class Champion extends Component {
                         <ChampionHistoryPickBan championHistoryData={championHistoryData}/>
                     </Paper>
                 </Grid>
+                <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                 {championstats.roles !== null ? championstats.roles.map(value => (
                     <Grid container spacing={24} justify="center" key={value+'container'}>
                     <Grid item xs={12} sm={12} md={6} lg={6} xl={6} key={value+'stats'}>
@@ -181,6 +182,7 @@ class Champion extends Component {
                     </Grid>
                     </Grid>
                 )) : <div></div>}
+                </Grid>
                 <Grid item xs>
                     <Paper>
                         <ChampionTextStatisticsAdditional championStats={championstats}/>
