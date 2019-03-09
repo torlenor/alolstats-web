@@ -87,6 +87,7 @@ class ChampionStats extends Component {
                     },
                     fixedrange: true,
                 },
+                dragmode: false,
             };
 
             const config={'displayModeBar': false};

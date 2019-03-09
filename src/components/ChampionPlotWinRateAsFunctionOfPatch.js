@@ -59,6 +59,7 @@ function ChampionHistoryWin(props) {
                 fixedrange: true,
                 range: [0, 100]
             },
+            dragmode: false,
         };
 
         const config={'displayModeBar': false};

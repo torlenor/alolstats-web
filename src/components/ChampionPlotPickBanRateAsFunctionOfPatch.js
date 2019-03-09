@@ -69,6 +69,7 @@ function ChampionHistoryPickBan(props) {
                 fixedrange: true,
                 range: [0, Math.ceil((Math.max(...banRate.y, ...pickRate.y)+1) / 10.0) * 10.0]
             },
+            dragmode: false,
         };
 
         const plotData = [pickRate, banRate];
