@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import ChampionsSummaryTable from './ChampionsSummaryTable'
 
 import Typography from '@material-ui/core/Typography';
-
 import Progress from './Progress'
 
 const API_URL = `${process.env.REACT_APP_API_BASE_URL}`;
@@ -38,7 +37,7 @@ function ChampionsSummary(props) {
     leagueParameter = "&tier=" + league;
 
     useEffect(() => {
-        setIsUpdating(true)
+        setIsUpdating(true);
         fetch(ChampionsStatsAPI + gameversionparameter + leagueParameter).then(response => {
             if (response.status === 200) {
                 let json = response.json();
@@ -77,11 +76,13 @@ function ChampionsSummary(props) {
     }, [gameversionparameter, leagueParameter]);
 
     if (didLoad && !error) {
-        return <div style={{margin: 5,}}><ChampionsSummaryTable data={data} gameVersion={fetchedGameVersion} league={fetchedLeague} isUpdating={isUpdating}/></div>;
+        return <div style={{margin: 5,}}>
+            <ChampionsSummaryTable data={data} gameVersion={fetchedGameVersion} league={fetchedLeague} isUpdating={isUpdating}/></div>;
     } else if ( didLoad && error) {
-        return <div><Typography variant="h5" gutterBottom component="h3">Ooops, something bad happened!<br></br><br></br>Error receiving Champions Summary, please try again later!</Typography></div>;
+        return <div>
+            <Typography variant="h5" gutterBottom component="h3">Ooops, something bad happened!<br></br><br></br>Error receiving Champions Summary, please try again later!</Typography></div>;
     } else {
-        return <Progress text="Loading Champions Summary..."/>;
+        return <div><Progress text="Loading Champions Summary..."/></div>;
     }
 }
 

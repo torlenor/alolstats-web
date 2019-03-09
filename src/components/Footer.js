@@ -6,6 +6,6 @@ import Typography from '@material-ui/core/Typography';
 export default (props) =>
   <div className="Footer">
   <Typography>
-  © ALoLStats - v{props.appVersion} - Built: {props.buildDate}
+    Powered by ALoLStats - v{props.appVersion} - Built: {props.buildDate}
   </Typography>
   </div>;

@@ -3,7 +3,7 @@ import './App.css';
 
 import Typography from '@material-ui/core/Typography';
 
-import NavBar from './components/NavBar'
+import NavBar from './components/NavBar';
 import Routes from "./components/Routes";
 import Footer from "./components/Footer";
 
@@ -96,7 +96,7 @@ class App extends Component {
             page =<div className="App">
                 </div>;
         } else if (this.state.errorVersions || this.state.errorLeagues) {
-            page = <div className="Champions">
+            page = <div className="App">
             <Typography variant="h5" gutterBottom component="h3">
                     <br/>
                     Sorry for the inconvenience!
