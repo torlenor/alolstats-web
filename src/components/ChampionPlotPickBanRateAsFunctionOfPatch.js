@@ -58,6 +58,7 @@ function ChampionHistoryPickBan(props) {
                 title: {
                     text: 'Game Version'
                 },
+                fixedrange: true,
                 categoryorder: 'array',
                 categoryarray: pickRate.x,
             },
@@ -65,6 +66,7 @@ function ChampionHistoryPickBan(props) {
                 title: {
                     text: 'Pick/Ban Rate [%]',
                 },  
+                fixedrange: true,
                 range: [0, Math.ceil((Math.max(...banRate.y, ...pickRate.y)+1) / 10.0) * 10.0]
             },
         };

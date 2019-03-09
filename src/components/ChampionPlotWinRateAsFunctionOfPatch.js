@@ -48,6 +48,7 @@ function ChampionHistoryWin(props) {
                 title: {
                     text: 'Game Version'
                 },
+                fixedrange: true,
                 categoryorder: 'array',
                 categoryarray: winRate.x,
             },
@@ -55,6 +56,7 @@ function ChampionHistoryWin(props) {
                 title: {
                     text: 'Win Rate [%]',
                 },
+                fixedrange: true,
                 range: [0, 100]
             },
         };
