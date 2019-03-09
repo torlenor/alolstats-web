@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 
 const MAX_VERSIONS = 5;
 
-function ChampionHistoryWin(props) {
+function ChampionHistoryKDA(props) {
     var displayRole = "";
     if (props.role !== undefined) {
         displayRole = props.role;
@@ -35,7 +35,7 @@ function ChampionHistoryWin(props) {
     const layout = 
         {
             autosize: true,
-            showlegend: false,
+            showlegend: true,
             margin: {
                 l: 60,
                 r: 20,
@@ -61,16 +61,16 @@ function ChampionHistoryWin(props) {
 
         const config={'displayModeBar': false};
 
-        const plotData = [winRate];
+        const plotData = [winRate, winRate, winRate];
 
         return <div className="ChampionPlotWinRateAsFunctionOfPatch">
             <div className="ChampionPlotWinRateAsFunctionOfPatch">
             <Typography variant="h6" gutterBottom component="h4">
-                    {displayRole} Win Rate
+                    {displayRole} KDA
                 </Typography>
                 </div>
                 <Plot useResizeHandler style={{ minWidth: '300px', width: '100%', height: props.height }} data={plotData} layout={layout} config={config}/>
         </div>;
 }
 
-export default ChampionHistoryWin;
+export default ChampionHistoryKDA;

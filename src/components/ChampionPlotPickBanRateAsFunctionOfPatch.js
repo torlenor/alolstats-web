@@ -47,12 +47,12 @@ function ChampionHistoryPickBan(props) {
             autosize: true,
             showlegend: false,
             margin: {
-                l: 60,
-                r: 20,
-                t: 20,
-                b: 60,
-                autoexpand: false,
-            },
+                    l: 60,
+                    r: 20,
+                    t: 20,
+                    b: 60,
+                    autoexpand: false,
+                },
             xaxis: {
                 type: 'category',
                 title: {
@@ -75,11 +75,11 @@ function ChampionHistoryPickBan(props) {
 
         return <div className="ChampionPlotWinRateAsFunctionOfPatch">
             <div className="ChampionPlotWinRateAsFunctionOfPatch">
-                <Typography variant="h5" gutterBottom component="h3">
+            <Typography variant="h6" gutterBottom component="h4">
                     {displayRole} Pick / Ban Rate
                 </Typography>
                 </div>
-                <Plot useResizeHandler style={{ minWidth: '400px', width: '100%', height: '100%' }} data={plotData} layout={layout} config={config}/>
+                <Plot useResizeHandler style={{ minWidth: '300px', width: '100%', height: '300px' }} data={plotData} layout={layout} config={config}/>
         </div>;
 }
 

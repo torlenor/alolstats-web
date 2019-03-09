@@ -84,15 +84,15 @@ class ChampionStats extends Component {
                 },
             };
 
-            const config={'displayModeBar': false};
+            const config={'displayModeBar': false, responsive: true};
 
             page = <div className="ChampionStats">
                 <div className="ChampionStats">
-                    <Typography variant="h5" gutterBottom component="h3">
+                    <Typography variant="h6" gutterBottom component="h4">
                         Role Distribution
                     </Typography>
                     </div>
-                    <Plot useResizeHandler style={{ width: '100%', height: '100%' }} data={data} layout={layout} config={config}/>
+                    <Plot useResizeHandler style={{ width: '100%', height: '300px' }} data={data} layout={layout} config={config} />
             </div>;
         }
 

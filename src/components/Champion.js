@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 import ChampionStats from "./ChampionPlotRoleDistribution"
 import ChampionHistoryWin from "./ChampionPlotWinRateAsFunctionOfPatch"
+import ChampionHistoryKDA from "./ChampionPlotKDAAsFunctionOfPatch"
 import ChampionHistoryPickBan from "./ChampionPlotPickBanRateAsFunctionOfPatch"
 import ChampionPlotDamagePerType from "./ChampionPlotDamagePerType"
 import ChampionTextStatistics from './ChampionTextStatistics';
@@ -9,6 +10,7 @@ import ChampionTextStatisticsAdditional from './ChampionTextStatisticsAdditional
 
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import GridList from '@material-ui/core/GridList';
 
 import Typography from '@material-ui/core/Typography';
 
@@ -139,40 +141,43 @@ class Champion extends Component {
                 {championstats.championname}
             </Typography>
             <div style={{ padding: 12 }}>
-            <Grid container spacing={24} justify="center">
-                <Grid item xs>
+            <Grid container layout={"row"} spacing={24} justify="center">
+                <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
                     <Paper>
                         <ChampionTextStatistics championStats={championstats}/>
                     </Paper>
                 </Grid>
-                <Grid item xs>
-                    <Paper>
+                <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+                    <Paper style={{ height: 356, padding: 12 }}>
                         <ChampionStats championStats={championstats}/>
                     </Paper>
-                    <Paper>
+                    <Paper style={{ height: 356, padding: 12 }}>
                         <ChampionPlotDamagePerType championStats={championstats}/>
                     </Paper>
                 </Grid>
+                <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+                    <Paper style={{ height: 356, padding: 12 }}>
+                        <ChampionHistoryWin championHistoryData={championHistoryData}/>
+                    </Paper>
+                    <Paper style={{ height: 356, padding: 12 }}>
+                        <ChampionHistoryPickBan championHistoryData={championHistoryData}/>
+                    </Paper>
+                </Grid>
                 {championstats.roles !== null ? championstats.roles.map(value => (
-                    <Grid item xs key={value}>
+                    <Grid container spacing={24} justify="center" key={value+'container'}>
+                    <Grid item xs={12} sm={12} md={6} lg={6} xl={6} key={value+'stats'}>
                         <Paper>
                             <ChampionTextStatistics championStats={championstats.statsperrole[value]} role={value}/>
                         </Paper>
                     </Grid>
-                )) : <div></div>}
-                <Grid item xs>
-                        <Paper>
-                            <ChampionHistoryWin championHistoryData={championHistoryData}/>
+                    <Grid item xs={12} sm={12} md={6} lg={6} xl={6} key={value+'plot'}>
+                        <Paper style={{ height: 310, padding: 12 }}>
+                            <ChampionHistoryWin championHistoryData={championHistoryData.historyperrole[value]} role={value} height={280}/>
                         </Paper>
-                        <Paper>
-                            <ChampionHistoryPickBan championHistoryData={championHistoryData}/>
-                        </Paper>
+                        {/* <Paper style={{ height: 310, padding: 12 }}>
+                            <ChampionHistoryKDA championHistoryData={championHistoryData.historyperrole[value]} role={value} height={280}/>
+                        </Paper> */}
                     </Grid>
-                {championstats.roles !== null ? championstats.roles.map(value => (
-                    <Grid item xs key={value}>
-                        <Paper>
-                            <ChampionHistoryWin championHistoryData={championHistoryData.historyperrole[value]} role={value}/>
-                        </Paper>
                     </Grid>
                 )) : <div></div>}
                 <Grid item xs>
