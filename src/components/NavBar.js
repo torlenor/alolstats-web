@@ -31,8 +31,8 @@ const styles = theme => ({
         flexGrow: 1,
     },
     menuButton: {
-        marginLeft: -12,
-        marginRight: 20,
+        marginLeft: -20,
+        marginRight: -8,
     },
     inputPatch: {
         marginTop: 10,
@@ -43,7 +43,7 @@ const styles = theme => ({
     inputLeague: {
         marginTop: 10,
         marginLeft: 8,
-        minWidth: 118,
+        minWidth: 90,
         // flex: 1,
     },
     cssLabel: {
@@ -206,7 +206,7 @@ class NavBar extends Component {
                                     <IconButton className={classes.menuButton} color="inherit" aria-label="Menu" onClick={() => { this.setState({showDrawer: true}); }}>
                                     <MenuIcon />
                                     </IconButton>
-                                    <Typography variant="h6" color="inherit" style={{ textDecoration: 'none' }} component={LinkHome}>
+                                    <Typography variant="h6" color="inherit" style={{ textDecoration: 'none', marginRight: 10 }} component={LinkHome}>
                                     fuu.la
                                     </Typography>
                                     {/* <div>

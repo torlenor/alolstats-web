@@ -67,7 +67,7 @@ function ChampionSearch(props) {
 
 
 const selectStyles = {
-    control: (provided, state) => ({ ...provided, color: state.isSelected ? 'red' : 'blue', backgroundColor: '#3f51b5', width: 200, boxShadow: "none",
+    control: (provided, state) => ({ ...provided, color: state.isSelected ? 'red' : 'blue', backgroundColor: '#3f51b5', minWidth: 100, boxShadow: "none",
     borderColor: '#6b79c6',
     '&:hover': {
       borderColor: 'white',
@@ -86,7 +86,7 @@ const selectStyles = {
     }}),
     input: base => ({
       ...base,
-      minWidth: 200,
+      minWidth: 100,
       textAlign: "left",
       color: 'white',
       '& input': {
@@ -132,7 +132,7 @@ const selectStyles = {
             isRtl={isRtl}
             isSearchable={isSearchable}
             name="Champion Search"
-            placeholder="Search Champion..."
+            placeholder="Search..."
             options={data}
             onChange={handleChange}
             value={selected}
@@ -148,7 +148,7 @@ const selectStyles = {
             isRtl={isRtl}
             isSearchable={isSearchable}
             name="Champion Search"
-            placeholder="Search Champion..."
+            placeholder="Search..."
             />
         );
     } else {
@@ -161,7 +161,7 @@ const selectStyles = {
             isRtl={isRtl}
             isSearchable={isSearchable}
             name="Champion Search"
-            placeholder="Search Champion..."
+            placeholder="Search..."
             />
         );
     }
