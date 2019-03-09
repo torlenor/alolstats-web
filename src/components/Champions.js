@@ -169,6 +169,7 @@ export default class Champions extends Component {
                     </Typography>
                 </div>
         } else if (this.state.isFiltered === true && filteredHits !== null) {
+            document.title = "Champions - fuu.la";
             page = <div className="Champions">
                         <TextField
                             id="outlined-full-width"
@@ -202,6 +203,7 @@ export default class Champions extends Component {
                         </Fab> */}
                     </div>
         } else {
+            document.title = "Champions - fuu.la";
             page = <div className="Champions">
             <TextField
                 id="outlined-full-width"

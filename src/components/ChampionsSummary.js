@@ -76,6 +76,7 @@ function ChampionsSummary(props) {
     }, [gameversionparameter, leagueParameter]);
 
     if (didLoad && !error) {
+        document.title = "Champions Summary - fuu.la";
         return <div style={{margin: 5,}}>
             <ChampionsSummaryTable data={data} gameVersion={fetchedGameVersion} league={fetchedLeague} isUpdating={isUpdating}/></div>;
     } else if ( didLoad && error) {

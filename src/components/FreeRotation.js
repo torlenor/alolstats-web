@@ -91,6 +91,7 @@ export default class FreeRotation extends Component {
                     </Typography>
                 </div>
         } else {
+            document.title = "Free Rotation - fuu.la";
             page = <div className="FreeRotation">
                 <Grid container className="demo" justify="center" spacing={16}>
                     {hits.map(value => (

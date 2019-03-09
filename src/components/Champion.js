@@ -136,6 +136,7 @@ class Champion extends Component {
                     </Typography>
             </div>;
         } else {
+            document.title = championstats.championname + " - fuu.la";
             page = <div className="Champion">
             <Typography variant="h4" gutterBottom component="h2">
                 {championstats.championname}
