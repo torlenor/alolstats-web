@@ -157,7 +157,7 @@ class Champion extends Component {
                 </Grid>
                 <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
                     <Paper style={{ height: 356, padding: 12 }}>
-                        <ChampionHistoryWin championHistoryData={championHistoryData}/>
+                        <ChampionHistoryWin championHistoryData={championHistoryData} height={300}/>
                     </Paper>
                     <Paper style={{ height: 356, padding: 12 }}>
                         <ChampionHistoryPickBan championHistoryData={championHistoryData}/>
