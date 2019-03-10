@@ -32,28 +32,19 @@ const styles = theme => ({
         marginRight: -8,
     },
     inputPatch: {
-        marginTop: 10,
+        marginTop: 0,
         marginLeft: 8,
         minWidth: 80,
+        height: 38,
+        color: "white",
         // flex: 1,
     },
     inputLeague: {
-        marginTop: 10,
+        marginTop: 0,
         marginLeft: 8,
         minWidth: 90,
+        height: 38,
         // flex: 1,
-    },
-    cssLabel: {
-        '&$cssFocused': {
-            color: "#FFFFFF",
-        },
-        color: "#FFFFFF",
-    },
-    cssFocused: {
-        '&$cssFocused': {
-            color: "#FFFFFF",
-        },
-        color: "#FFFFFF",
     },
 });
 
@@ -134,23 +125,13 @@ class NavBar extends Component {
                 
                 render() {
                     const { classes } = this.props;
-                    
-                    // const theme = createMuiTheme({
-                    //     palette: {
-                    //         type: 'dark',
-                    //     },
-                    //     typography: { useNextVariants: true },
-                    // });
 
                     const theme = createMuiTheme({
-                    // eslint-disable-next-line
-                    ...theme,
-                    palette: {
-                                    type: 'dark',
-                                },
-                                typography: { useNextVariants: true },
+                        // eslint-disable-next-line
+                        ...theme,
+                        palette: { type: 'dark', },
                     });
-                    
+
                     return (
                         <div className={classes.root}>
                             <MenuDrawer open={this.state.showDrawer} onClose={this.handleMenuButtonClose} 
@@ -166,16 +147,12 @@ class NavBar extends Component {
                                     <Typography variant="h6" color="inherit" style={{ textDecoration: 'none', marginRight: 10 }} component={LinkHome}>
                                     fuu.la
                                     </Typography>
-                                    {/* <div>
-                                        <Button component={LinkFreeRotation} color="inherit">Free Rotation</Button>
-                                        <Button component={LinkChampions} color="inherit">Champions</Button>
-                                        <Button component={LinkChampionsSummary} color="inherit">Summary</Button>
-                                    </div> */}
 
                                     <div className={classes.grow}></div>
 
                                     <ChampionSearch selectedVersion={this.state.selectedPatch} selectedLeague={this.state.selectedLeague} routerHistory={this.props.history}/>
-                                    
+
+
                                     <MuiThemeProvider theme={theme}>
                                         <TextField
                                         select

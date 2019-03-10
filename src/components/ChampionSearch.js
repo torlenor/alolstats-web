@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
 
+// THEME
+import reactSelectTheme from '../theme/ReactSelectTheme';
+
 const API_URL = `${process.env.REACT_APP_API_BASE_URL}`;
 const ChampionsAPI = `${API_URL}/v1/champions`;
 const LEAGUEPARAMETER = `&tier=`;
@@ -65,37 +68,6 @@ function ChampionSearch(props) {
     isSearchable: true,
   };
 
-
-const selectStyles = {
-    control: (provided, state) => ({ ...provided, color: state.isSelected ? 'red' : 'blue', backgroundColor: '#3f51b5', minWidth: 100, boxShadow: "none",
-    borderColor: '#6b79c6',
-    '&:hover': {
-      borderColor: 'white',
-      border: '1px solid white',
-    } }),
-    option: (provided, state) => ({...provided, color: state.isSelected ? 'white' : 'white', backgroundColor: '#3f51b5', height: '100%',
-    '&:hover': {
-        backgroundColor: '#344395',
-    }}),
-    container: (provided, state)  => ({...provided, color: state.isSelected ? 'red' : 'blue', backgroundColor: 'white',}),
-    placeholder:  styles => ({...styles, color: 'white'}),
-    singleValue: styles => ({...styles, color: 'white',
-    '&:hover': {
-      borderColor: 'white',
-      border: '1px solid white',
-    }}),
-    input: base => ({
-      ...base,
-      minWidth: 100,
-      textAlign: "left",
-      color: 'white',
-      '& input': {
-        font: 'inherit',
-        color: 'white',
-      },
-    }),
-  };
-
     const {
       isClearable,
       isSearchable,
@@ -116,7 +88,7 @@ const selectStyles = {
     if (didLoad && !error) {
         return (
             <Select
-            styles={selectStyles}
+            styles={reactSelectTheme}
             theme={(theme) => ({
             ...theme,
             borderRadius: 0,
@@ -141,7 +113,7 @@ const selectStyles = {
     } else if ( didLoad && error) {
         return (
             <Select
-            styles={selectStyles}
+            styles={reactSelectTheme}
             isDisabled={true}
             isLoading={isLoading}
             isClearable={isClearable}
@@ -154,7 +126,7 @@ const selectStyles = {
     } else {
         return (
             <Select
-            styles={selectStyles}
+            styles={reactSelectTheme}
             isDisabled={isDisabled}
             isLoading={false}
             isClearable={isClearable}

@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+
+// THEME
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import muiTheme from './theme/MuiTheme';
 
 import NavBar from './components/NavBar';
 import Routes from "./components/Routes";
@@ -93,20 +96,13 @@ class App extends Component {
 
 
     render() {
-        const theme = createMuiTheme({
-//   palette: {
-//     type: 'dark',
-//   },
-});
-
-
         var page;
         if (this.state.didMountVersions === false || this.state.didMountLeagues === false) {
-            page = <MuiThemeProvider theme={theme}>
+            page = <MuiThemeProvider theme={muiTheme}>
                 <div className="App"/>
                 </MuiThemeProvider>;
         } else if (this.state.errorVersions || this.state.errorLeagues) {
-            page = <MuiThemeProvider theme={theme}><div className="App">
+            page = <MuiThemeProvider theme={muiTheme}><div className="App">
             <Typography variant="h5" gutterBottom component="h3">
                     <br/>
                     Sorry for the inconvenience!
@@ -118,7 +114,7 @@ class App extends Component {
                 </Typography>
             </div></MuiThemeProvider>;
         } else {
-            page =<MuiThemeProvider theme={theme}><div className="App">
+            page =<MuiThemeProvider theme={muiTheme}><div className="App">
                     <NavBar versions={this.state.versions} leagues={this.state.leagues} handlerPatch={this.handlerPatch} handlerLeague={this.handlerLeague} />
                     <Routes versions={this.state.versions} leagues={this.state.leagues} selectedVersion={this.state.patch} selectedLeague={this.state.league}/>
                     <Footer appVersion={VERSION} buildDate={BUILD_DATE}/>
