@@ -10,7 +10,6 @@ import ChampionTextStatisticsAdditional from './ChampionTextStatisticsAdditional
 
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import GridList from '@material-ui/core/GridList';
 
 import Typography from '@material-ui/core/Typography';
 

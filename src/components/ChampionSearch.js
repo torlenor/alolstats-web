@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
 
 const API_URL = `${process.env.REACT_APP_API_BASE_URL}`;

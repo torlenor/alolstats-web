@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from "react-router-dom";
 
-import Home from "./Home";
 import FreeRotation from "./FreeRotation";
 import Champions from "./Champions";
 import Champion from "./Champion";
