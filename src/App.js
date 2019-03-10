@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 
 // THEME
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import muiTheme from './theme/MuiTheme';
 
 import NavBar from './components/NavBar';
@@ -98,7 +99,7 @@ class App extends Component {
     render() {
         var page;
         if (this.state.didMountVersions === false || this.state.didMountLeagues === false) {
-            page = <MuiThemeProvider theme={muiTheme}>
+            page = <MuiThemeProvider theme={muiTheme}><CssBaseline />
                 <div className="App"/>
                 </MuiThemeProvider>;
         } else if (this.state.errorVersions || this.state.errorLeagues) {
@@ -114,7 +115,8 @@ class App extends Component {
                 </Typography>
             </div></MuiThemeProvider>;
         } else {
-            page =<MuiThemeProvider theme={muiTheme}><div className="App">
+            page =<MuiThemeProvider theme={muiTheme}><CssBaseline />
+                <div className="App">
                     <NavBar versions={this.state.versions} leagues={this.state.leagues} handlerPatch={this.handlerPatch} handlerLeague={this.handlerLeague} />
                     <Routes versions={this.state.versions} leagues={this.state.leagues} selectedVersion={this.state.patch} selectedLeague={this.state.league}/>
                     <Footer appVersion={VERSION} buildDate={BUILD_DATE}/>
