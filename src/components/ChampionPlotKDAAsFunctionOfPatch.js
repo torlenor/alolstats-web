@@ -17,20 +17,65 @@ function ChampionHistoryKDA(props) {
         return <div></div>;
     }
 
-    const winRate = 
+    const kills = 
         {
             x: props.championHistoryData.versions.slice(0, MAX_VERSIONS),
-            y: props.championHistoryData.winRateHistory.slice(0, MAX_VERSIONS).map(value => value*100),
+            y: props.championHistoryData.averagekillsHistory.slice(0, MAX_VERSIONS),
+            error_y: {
+                type: 'data',
+                array: props.championHistoryData.stddevkillsHistory.slice(0, MAX_VERSIONS),
+                visible: true
+              },
             type: 'scatter',
             mode: 'lines+markers',
             'line': {
-                'color': 'rgb(19, 160, 49)'
+                'color': 'rgb(15, 35, 168)'
             },
             'marker': {
-                'color': 'rgb(19, 160, 49)'
+                'color': 'rgb(15, 35, 168)'
             },
-            name: 'Win Rate'
-            };
+            name: 'Kills'
+        };
+
+    const deaths = 
+    {
+        x: props.championHistoryData.versions.slice(0, MAX_VERSIONS),
+        y: props.championHistoryData.averagedeathsHistory.slice(0, MAX_VERSIONS),
+        error_y: {
+            type: 'data',
+            array: props.championHistoryData.stddevdeathsHistory.slice(0, MAX_VERSIONS),
+            visible: true
+          },
+        type: 'scatter',
+        mode: 'lines+markers',
+        'line': {
+            'color': 'rgb(168, 15, 15)'
+        },
+        'marker': {
+            'color': 'rgb(168, 15, 15)'
+        },
+        name: 'Deaths'
+    };
+
+    const assists = 
+    {
+        x: props.championHistoryData.versions.slice(0, MAX_VERSIONS),
+        y: props.championHistoryData.averageassistsHistory.slice(0, MAX_VERSIONS),
+        error_y: {
+            type: 'data',
+            array: props.championHistoryData.stddevassistsHistory.slice(0, MAX_VERSIONS),
+            visible: true
+          },
+        type: 'scatter',
+        mode: 'lines+markers',
+        'line': {
+            'color': 'rgb(30, 104, 11)'
+        },
+        'marker': {
+            'color': 'rgb(30, 104, 11)'
+        },
+        name: 'Assists'
+    };
 
     const layout = 
         {
@@ -50,21 +95,21 @@ function ChampionHistoryKDA(props) {
                 },
                 fixedrange: true,
                 categoryorder: 'array',
-                categoryarray: winRate.x,
+                categoryarray: kills.x,
             },
             yaxis: {
                 title: {
-                    text: 'Win Rate [%]',
+                    text: 'KDA',
                 },
                 fixedrange: true,
-                range: [0, 100]
+                range: [0, Math.ceil((Math.max(...kills.y, ...deaths.y, ...assists.y) + Math.max(...kills.error_y.array, ...deaths.error_y.array, ...assists.error_y.array) + +1) / 10.0) * 10.0]
             },
             dragmode: false,
         };
 
         const config={'displayModeBar': false};
 
-        const plotData = [winRate, winRate, winRate];
+        const plotData = [kills, deaths, assists];
 
         return <div className="ChampionPlotWinRateAsFunctionOfPatch">
             <div className="ChampionPlotWinRateAsFunctionOfPatch">

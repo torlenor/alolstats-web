@@ -176,9 +176,9 @@ class Champion extends Component {
                         <Paper style={{ height: 310, padding: 12 }}>
                             <ChampionHistoryWin championHistoryData={championHistoryData.historyperrole[value]} role={value} height={280}/>
                         </Paper>
-                        {/* <Paper style={{ height: 310, padding: 12 }}>
+                        <Paper style={{ height: 310, padding: 12 }}>
                             <ChampionHistoryKDA championHistoryData={championHistoryData.historyperrole[value]} role={value} height={280}/>
-                        </Paper> */}
+                        </Paper>
                     </Grid>
                     </Grid>
                 )) : <div></div>}
