@@ -127,7 +127,7 @@ class Champion extends Component {
                     <Progress text="Loading Champion Statistics..."/>
                 </div>
             </div>;
-        } else if (this.state.errorChampion || this.state.errorChampionHistory || championstats === null || championHistoryData === null || championstats === undefined || championHistoryData === undefined) {
+        } else if ( (this.state.didMountChampion && this.state.didMountHistory) || this.state.errorChampion || this.state.errorChampionHistory || championstats === null || championHistoryData === null || championstats === undefined || championHistoryData === undefined) {
             page = <div className="content">
                 <Typography variant="h5" gutterBottom component="h3">
                     Ooops, something bad happened!<br></br>
