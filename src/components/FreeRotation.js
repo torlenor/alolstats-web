@@ -1,13 +1,17 @@
 import React, {Component} from 'react';
 
+// CSS
 import './FreeRotation.css';
 
+// Material-UI Components
 import Grid from "@material-ui/core/Grid";
 import Typography from '@material-ui/core/Typography';
 
+// ALoLStats Components
 import ChampionCard from './ChampionCard.js'
 import Progress from './Progress'
 
+// API
 const API_URL = `${process.env.REACT_APP_API_BASE_URL}`;
 const FreeRotationAPI = `${API_URL}/v1/champion-rotations`;
 const API = `${API_URL}/v1/champion/bykey?key=`;
@@ -93,22 +97,16 @@ export default class FreeRotation extends Component {
         } else {
             document.title = "Free Rotation - fuu.la";
             page = <div className="FreeRotation">
-                <Grid container className="demo" justify="center" spacing={16}>
+                <Grid container className="FreeRotationCards" justify="center" spacing={16}>
                     {hits.map(value => (
                         <Grid key={value.key} item>
-                            {/* <Paper className="paper"> */}
-                                <ChampionCard champion={value}/>
-                            {/* </Paper> */}
+                            <ChampionCard champion={value}/>
                         </Grid>
                     ))}
                 </Grid>
             </div>
         }
 
-        return (
-            <div>
-                <h2>{page}</h2>
-            </div>
-        );
+        return ( page );
     }
 }

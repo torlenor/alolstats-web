@@ -22,7 +22,7 @@ import ChampionSearch from './ChampionSearch'
 const styles = theme => ({
     root: {
         flexGrow: 1,
-        paddingBottom: 70,
+        paddingBottom: 80,
     },
     grow: {
         flexGrow: 1,
@@ -93,107 +93,106 @@ class NavBar extends Component {
             }
         }
             
-            componentDidMount() {
-                if (this.props.versions !== undefined && this.props.versions.length > 0
-                    && this.props.leagues !== undefined && this.props.leagues.length > 0 ) {
-                        this.setState({
-                            // selectedPatch: this.props.versions[0], 
-                            // selectedLeague: this.props.leagues[0],
-                            versions: this.props.versions,
-                            leagues: this.props.leagues,
-                        });
-                    }
-                }
-
-                handleChangePatch = (event) => {
-                    this.setState({selectedPatch: event.target.value});
-                    this.props.handlerPatch(event.target.value);
-                };
-
-                handleChangeLeague = (event) => {
-                    this.setState({selectedLeague: event.target.value});
-                    this.props.handlerLeague(event.target.value);
-                };
-
-                handleMenuButtonClose = (event) => {
-                    this.setState({showDrawer: false})
-                }
-
-                handleMenuButton = () => {
-                    this.setState({showDrawer: true})
-                }
-                
-                render() {
-                    const { classes } = this.props;
-
-                    const theme = createMuiTheme({
-                        // eslint-disable-next-line
-                        ...theme,
-                        palette: { type: 'dark', },
-                    });
-
-                    return (
-                        <div className={classes.root}>
-                            <MenuDrawer open={this.state.showDrawer} onClose={this.handleMenuButtonClose} 
-                                        versions={this.props.versions} leagues={this.props.leagues} 
-                                        selectedVersion={this.state.selectedPatch} selectedLeague={this.state.selectedLeague}
-                                        handlerPatch={this.props.handlerPatch} handlerLeague={this.props.handlerLeague}
-                                        />
-                            <AppBar position="fixed">
-                                <Toolbar>
-                                    <IconButton className={classes.menuButton} color="inherit" aria-label="Menu" onClick={() => { this.setState({showDrawer: true}); }}>
-                                    <MenuIcon />
-                                    </IconButton>
-                                    <Typography variant="h6" color="inherit" style={{ textDecoration: 'none', marginRight: 10 }} component={LinkHome}>
-                                    fuu.la
-                                    </Typography>
-
-                                    <div className={classes.grow}></div>
-
-                                    <ChampionSearch selectedVersion={this.state.selectedPatch} selectedLeague={this.state.selectedLeague} routerHistory={this.props.history}/>
-
-
-                                    <MuiThemeProvider theme={theme}>
-                                        <TextField
-                                        select
-                                        variant="outlined"
-                                        label="Patch"
-                                        value={this.state.selectedPatch}
-                                        className={classes.inputPatch}
-                                        onChange={this.handleChangePatch}>
-                                            {
-                                                this.state.versions.map(option => (
-                                                <MenuItem key={option} value={option}>
-                                                {option}
-                                                </MenuItem>
-                                                ))
-                                            }
-                                        </TextField>
-
-                                        <TextField
-                                        select
-                                        variant="outlined"
-                                        label="League"
-                                        value={this.state.selectedLeague}
-                                        className={classes.inputLeague}
-                                        onChange={this.handleChangeLeague}>
-                                            {
-                                                this.state.leagues.map(option => (
-                                                <MenuItem key={option} value={option}>{option}</MenuItem>
-                                                ))
-                                            }
-                                        </TextField>
-                                    </MuiThemeProvider>
-                                </Toolbar>
-                            </AppBar>
-                        </div>
-                );
+    componentDidMount() {
+        if (this.props.versions !== undefined && this.props.versions.length > 0
+            && this.props.leagues !== undefined && this.props.leagues.length > 0 ) {
+                this.setState({
+                    // selectedPatch: this.props.versions[0], 
+                    // selectedLeague: this.props.leagues[0],
+                    versions: this.props.versions,
+                    leagues: this.props.leagues,
+                });
             }
-        }
+    }
+
+    handleChangePatch = (event) => {
+        this.setState({selectedPatch: event.target.value});
+        this.props.handlerPatch(event.target.value);
+    };
+
+    handleChangeLeague = (event) => {
+        this.setState({selectedLeague: event.target.value});
+        this.props.handlerLeague(event.target.value);
+    };
+
+    handleMenuButtonClose = (event) => {
+        this.setState({showDrawer: false})
+    }
+
+    handleMenuButton = () => {
+        this.setState({showDrawer: true})
+    }
+                
+        render() {
+            const { classes } = this.props;
+
+            const theme = createMuiTheme({
+                // eslint-disable-next-line
+                ...theme,
+                palette: { type: 'dark', },
+            });
+
+            return (
+                <div className={classes.root}>
+                    <MenuDrawer open={this.state.showDrawer} onClose={this.handleMenuButtonClose} 
+                                versions={this.props.versions} leagues={this.props.leagues} 
+                                selectedVersion={this.state.selectedPatch} selectedLeague={this.state.selectedLeague}
+                                handlerPatch={this.props.handlerPatch} handlerLeague={this.props.handlerLeague}
+                                />
+                    <AppBar position="fixed">
+                        <Toolbar>
+                            <IconButton className={classes.menuButton} color="inherit" aria-label="Menu" onClick={() => { this.setState({showDrawer: true}); }}>
+                            <MenuIcon />
+                            </IconButton>
+                            <Typography variant="h6" color="inherit" style={{ textDecoration: 'none', marginRight: 10 }} component={LinkHome}>
+                            fuu.la
+                            </Typography>
+
+                            <div className={classes.grow}></div>
+
+                            <ChampionSearch selectedVersion={this.state.selectedPatch} selectedLeague={this.state.selectedLeague} routerHistory={this.props.history}/>
+
+
+                            <MuiThemeProvider theme={theme}>
+                                <TextField
+                                select
+                                variant="outlined"
+                                label="Patch"
+                                value={this.state.selectedPatch}
+                                className={classes.inputPatch}
+                                onChange={this.handleChangePatch}>
+                                    {
+                                        this.state.versions.map(option => (
+                                        <MenuItem key={option} value={option}>
+                                        {option}
+                                        </MenuItem>
+                                        ))
+                                    }
+                                </TextField>
+
+                                <TextField
+                                select
+                                variant="outlined"
+                                label="League"
+                                value={this.state.selectedLeague}
+                                className={classes.inputLeague}
+                                onChange={this.handleChangeLeague}>
+                                    {
+                                        this.state.leagues.map(option => (
+                                        <MenuItem key={option} value={option}>{option}</MenuItem>
+                                        ))
+                                    }
+                                </TextField>
+                            </MuiThemeProvider>
+                        </Toolbar>
+                    </AppBar>
+                </div>
+        );
+    }
+}
         
-        NavBar.propTypes = {
-            classes: PropTypes.object.isRequired,
-        };
+NavBar.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
         
-        export default withStyles(styles)(withRouter(NavBar));
-        
+export default withStyles(styles)(withRouter(NavBar));

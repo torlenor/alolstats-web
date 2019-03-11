@@ -1,50 +1,20 @@
 import React, {Component} from 'react';
 
+// CSS
 import './Champions.css';
 
-import ChampionCard from './ChampionCard.js'
-
+// Material-UI Components
 import Grid from "@material-ui/core/Grid";
 import TextField from '@material-ui/core/TextField';
-
-import Progress from './Progress'
-
-// import Checkbox from '@material-ui/core/Checkbox';
-
 import Typography from '@material-ui/core/Typography';
 
-// import Fab from '@material-ui/core/Fab';
+// ALoLStats Components
+import ChampionCard from './ChampionCard.js'
+import Progress from './Progress'
 
-// import green from '@material-ui/core/colors/green';
-// import grey from '@material-ui/core/colors/grey';
-
-// import Icon from '@material-ui/core/Icon';
-
+// API
 const API_URL = `${process.env.REACT_APP_API_BASE_URL}`;
 const ChampionsAPI = `${API_URL}/v1/champions`;
-
-//   const style = {
-//     margin: 0,
-//     top: 'auto',
-//     right: 20,
-//     bottom: 20,
-//     left: 'auto',
-//     position: 'fixed',
-//     color: "white",
-//     backgroundColor: green[500],
-// };
-
-// const style2 = {
-//     margin: 0,
-//     top: 'auto',
-//     right: 150,
-//     bottom: 20,
-//     left: 'auto',
-//     position: 'fixed',
-//     color: "white",
-//     backgroundColor: grey[500],
-// };
-
 const LEAGUEPARAMETER = `&tier=`;
 
 export default class Champions extends Component {
@@ -186,21 +156,13 @@ export default class Champions extends Component {
                             shrink: true,
                             }}
                         />
-                        <Grid container className="demo" justify="center" spacing={16}>
+                        <Grid container className="ChampionCards" justify="center" spacing={16}>
                             {filteredHits.map(value => (
                                 <Grid key={value.key} item>
                                     <ChampionCard champion={value}/>
-                                    {/* <Checkbox checked={this.checkChecked(value.key)} onChange={this.handleChange(value.key)} value={value.key} /> */}
                                 </Grid>
                             ))}
                         </Grid>
-                        {/* <Fab variant="extended" aria-label="Delete" onClick={this.unselectAll} style={style2}>
-                            Unselect All
-                        </Fab>
-                        <Fab variant="extended" aria-label="Delete" style={style}>
-                            <Icon>compare</Icon>
-                            Compare
-                        </Fab> */}
                     </div>
         } else {
             document.title = "Champions - fuu.la";
@@ -220,28 +182,16 @@ export default class Champions extends Component {
                 shrink: true,
                 }}
             />
-            <Grid container className="demo" justify="center" spacing={16}>
+            <Grid container className="ChampionCards" justify="center" spacing={16}>
                 {hits.map(value => (
                     <Grid key={value.key} item>
                         <ChampionCard champion={value}/>
-                        {/* <Checkbox checked={this.checkChecked(value.key)} onChange={this.handleChange(value.key)} value={value.key} /> */}
                     </Grid>
                 ))}
             </Grid>
-            {/* <Fab variant="extended" aria-label="Delete" onClick={this.unselectAll} style={style2}>
-                Unselect All
-            </Fab>
-            <Fab variant="extended" aria-label="Delete" style={style}>
-                <Icon>compare</Icon>
-                Compare
-            </Fab> */}
         </div>
         }
 
-        return (
-            <div>
-                <h2>{page}</h2>
-            </div>
-        );
+        return ( page );
     }
 }
