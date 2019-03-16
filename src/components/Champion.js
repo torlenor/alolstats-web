@@ -48,8 +48,12 @@ class Champion extends Component {
 
     getChampionInfo(props) {
         let champion = props.match.params.champion;
-        const setState = this.setState.bind(this);
-        fetchChampionInfo(champion, setState);
+        if (props.parentProps.selectedVersion !== undefined && props.parentProps.selectedLeague !== undefined) {
+            const version = props.parentProps.selectedVersion;
+            const league = props.parentProps.selectedLeague.toUpperCase();
+            const setState = this.setState.bind(this);
+            fetchChampionInfo(champion, version, league, setState);
+        }
     }
 
     getChampion(props) {

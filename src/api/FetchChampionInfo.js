@@ -2,9 +2,11 @@
 const API_URL = `${process.env.REACT_APP_API_BASE_URL}`;
 
 const CHAMPION_API = `${API_URL}/v1/champion/byid?id=`;
+const GAMEVERSIONPARAMETER = "gameversion=";
+const LEAGUEPARAMETER = `tier=`;
 
-export const fetchChampionInfo = (champion, setState) => {
-    fetch(CHAMPION_API + champion).then(response => {
+export const fetchChampionInfo = (champion, gameVersion, league, setState) => {
+    fetch(CHAMPION_API + champion + "&" + GAMEVERSIONPARAMETER + gameVersion + "&" + LEAGUEPARAMETER + league).then(response => {
         if (response.status === 200) {
             let json = response.json();
             return json;
