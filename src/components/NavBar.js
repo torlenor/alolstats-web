@@ -152,7 +152,6 @@ class NavBar extends Component {
 
                             <ChampionSearch selectedVersion={this.state.selectedPatch} selectedLeague={this.state.selectedLeague} routerHistory={this.props.history}/>
 
-
                             <MuiThemeProvider theme={theme}>
                                 <TextField
                                 select

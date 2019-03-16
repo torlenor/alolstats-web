@@ -12,6 +12,7 @@ const DEFAULTGAMEVERSION = "9.4"
 const API_URL = `${process.env.REACT_APP_API_BASE_URL}`;
 const API = `${API_URL}/v1/stats/champion/byid?id=`;
 const VERSIONPARAMETER = `&gameversion=`;
+const LEAGUEPARAMETER = `&tier=`;
 
 class ChampionComparison extends Component {
 
@@ -28,7 +29,6 @@ class ChampionComparison extends Component {
     }
 
     fetchChampion(champNumber, props) {
-        console.log(props);
         let champion = "";
         let version = "";
         if (props.parentProps.selectedVersion !== undefined) {
@@ -37,13 +37,18 @@ class ChampionComparison extends Component {
             version = DEFAULTGAMEVERSION;
         }
 
+        let league = "";
+        if (props.parentProps.selectedLeague !== undefined) {
+            league = props.parentProps.selectedLeague.toUpperCase();
+        }
+
         if (champNumber === 1) {
             champion = props.match.params.champion1;
         } else {
             champion = props.match.params.champion2;
         }
         
-        fetch(API + champion + VERSIONPARAMETER + version).then(response => {
+        fetch(API + champion + VERSIONPARAMETER + version + LEAGUEPARAMETER + league).then(response => {
             if (response.status === 200) {
                 let json = response.json();
                 return json;
@@ -111,12 +116,21 @@ class ChampionComparison extends Component {
             </Typography>
             <div style={{ padding: 12 }}>
             <Grid container spacing={24} justify="center">
-                <Grid item xs>
+                <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
                     <Paper>
                         <ChampionComparisonTextStatistics championStats1={championstats1} championStats2={championstats2}/>
                     </Paper>
                 </Grid>
-            </Grid>
+                {/* <Grid item xs={12} sm={12} md={12} lg={12} xl={12}> */}
+                {championstats1.roles !== null ? ["Top", "Mid", "Jungle", "Carry", "Support"].map(value => (
+                    <Grid item xs={12} sm={12} md={6} lg={6} xl={6} key={value+'stats'}>
+                        <Paper>
+                            <ChampionComparisonTextStatistics championStats1={championstats1.statsperrole[value]} championStats2={championstats2.statsperrole[value]} role={value}/>
+                        </Paper>
+                    </Grid>
+                )) : <div></div>}
+                </Grid>
+            {/* </Grid> */}
             </div>
 
         </div>;

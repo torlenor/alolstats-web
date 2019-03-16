@@ -6,6 +6,8 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 
+import Typography from '@material-ui/core/Typography';
+
 let id = 0;
 function createData(name, avgValue1, stddevValue1, avgValue2, stddevValue2, unit, prec, noColor=false, lowerIsBetter=false) {
     id += 1;
@@ -53,41 +55,83 @@ function createData(name, avgValue1, stddevValue1, avgValue2, stddevValue2, unit
 
 class ChampionComparisonTextStatistics extends Component {
     render() {
-        const {championStats1, championStats2} = this.props;
+        const {championStats1, championStats2, role} = this.props;
 
-        const rows = [
-            createData('Sample Size', championStats1.samplesize, null, championStats2.samplesize, null, "Games", 0, true),
-            createData('Pick Rate', (100.0*championStats1.pickrate).toFixed(2), null, (100.0*championStats2.pickrate).toFixed(2), null, "%", 2, true),
-            createData('Ban Rate', (100.0*championStats1.banrate).toFixed(2), null, (100.0*championStats2.banrate).toFixed(2), null, "%", 2, true),
-            createData('Win Rate', (100.0*championStats1.winrate).toFixed(2), null, (100.0*championStats2.winrate).toFixed(2), null, "%", 2),
-            createData('Average Kills', championStats1.averagekills.toFixed(2), championStats1.stddevkills.toFixed(2),
-                                        championStats2.averagekills.toFixed(2), championStats2.stddevkills.toFixed(2), "", 2
-                                        ),
-            createData('Average Deaths', championStats1.averagedeaths.toFixed(2), championStats1.stddevdeaths.toFixed(2),
-                                         championStats2.averagedeaths.toFixed(2), championStats2.stddevdeaths.toFixed(2), "", 2, false,true
-                                         ),
-            createData('Average Assists', championStats1.averageassists.toFixed(2), championStats1.stddevassists.toFixed(2),
-                                          championStats2.averageassists.toFixed(2), championStats2.stddevassists.toFixed(2), "", 2
-                                          ),
-            createData('Average Gold Earned', championStats1.average_goldearned.toFixed(0), championStats1.stddev_goldearned.toFixed(0),
-                                              championStats2.average_goldearned.toFixed(0), championStats2.stddev_goldearned.toFixed(0), "", 0
-                                              ),
-            createData('Average Minions Killed', championStats1.average_totalminionskilled.toFixed(2), championStats1.stddev_totalminionskilled.toFixed(2),
-                                                 championStats2.average_totalminionskilled.toFixed(2), championStats2.stddev_totalminionskilled.toFixed(2), "", 2
-                                                 ),
-            createData('Average Total Damage Dealt', championStats1.average_totaldamagedealt.toFixed(0), championStats1.stddev_totaldamagedealt.toFixed(0),
-                                                     championStats2.average_totaldamagedealt.toFixed(0), championStats2.stddev_totaldamagedealt.toFixed(0), "", 0
-                                                     ),
-            createData('Average Total Damage Taken', championStats1.average_totaldamagetaken.toFixed(0), championStats1.stddev_totaldamagetaken.toFixed(0),
-                                                     championStats2.average_totaldamagetaken.toFixed(0), championStats2.stddev_totaldamagetaken.toFixed(0), "", 0, false, true
-                                                     ),
-            createData('Average Heals', championStats1.average_totalheal.toFixed(0), championStats1.stddev_totalheal.toFixed(0),
-                                        championStats2.average_totalheal.toFixed(0), championStats2.stddev_totalheal.toFixed(0), "", 0
-                                        ),
-          ];
+        var rows = [];
+        if (role !== undefined) {
+            rows = [
+                createData('Win Rate', (100.0*championStats1.winrate).toFixed(2), null, (100.0*championStats2.winrate).toFixed(2), null, "%", 2),
+                createData('Average Kills', championStats1.averagekills.toFixed(2), championStats1.stddevkills.toFixed(2),
+                                            championStats2.averagekills.toFixed(2), championStats2.stddevkills.toFixed(2), "", 2
+                                            ),
+                createData('Average Deaths', championStats1.averagedeaths.toFixed(2), championStats1.stddevdeaths.toFixed(2),
+                                            championStats2.averagedeaths.toFixed(2), championStats2.stddevdeaths.toFixed(2), "", 2, false,true
+                                            ),
+                createData('Average Assists', championStats1.averageassists.toFixed(2), championStats1.stddevassists.toFixed(2),
+                                            championStats2.averageassists.toFixed(2), championStats2.stddevassists.toFixed(2), "", 2
+                                            ),
+                createData('Average Gold Earned', championStats1.average_goldearned.toFixed(0), championStats1.stddev_goldearned.toFixed(0),
+                                                championStats2.average_goldearned.toFixed(0), championStats2.stddev_goldearned.toFixed(0), "", 0
+                                                ),
+                createData('Average Minions Killed', championStats1.average_totalminionskilled.toFixed(2), championStats1.stddev_totalminionskilled.toFixed(2),
+                                                    championStats2.average_totalminionskilled.toFixed(2), championStats2.stddev_totalminionskilled.toFixed(2), "", 2
+                                                    ),
+                createData('Average Total Damage Dealt', championStats1.average_totaldamagedealt.toFixed(0), championStats1.stddev_totaldamagedealt.toFixed(0),
+                                                        championStats2.average_totaldamagedealt.toFixed(0), championStats2.stddev_totaldamagedealt.toFixed(0), "", 0
+                                                        ),
+                createData('Average Total Damage Taken', championStats1.average_totaldamagetaken.toFixed(0), championStats1.stddev_totaldamagetaken.toFixed(0),
+                                                        championStats2.average_totaldamagetaken.toFixed(0), championStats2.stddev_totaldamagetaken.toFixed(0), "", 0, false, true
+                                                        ),
+                createData('Average Heals', championStats1.average_totalheal.toFixed(0), championStats1.stddev_totalheal.toFixed(0),
+                                            championStats2.average_totalheal.toFixed(0), championStats2.stddev_totalheal.toFixed(0), "", 0
+                                            ),
+            ];
+        } else {
+            rows = [
+                // createData('Sample Size', championStats1.samplesize, null, championStats2.samplesize, null, "Games", 0, true),
+                // createData('Pick Rate', (100.0*championStats1.pickrate).toFixed(2), null, (100.0*championStats2.pickrate).toFixed(2), null, "%", 2, true),
+                // createData('Ban Rate', (100.0*championStats1.banrate).toFixed(2), null, (100.0*championStats2.banrate).toFixed(2), null, "%", 2, true),
+                createData('Win Rate', (100.0*championStats1.winrate).toFixed(2), null, (100.0*championStats2.winrate).toFixed(2), null, "%", 2),
+                createData('Average Kills', championStats1.averagekills.toFixed(2), championStats1.stddevkills.toFixed(2),
+                                            championStats2.averagekills.toFixed(2), championStats2.stddevkills.toFixed(2), "", 2
+                                            ),
+                createData('Average Deaths', championStats1.averagedeaths.toFixed(2), championStats1.stddevdeaths.toFixed(2),
+                                            championStats2.averagedeaths.toFixed(2), championStats2.stddevdeaths.toFixed(2), "", 2, false,true
+                                            ),
+                createData('Average Assists', championStats1.averageassists.toFixed(2), championStats1.stddevassists.toFixed(2),
+                                            championStats2.averageassists.toFixed(2), championStats2.stddevassists.toFixed(2), "", 2
+                                            ),
+                createData('Average Gold Earned', championStats1.average_goldearned.toFixed(0), championStats1.stddev_goldearned.toFixed(0),
+                                                championStats2.average_goldearned.toFixed(0), championStats2.stddev_goldearned.toFixed(0), "", 0
+                                                ),
+                createData('Average Minions Killed', championStats1.average_totalminionskilled.toFixed(2), championStats1.stddev_totalminionskilled.toFixed(2),
+                                                    championStats2.average_totalminionskilled.toFixed(2), championStats2.stddev_totalminionskilled.toFixed(2), "", 2
+                                                    ),
+                createData('Average Total Damage Dealt', championStats1.average_totaldamagedealt.toFixed(0), championStats1.stddev_totaldamagedealt.toFixed(0),
+                                                        championStats2.average_totaldamagedealt.toFixed(0), championStats2.stddev_totaldamagedealt.toFixed(0), "", 0
+                                                        ),
+                createData('Average Total Damage Taken', championStats1.average_totaldamagetaken.toFixed(0), championStats1.stddev_totaldamagetaken.toFixed(0),
+                                                        championStats2.average_totaldamagetaken.toFixed(0), championStats2.stddev_totaldamagetaken.toFixed(0), "", 0, false, true
+                                                        ),
+                createData('Average Heals', championStats1.average_totalheal.toFixed(0), championStats1.stddev_totalheal.toFixed(0),
+                                            championStats2.average_totalheal.toFixed(0), championStats2.stddev_totalheal.toFixed(0), "", 0
+                                            ),
+            ];
+        }
       
+          var displayRole = "";
+          if (role !== undefined) {
+              displayRole = role;
+          } else {
+              displayRole = "Overall";
+          }
+
         return (
         <div>
+            <Typography variant="h6" gutterBottom component="h4">
+                {displayRole} Comparison
+            </Typography>
+
             <Table>
                 <TableHead>
                     <TableRow>
