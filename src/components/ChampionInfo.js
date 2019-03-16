@@ -68,7 +68,7 @@ function ChampionInfo(props) {
                 Armor: {champion.stats.armor} (+{champion.stats.armorperlevel}) 
                 Health: {champion.stats.hp} (+{champion.stats.hpperlevel}) Health Regen: {champion.stats.hpregen} (+{champion.stats.hpregenperlevel})<br/>
                 Attack Damage: {champion.stats.attackdamage} (+{champion.stats.attackdamageperlevel}) Attack Range: {champion.stats.attackrange} Attack Speed: {champion.stats.attackspeed} (+{champion.stats.attackspeedperlevel})<br/>
-                Mana: {champion.stats.mp} (+{champion.stats.mpperlevel}) Mana Regen: {champion.stats.mpregen} (+{champion.stats.mpregen})
+                Mana: {champion.stats.mp} (+{champion.stats.mpperlevel}) Mana Regen: {champion.stats.mpregen} (+{champion.stats.mpregenperlevel})
                 Move Speed: {champion.stats.movespeed}
             </Typography>
         </div>
