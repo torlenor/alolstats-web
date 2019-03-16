@@ -23,6 +23,7 @@ export default class Champions extends Component {
             fetchChampionsDone: false,
             fetchChampionsData: null,
             fetchChampionsError: false,
+
             filteredHits: null,
             isFiltered: false,
             isChecked: new Map(),
@@ -47,27 +48,21 @@ export default class Champions extends Component {
           this.setState({isChecked: new Map()});
       };
 
-    fetchChampions(props) {
-        let version = "";
-        if (props.parentProps.selectedVersion !== undefined) {
-            version = props.parentProps.selectedVersion;
+    getChampions(props) {
+        if (props.parentProps.selectedVersion !== undefined && props.parentProps.selectedLeague !== undefined) {
+            const version = props.parentProps.selectedVersion;
+            const league = props.parentProps.selectedLeague.toUpperCase();
+            const setState = this.setState.bind(this);
+            fetchChampions(version, league, setState);
         }
-        
-        let league = "";
-        if (props.parentProps.selectedLeague !== undefined) {
-            league = props.parentProps.selectedLeague.toUpperCase();
-        }
-
-        const setState = this.setState.bind(this)
-        fetchChampions(version, league, setState);
     }
 
     componentWillReceiveProps(props) {
-        this.fetchChampions(props);
+        this.getChampions(props);
       }
 
     componentDidMount() {
-        this.fetchChampions(this.props);
+        this.getChampions(this.props);
     }
 
     toLower(item) {

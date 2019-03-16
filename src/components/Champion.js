@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 
-import ChampionStats from "./plots/ChampionPlotRoleDistribution"
-import ChampionHistoryWin from "./plots/ChampionPlotWinRateAsFunctionOfPatch"
-import ChampionHistoryKDA from "./plots/ChampionPlotKDAAsFunctionOfPatch"
-import ChampionHistoryPickBan from "./plots/ChampionPlotPickBanRateAsFunctionOfPatch"
-import ChampionPlotDamagePerType from "./plots/ChampionPlotDamagePerType"
+import ChampionStats from "./plots/ChampionPlotRoleDistribution";
+import ChampionHistoryWin from "./plots/ChampionPlotWinRateAsFunctionOfPatch";
+import ChampionHistoryKDA from "./plots/ChampionPlotKDAAsFunctionOfPatch";
+import ChampionHistoryPickBan from "./plots/ChampionPlotPickBanRateAsFunctionOfPatch";
+import ChampionPlotDamagePerType from "./plots/ChampionPlotDamagePerType";
 import ChampionTextStatistics from './ChampionTextStatistics';
 import ChampionTextStatisticsAdditional from './ChampionTextStatisticsAdditional';
 
@@ -13,14 +13,11 @@ import Grid from '@material-ui/core/Grid';
 
 import Typography from '@material-ui/core/Typography';
 
-import Progress from './Progress'
+import Progress from './Progress';
 
-const API_URL = `${process.env.REACT_APP_API_BASE_URL}`;
-const API = `${API_URL}/v1/stats/champion/byid?id=`;
-const VERSIONPARAMETER = `&gameversion=`;
-const LEAGUEPARAMETER = `&tier=`;
-
-const CHAMPION_HISTORY_API = `${API_URL}/v1/stats/championhistory/byid?id=`;
+// API
+import { fetchChampion } from "../api/FetchChampion";
+import { fetchChampionHistory } from "../api/FetchChampionHistory";
 
 class Champion extends Component {
 
@@ -28,97 +25,57 @@ class Champion extends Component {
         super(props);
 
         this.state = {
-            didMountChampion: false,
-            errorChampion: false,
-            championstats: null,
+            fetchChampionDone: false,
+            fetchChampionData: null,
+            fetchChampionError: false,
 
-            didMountChampionHistory: false,
-            errorChampionHistory: false,
-            championHistoryData: null,
+            fetchChampionHistoryDone: false,
+            fetchChampionHistoryData: null,
+            fetchChampionHistoryError: false,
 
             parentProps: props,
         };
     }
 
-    fetchChampion(props) {
-        this.setState( {parentProps: props});
+    getChampionData(props) {
         let champion = props.match.params.champion;
-        let version = "";
-        if (props.parentProps.selectedVersion !== undefined) {
-            version = props.parentProps.selectedVersion;
+        if (props.parentProps.selectedVersion !== undefined && props.parentProps.selectedLeague !== undefined) {
+            const version = props.parentProps.selectedVersion;
+            const league = props.parentProps.selectedLeague.toUpperCase();
+            const setState = this.setState.bind(this);
+            fetchChampion(champion, version, league, setState);
         }
-
-        let league = "";
-        if (props.parentProps.selectedLeague !== undefined) {
-            league = props.parentProps.selectedLeague.toUpperCase();
-        }
-        
-        fetch(API + champion + VERSIONPARAMETER + version + LEAGUEPARAMETER + league).then(response => {
-            if (response.status === 200) {
-                let json = response.json();
-                return json;
-            } else {
-                this.setState({errorChampion: true});
-                return null;
-            }
-        }).then(data => {
-            if (data !== null) {
-                this.setState({championstats: data, errorChampion: false, didMountChampion: true});
-            } else {
-                this.setState({errorChampion: true, didMountChampion: true});
-            }
-        }).catch(error => {
-            this.setState({errorChampion: true, didMountChampion: true})
-        });
     }
 
-    fetchChampionHistory(props) {
+    getChampionHistoryData(props) {
         let champion = props.match.params.champion;
-        let version = "";
-        if (props.parentProps.selectedVersion !== undefined) {
-            version = props.parentProps.selectedVersion;
-        }
-
-        let league = "";
-        if (props.parentProps.selectedLeague !== undefined) {
-            league = props.parentProps.selectedLeague.toUpperCase();
-        }
-        
-        fetch(CHAMPION_HISTORY_API + champion + VERSIONPARAMETER + version + LEAGUEPARAMETER + league).then(response => {
-            if (response.status === 200) {
-                let json = response.json();
-                return json;
-            } else {
-                this.setState({errorChampionHistory: true});
-                return null;
-            }
-        }).then(data => {
-            if (data !== null) {
-                this.setState({championHistoryData: data, errorChampionHistory: false, didMountChampionHistory: true});
-            } else {
-                this.setState({errorChampionHistory: true, didMountChampionHistory: true});
-            }
-        }).catch(error => {
-            this.setState({errorChampionHistory: true, didMountChampionHistory: true})
-        });
+        if (props.parentProps.selectedVersion !== undefined && props.parentProps.selectedLeague !== undefined) {
+            const version = props.parentProps.selectedVersion;
+            const league = props.parentProps.selectedLeague.toUpperCase();
+            const setState = this.setState.bind(this);
+            fetchChampionHistory(champion, version, league, setState);
+        } 
     }
 
     componentWillReceiveProps(props) {
-        this.fetchChampion(props);
-        this.fetchChampionHistory(props);
+        this.setState( {parentProps: props});
+        this.getChampionData(props);
+        this.getChampionHistoryData(props);
       }
 
     componentDidMount() {
-        this.fetchChampion(this.props);
-        this.fetchChampionHistory(this.props);
+        this.setState( {parentProps: this.props});
+        this.getChampionData(this.props);
+        this.getChampionHistoryData(this.props);
     }
 
     render() {
-        const {championstats, championHistoryData} = this.state;
+        const {fetchChampionData, fetchChampionError, fetchChampionDone,
+               fetchChampionHistoryData, fetchChampionHistoryError, fetchChampionHistoryDone } = this.state;
 
         let page;
 
-        if (this.state.didMountChampion === false || this.state.didMountChampionHistory === false) {
+        if ( fetchChampionDone === false || fetchChampionHistoryDone === false ) {
             page = <div className="content">
                 <Typography variant="h4" gutterBottom component="h2">
                     {this.props.match.params.champion}
@@ -127,7 +84,7 @@ class Champion extends Component {
                     <Progress text="Loading Champion Statistics..."/>
                 </div>
             </div>;
-        } else if ( (this.state.didMountChampion && this.state.didMountHistory) || this.state.errorChampion || this.state.errorChampionHistory || championstats === null || championHistoryData === null || championstats === undefined || championHistoryData === undefined) {
+        } else if ( fetchChampionError || fetchChampionHistoryError ) {
             page = <div className="content">
                 <Typography variant="h5" gutterBottom component="h3">
                     Ooops, something bad happened!<br></br>
@@ -135,48 +92,48 @@ class Champion extends Component {
                     </Typography>
             </div>;
         } else {
-            document.title = championstats.championname + " - fuu.la";
+            document.title = fetchChampionData.championname + " - fuu.la";
             page = <div className="Champion">
             <Typography variant="h4" gutterBottom component="h2">
-                {championstats.championname}
+                {fetchChampionData.championname}
             </Typography>
             <div style={{ padding: 12 }}>
             <Grid container layout={"row"} spacing={24} justify="center">
                 <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
                     <Paper>
-                        <ChampionTextStatistics championStats={championstats}/>
+                        <ChampionTextStatistics championStats={fetchChampionData}/>
                     </Paper>
                 </Grid>
                 <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
                     <Paper style={{ height: 356, padding: 12 }}>
-                        <ChampionStats championStats={championstats}/>
+                        <ChampionStats championStats={fetchChampionData}/>
                     </Paper>
                     <Paper style={{ height: 356, padding: 12 }}>
-                        <ChampionPlotDamagePerType championStats={championstats}/>
+                        <ChampionPlotDamagePerType championStats={fetchChampionData}/>
                     </Paper>
                 </Grid>
                 <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
                     <Paper style={{ height: 356, padding: 12 }}>
-                        <ChampionHistoryWin championHistoryData={championHistoryData} height={300}/>
+                        <ChampionHistoryWin championHistoryData={fetchChampionHistoryData} height={300}/>
                     </Paper>
                     <Paper style={{ height: 356, padding: 12 }}>
-                        <ChampionHistoryPickBan championHistoryData={championHistoryData}/>
+                        <ChampionHistoryPickBan championHistoryData={fetchChampionHistoryData}/>
                     </Paper>
                 </Grid>
                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                {championstats.roles !== null ? championstats.roles.map(value => (
+                {fetchChampionData.roles !== null ? fetchChampionData.roles.map(value => (
                     <Grid container spacing={24} justify="center" key={value+'container'}>
                     <Grid item xs={12} sm={12} md={6} lg={6} xl={6} key={value+'stats'}>
                         <Paper>
-                            <ChampionTextStatistics championStats={championstats.statsperrole[value]} role={value}/>
+                            <ChampionTextStatistics championStats={fetchChampionData.statsperrole[value]} role={value}/>
                         </Paper>
                     </Grid>
                     <Grid item xs={12} sm={12} md={6} lg={6} xl={6} key={value+'plot'}>
                         <Paper style={{ height: 310, padding: 12 }}>
-                            <ChampionHistoryWin championHistoryData={championHistoryData.historyperrole[value]} role={value} height={280}/>
+                            <ChampionHistoryWin championHistoryData={fetchChampionHistoryData.historyperrole[value]} role={value} height={280}/>
                         </Paper>
                         <Paper style={{ height: 310, padding: 12 }}>
-                            <ChampionHistoryKDA championHistoryData={championHistoryData.historyperrole[value]} role={value} height={280}/>
+                            <ChampionHistoryKDA championHistoryData={fetchChampionHistoryData.historyperrole[value]} role={value} height={280}/>
                         </Paper>
                     </Grid>
                     </Grid>
@@ -184,7 +141,7 @@ class Champion extends Component {
                 </Grid>
                 <Grid item xs>
                     <Paper>
-                        <ChampionTextStatisticsAdditional championStats={championstats}/>
+                        <ChampionTextStatisticsAdditional championStats={fetchChampionData}/>
                     </Paper>
                 </Grid>
             </Grid>
