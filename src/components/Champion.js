@@ -15,9 +15,14 @@ import Typography from '@material-ui/core/Typography';
 
 import Progress from './Progress';
 
+import ChampionInfo from './ChampionInfo';
+
 // API
 import { fetchChampion } from "../api/FetchChampion";
 import { fetchChampionHistory } from "../api/FetchChampionHistory";
+import { fetchChampionInfo } from "../api/FetchChampionInfo";
+
+const PADDING = 12;
 
 class Champion extends Component {
 
@@ -33,11 +38,21 @@ class Champion extends Component {
             fetchChampionHistoryData: null,
             fetchChampionHistoryError: false,
 
+            fetchChampionInfoDone: false,
+            fetchChampionInfoData: null,
+            fetchChampionInfoError: false,
+
             parentProps: props,
         };
     }
 
-    getChampionData(props) {
+    getChampionInfo(props) {
+        let champion = props.match.params.champion;
+        const setState = this.setState.bind(this);
+        fetchChampionInfo(champion, setState);
+    }
+
+    getChampion(props) {
         let champion = props.match.params.champion;
         if (props.parentProps.selectedVersion !== undefined && props.parentProps.selectedLeague !== undefined) {
             const version = props.parentProps.selectedVersion;
@@ -47,7 +62,7 @@ class Champion extends Component {
         }
     }
 
-    getChampionHistoryData(props) {
+    getChampionHistory(props) {
         let champion = props.match.params.champion;
         if (props.parentProps.selectedVersion !== undefined && props.parentProps.selectedLeague !== undefined) {
             const version = props.parentProps.selectedVersion;
@@ -59,32 +74,32 @@ class Champion extends Component {
 
     componentWillReceiveProps(props) {
         this.setState( {parentProps: props});
-        this.getChampionData(props);
-        this.getChampionHistoryData(props);
+        this.getChampionInfo(props);
+        this.getChampion(props);
+        this.getChampionHistory(props);
       }
 
     componentDidMount() {
         this.setState( {parentProps: this.props});
-        this.getChampionData(this.props);
-        this.getChampionHistoryData(this.props);
+        this.getChampionInfo(this.props);
+        this.getChampion(this.props);
+        this.getChampionHistory(this.props);
     }
 
     render() {
         const {fetchChampionData, fetchChampionError, fetchChampionDone,
-               fetchChampionHistoryData, fetchChampionHistoryError, fetchChampionHistoryDone } = this.state;
+               fetchChampionHistoryData, fetchChampionHistoryError, fetchChampionHistoryDone,
+               fetchChampionInfoData, fetchChampionInfoError, fetchChampionInfoDone } = this.state;
 
         let page;
 
-        if ( fetchChampionDone === false || fetchChampionHistoryDone === false ) {
+        if ( fetchChampionDone === false || fetchChampionHistoryDone === false || fetchChampionInfoDone === false ) {
             page = <div className="content">
-                <Typography variant="h4" gutterBottom component="h2">
-                    {this.props.match.params.champion}
-                </Typography>
                 <div>
                     <Progress text="Loading Champion Statistics..."/>
                 </div>
             </div>;
-        } else if ( fetchChampionError || fetchChampionHistoryError ) {
+        } else if ( fetchChampionError || fetchChampionHistoryError || fetchChampionInfoError ) {
             page = <div className="content">
                 <Typography variant="h5" gutterBottom component="h3">
                     Ooops, something bad happened!<br></br>
@@ -94,10 +109,12 @@ class Champion extends Component {
         } else {
             document.title = fetchChampionData.championname + " - fuu.la";
             page = <div className="Champion">
-            <Typography variant="h4" gutterBottom component="h2">
-                {fetchChampionData.championname}
-            </Typography>
-            <div style={{ padding: 12 }}>
+            <div style={{ padding: PADDING }}>
+            <Paper style={{ padding: PADDING }}>
+                <ChampionInfo champion={fetchChampionInfoData}/>
+            </Paper>
+            </div>
+            <div style={{ padding: PADDING }}>
             <Grid container layout={"row"} spacing={24} justify="center">
                 <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
                     <Paper>
@@ -105,18 +122,18 @@ class Champion extends Component {
                     </Paper>
                 </Grid>
                 <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
-                    <Paper style={{ height: 356, padding: 12 }}>
+                    <Paper style={{ height: 356, padding: PADDING }}>
                         <ChampionStats championStats={fetchChampionData}/>
                     </Paper>
-                    <Paper style={{ height: 356, padding: 12 }}>
+                    <Paper style={{ height: 356, padding: PADDING }}>
                         <ChampionPlotDamagePerType championStats={fetchChampionData}/>
                     </Paper>
                 </Grid>
                 <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
-                    <Paper style={{ height: 356, padding: 12 }}>
+                    <Paper style={{ height: 356, padding: PADDING }}>
                         <ChampionHistoryWin championHistoryData={fetchChampionHistoryData} height={300}/>
                     </Paper>
-                    <Paper style={{ height: 356, padding: 12 }}>
+                    <Paper style={{ height: 356, padding: PADDING }}>
                         <ChampionHistoryPickBan championHistoryData={fetchChampionHistoryData}/>
                     </Paper>
                 </Grid>
@@ -129,10 +146,10 @@ class Champion extends Component {
                         </Paper>
                     </Grid>
                     <Grid item xs={12} sm={12} md={6} lg={6} xl={6} key={value+'plot'}>
-                        <Paper style={{ height: 310, padding: 12 }}>
+                        <Paper style={{ height: 310, padding: PADDING }}>
                             <ChampionHistoryWin championHistoryData={fetchChampionHistoryData.historyperrole[value]} role={value} height={280}/>
                         </Paper>
-                        <Paper style={{ height: 310, padding: 12 }}>
+                        <Paper style={{ height: 310, padding: PADDING }}>
                             <ChampionHistoryKDA championHistoryData={fetchChampionHistoryData.historyperrole[value]} role={value} height={280}/>
                         </Paper>
                     </Grid>

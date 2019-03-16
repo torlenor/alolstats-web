@@ -62,11 +62,6 @@ function ChampionCard(props) {
         </Typography>
       </CardContent>
       </CardActionArea>
-      {/* <CardActions>
-      <Button size="small" color="primary">
-          Learn More
-        </Button>
-      </CardActions> */}
     </Card>
   );
 }
