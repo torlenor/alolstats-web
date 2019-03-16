@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 
-import ChampionStats from "./ChampionPlotRoleDistribution"
-import ChampionHistoryWin from "./ChampionPlotWinRateAsFunctionOfPatch"
-import ChampionHistoryKDA from "./ChampionPlotKDAAsFunctionOfPatch"
-import ChampionHistoryPickBan from "./ChampionPlotPickBanRateAsFunctionOfPatch"
-import ChampionPlotDamagePerType from "./ChampionPlotDamagePerType"
+import ChampionStats from "./plots/ChampionPlotRoleDistribution"
+import ChampionHistoryWin from "./plots/ChampionPlotWinRateAsFunctionOfPatch"
+import ChampionHistoryKDA from "./plots/ChampionPlotKDAAsFunctionOfPatch"
+import ChampionHistoryPickBan from "./plots/ChampionPlotPickBanRateAsFunctionOfPatch"
+import ChampionPlotDamagePerType from "./plots/ChampionPlotDamagePerType"
 import ChampionTextStatistics from './ChampionTextStatistics';
 import ChampionTextStatisticsAdditional from './ChampionTextStatisticsAdditional';
 
@@ -118,7 +118,7 @@ class Champion extends Component {
 
         let page;
 
-        if (this.state.didMountChampion === false || this.state.didMountHistory === false) {
+        if (this.state.didMountChampion === false || this.state.didMountChampionHistory === false) {
             page = <div className="content">
                 <Typography variant="h4" gutterBottom component="h2">
                     {this.props.match.params.champion}
