@@ -13,20 +13,18 @@ import ChampionCard from './ChampionCard.js'
 import Progress from './Progress'
 
 // API
-const API_URL = `${process.env.REACT_APP_API_BASE_URL}`;
-const ChampionsAPI = `${API_URL}/v1/champions`;
-const LEAGUEPARAMETER = `&tier=`;
+import { fetchChampions } from "../api/FetchChampions"
 
 export default class Champions extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            didMount: false,
-            hits: null,
+            fetchChampionsDone: false,
+            fetchChampionsData: null,
+            fetchChampionsError: false,
             filteredHits: null,
             isFiltered: false,
-            error: false,
             isChecked: new Map(),
         };
     }
@@ -50,43 +48,18 @@ export default class Champions extends Component {
       };
 
     fetchChampions(props) {
-        var self = this;
-
-        let gameversionparameter = "";
         let version = "";
         if (props.parentProps.selectedVersion !== undefined) {
             version = props.parentProps.selectedVersion;
         }
-        gameversionparameter = "?gameversion=" + version;
-
+        
         let league = "";
         if (props.parentProps.selectedLeague !== undefined) {
             league = props.parentProps.selectedLeague.toUpperCase();
         }
 
-        fetch(ChampionsAPI + gameversionparameter + LEAGUEPARAMETER + league).then(response => {
-            if (response.status === 200) {
-                let json = response.json();
-                return json;
-            } else {
-                this.setState({error: true});
-                return null;
-            }
-        }).then(data => {
-            let newHits = [];
-            for (var key in data) {
-                        if (data.hasOwnProperty(key)) {
-                            newHits.push(data[key]);
-                        }
-                    }
-                self.setState({hits: newHits.sort(function (a, b) {
-                    return ('' + a.name).localeCompare(b.name);
-                  })});
-                self.setState({didMount: true});
-        }).catch(error => {
-            this.setState({error: true, didMount: true});
-            console.log(error);
-        });
+        const setState = this.setState.bind(this)
+        fetchChampions(version, league, setState);
     }
 
     componentWillReceiveProps(props) {
@@ -107,7 +80,7 @@ export default class Champions extends Component {
             this.setState({isFiltered: false});
             return
         }
-        const filtered = this.state.hits.filter(hit => {
+        const filtered = this.state.fetchChampionsData.filter(hit => {
             const roles = hit.roles.map(this.toLower)
             var i;
             for (i = 0; i < roles.length; i++) { 
@@ -122,23 +95,22 @@ export default class Champions extends Component {
     };
 
     render() {
-        const {hits} = this.state;
-        const {filteredHits} = this.state;
+        const {fetchChampionsData, fetchChampionsError, fetchChampionsDone, isFiltered, filteredHits} = this.state;
 
         let page;
 
-        if (this.state.didMount === false) {
+        if (fetchChampionsDone === false) {
             page =  <div>
                         <Progress text="Loading Champions..."/>
                     </div>
-        } else if (this.state.error || hits === null) {
+        } else if (fetchChampionsError || fetchChampionsData === null) {
             page = <div className="Champions">
                 <Typography variant="h5" gutterBottom component="h3">
                     Ooops, something bad happened!<br></br>
                     <br></br>Error receiving Champions, please try again later!
                     </Typography>
                 </div>
-        } else if (this.state.isFiltered === true && filteredHits !== null) {
+        } else if (isFiltered === true && filteredHits !== null) {
             document.title = "Champions - fuu.la";
             page = <div className="Champions">
                         <TextField
@@ -183,7 +155,7 @@ export default class Champions extends Component {
                 }}
             />
             <Grid container className="ChampionCards" justify="center" spacing={16}>
-                {hits.map(value => (
+                {fetchChampionsData.map(value => (
                     <Grid key={value.key} item>
                         <ChampionCard champion={value}/>
                     </Grid>
