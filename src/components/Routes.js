@@ -18,7 +18,10 @@ class MainPage extends Component {
 
                 <Route path="/champions" exact render={()=><Champions parentProps={this.props}/>}/>
 
-                <Route path="/championcomparison" exact render={()=><ChampionComparison parentProps={this.props}/>}/>
+                <Route 
+                    path="/championcomparison/:champion1/:champion2"
+                    render={(props) => <ChampionComparison {...props} parentProps={this.props}/>}
+                />
 
                 <Route path="/championssummary" exact render={()=><ChampionsSummary parentProps={this.props}/>}/>
 

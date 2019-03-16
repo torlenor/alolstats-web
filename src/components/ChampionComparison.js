@@ -12,8 +12,6 @@ const DEFAULTGAMEVERSION = "9.4"
 const API_URL = `${process.env.REACT_APP_API_BASE_URL}`;
 const API = `${API_URL}/v1/stats/champion/byid?id=`;
 const VERSIONPARAMETER = `&gameversion=`;
-const CHAMPION_ID_1 = "Ahri";
-const CHAMPION_ID_2 = "Sivir";
 
 class ChampionComparison extends Component {
 
@@ -30,6 +28,7 @@ class ChampionComparison extends Component {
     }
 
     fetchChampion(champNumber, props) {
+        console.log(props);
         let champion = "";
         let version = "";
         if (props.parentProps.selectedVersion !== undefined) {
@@ -39,9 +38,9 @@ class ChampionComparison extends Component {
         }
 
         if (champNumber === 1) {
-            champion = CHAMPION_ID_1;
+            champion = props.match.params.champion1;
         } else {
-            champion = CHAMPION_ID_2;
+            champion = props.match.params.champion2;
         }
         
         fetch(API + champion + VERSIONPARAMETER + version).then(response => {
