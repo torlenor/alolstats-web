@@ -110,9 +110,7 @@ class Champion extends Component {
             document.title = fetchChampionData.championname + " - fuu.la";
             page = <div className="Champion">
             <div style={{ padding: PADDING }}>
-            <Paper style={{ padding: PADDING }}>
                 <ChampionInfo champion={fetchChampionInfoData}/>
-            </Paper>
             </div>
             <div style={{ padding: PADDING }}>
             <Grid container layout={"row"} spacing={24} justify="center">
