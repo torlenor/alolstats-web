@@ -339,9 +339,13 @@ function EnhancedTable(props) {
                             onClick={event => handleClick(event, n.id)}
                         /> */}
                         </TableCell>
-                        <TableCell scope="row" padding="none" component={props => <Link to={`/champions/${n.key}`} {...props}/>}>
-                            <p><img src={`https://ddragon.leagueoflegends.com/cdn/9.5.1/img/champion/${n.key}.png`} height={32}  style={{float: "left",}} alt="Logo" />
-                            {n.name}</p>
+                        <TableCell scope="row" padding="none" style={{ "text-decoration": "none", "justify-content": "center", "align-items": "center", "text-align": "center",}} component={props => <Link to={`/champions/${n.key}`} {...props}/>}>
+                            <div style={{ "justify-content": "left", "align-items": "center", "text-align": "center", display: 'flex', flexDirection: 'row',}}>
+                                <img src={`https://ddragon.leagueoflegends.com/cdn/9.5.1/img/champion/${n.key}.png`} height={32} width={32} style={{justify: "left",}} alt="Logo" />
+                                <Typography component={'span'} style={{"text-decoration": "none",  "marginLeft": 4}}>
+                                    {n.name}
+                                </Typography>
+                            </div>
                         </TableCell>
                         <TableCell padding="none">{renderRoles(n.roles)}</TableCell>
                         <TableCell numeric>{n.sampleSize}</TableCell>
