@@ -121,7 +121,7 @@ class ChampionComparison extends Component {
             <Grid container spacing={24} justify="center">
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
                     <Paper>
-                        <ChampionComparisonTextStatistics championStats1={championstats1} championStats2={championstats2}/>
+                        <ChampionComparisonTextStatistics champName1={championstats1.championname} champName2={championstats2.championname} championStats1={championstats1} championStats2={championstats2}/>
                     </Paper>
                 </Grid>
                 {/* <Grid item xs={12} sm={12} md={12} lg={12} xl={12}> */}
