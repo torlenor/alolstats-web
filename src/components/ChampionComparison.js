@@ -88,7 +88,6 @@ class ChampionComparison extends Component {
         this.fetchChampion(1, this.props);
         this.fetchChampion(2, this.props);
     }
-      
 
     render() {
         const {championstats1, championstats2} = this.state;
@@ -132,7 +131,7 @@ class ChampionComparison extends Component {
                             <ChampionComparisonTextStatistics champName1={championstats1.championname} champName2={championstats2.championname} championStats1={championstats1.statsperrole[value]} championStats2={championstats2.statsperrole[value]} role={value}/>
                         </Paper>
                     </Grid>
-                    : <div></div>
+                    : <div key={value+'stats'}></div>
                 )) : <div></div>}
                 </Grid>
             {/* </Grid> */}

@@ -73,7 +73,6 @@ function toLower(item) {
 
 function EnhancedTableHead(props) {
   const { onClearAllClick, order, orderBy, numSelected, onRequestSort } = props;
-//   const { order, orderBy, onRequestSort } = props;
   const createSortHandler = property => event => {
     onRequestSort(event, property);
   };
@@ -238,9 +237,9 @@ function EnhancedTable(props) {
 
     function handleSelectAllClick(event) {
         if (event.target.checked) {
-        const newSelecteds = filteredData.map(n => n.key);
-        setSelected(newSelecteds);
-        return;
+            const newSelecteds = filteredData.map(n => n.key);
+            setSelected(newSelecteds);
+            return;
         }
         setSelected([]);
     }
