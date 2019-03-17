@@ -9,6 +9,8 @@
     "clsx": "^1.0.3",
     "plotly.js": "^1.44.1",
     "react": "^16.8.3",
+    "react-cookie": "^3.0.8",
+    "react-cookie-consent": "^2.2.2",
     "react-dom": "^16.8.3",
     "react-plotly.js": "^2.2.0",
     "react-router-dom": "^4.3.1",

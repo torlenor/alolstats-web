@@ -3,6 +3,9 @@ import './App.css';
 
 import Typography from '@material-ui/core/Typography';
 
+// Cookie stuff
+import CookieConsent from "react-cookie-consent";
+
 // THEME
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import muiTheme from './theme/MuiTheme';
@@ -114,11 +117,16 @@ class App extends Component {
                 </Typography>
             </div></MuiThemeProvider>;
         } else {
-            page =<MuiThemeProvider theme={muiTheme}><div className="App">
-                    <NavBar versions={this.state.versions} leagues={this.state.leagues} handlerPatch={this.handlerPatch} handlerLeague={this.handlerLeague} />
-                    <Routes versions={this.state.versions} leagues={this.state.leagues} selectedVersion={this.state.patch} selectedLeague={this.state.league}/>
-                    <Footer appVersion={VERSION} buildDate={BUILD_DATE}/>
-                </div></MuiThemeProvider>;
+            page =<MuiThemeProvider theme={muiTheme}>
+                    <div className="App">
+                        <NavBar versions={this.state.versions} leagues={this.state.leagues} handlerPatch={this.handlerPatch} handlerLeague={this.handlerLeague} />
+                        <Routes versions={this.state.versions} leagues={this.state.leagues} selectedVersion={this.state.patch} selectedLeague={this.state.league}/>
+                        <Footer appVersion={VERSION} buildDate={BUILD_DATE}/>
+                    </div>
+                    <CookieConsent>
+                        This website uses cookies to enhance the user experience.
+                    </CookieConsent>
+                </MuiThemeProvider>;
         }
         return(page);
   }

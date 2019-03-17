@@ -215,7 +215,10 @@ function EnhancedTable(props) {
     const classes = useStyles();
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('name');
-    const [selected, setSelected] = React.useState([]);
+    let selected, setSelected;
+    if (props.cookies !== undefined && props.cookies !== null) {
+        [selected, setSelected] = React.useState(props.cookies.get('summarySelected') || []);
+    }
     const [data, setData] = React.useState(props.data);
     const [filteredData, setFilteredData] = React.useState(props.data);
     const [page, setPage] = React.useState(0);
@@ -245,6 +248,9 @@ function EnhancedTable(props) {
     }
 
     function handleClearAllClick(event) {
+        if (props.cookies !== undefined && props.cookies !== null) {
+            props.cookies.set('summarySelected', [], { path: '/' });
+        }
         setSelected([]);
     }
 
@@ -276,6 +282,9 @@ function EnhancedTable(props) {
             return;
         }
 
+        if (props.cookies !== undefined && props.cookies !== null) {
+            props.cookies.set('summarySelected', newSelected, { path: '/' });
+        }
         setSelected(newSelected);
     }
 

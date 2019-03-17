@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Route, Switch, withRouter } from "react-router-dom";
 
+import { instanceOf } from 'prop-types';
+import { withCookies, Cookies } from 'react-cookie';
+
 import FreeRotation from "./FreeRotation";
 import Champions from "./Champions";
 import Champion from "./Champion";
@@ -9,6 +12,10 @@ import ChampionsSummary from "./ChampionsSummary";
 import NotFound from "./NotFound";
 
 class MainPage extends Component {
+    static propTypes = {
+        cookies: instanceOf(Cookies).isRequired
+    };
+
     render() {
         return (
             <Switch>
@@ -23,7 +30,7 @@ class MainPage extends Component {
                     render={(props) => <ChampionComparison {...props} parentProps={this.props}/>}
                 />
 
-                <Route path="/championssummary" exact render={()=><ChampionsSummary parentProps={this.props} routerHistory={this.props.history}/>}/>
+                <Route path="/championssummary" exact render={()=><ChampionsSummary parentProps={this.props} routerHistory={this.props.history} cookies={this.props.cookies}/>}/>
 
                 <Route
                     path='/champions/:champion'
@@ -37,4 +44,4 @@ class MainPage extends Component {
     }
 }
 
-export default withRouter(MainPage);
+export default withRouter(withCookies(MainPage));
