@@ -213,18 +213,19 @@ const useStyles = makeStyles(theme => ({
 
 function EnhancedTable(props) {
     const classes = useStyles();
-    const [order, setOrder] = React.useState('asc');
-    const [orderBy, setOrderBy] = React.useState('name');
-    let selected, setSelected;
+
+    let selected, setSelected, order, setOrder, orderBy, setOrderBy, filterText, setFilterText;
     if (props.cookies !== undefined && props.cookies !== null) {
         [selected, setSelected] = React.useState(props.cookies.get('summarySelected') || []);
+        [order, setOrder] = React.useState(props.cookies.get('summaryOrder') || 'asc');
+        [orderBy, setOrderBy] = React.useState(props.cookies.get('summaryOrderBy') || 'name');
+        [filterText, setFilterText] = React.useState(props.cookies.get('summaryFilterText') || "");
     }
     const [data, setData] = React.useState(props.data);
     const [filteredData, setFilteredData] = React.useState(props.data);
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
-    const [filterText, setFilterText] = React.useState("");
-
+    
     React.useEffect(() => {
         setFilteredData(props.data);
         setData(props.data);
@@ -232,8 +233,16 @@ function EnhancedTable(props) {
         changeFilter(filterText, props.data);
     }, [props.data, filterText]);
 
+    React.useEffect(() => {
+        changeFilter(filterText, props.data);
+    }, [selected]);
+
     function handleRequestSort(event, property) {
         const isDesc = orderBy === property && order === 'desc';
+        if (props.cookies !== undefined && props.cookies !== null) {
+            props.cookies.set('summaryOrder', isDesc ? 'asc' : 'desc', { path: '/' });
+            props.cookies.set('summaryOrderBy', property, { path: '/' });
+        }
         setOrder(isDesc ? 'asc' : 'desc');
         setOrderBy(property);
     }
@@ -302,6 +311,7 @@ function EnhancedTable(props) {
 
     function changeFilter(newFilterText, data) {
         setFilterText(newFilterText)
+        props.cookies.set('summaryFilterText', newFilterText, { path: '/' });
         if (filterText.length === 0) {
             setFilteredData(data);
             return;
@@ -316,7 +326,7 @@ function EnhancedTable(props) {
                     }
                 }
             }
-            return hit.key.toLowerCase().includes(filterText) === true || hit.name.toLowerCase().includes(filterText) === true ;
+            return hit.key.toLowerCase().includes(filterText) === true || hit.name.toLowerCase().includes(filterText) === true || selected.includes(hit.key);
         }
         );
         setFilteredData(filtered);
@@ -351,6 +361,7 @@ function EnhancedTable(props) {
                 placeholder="Enter name or role"
                 fullWidth
                 autoFocus
+                value={filterText}
                 onChange={handleChangeFilter}
                 margin="normal"
                 variant="outlined"
