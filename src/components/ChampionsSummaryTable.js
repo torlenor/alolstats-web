@@ -1,7 +1,16 @@
 import React from 'react';
+
+import { Link } from 'react-router-dom'
+
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+
+// Material UI
 import { makeStyles } from '@material-ui/styles';
+
+import Icon from '@material-ui/core/Icon';
+import IconButton from '@material-ui/core/IconButton';
+import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -9,20 +18,18 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
-// import Checkbox from '@material-ui/core/Checkbox';
-import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
-
 import TextField from '@material-ui/core/TextField';
+import Toolbar from '@material-ui/core/Toolbar';
+import Tooltip from '@material-ui/core/Tooltip';
+import Typography from '@material-ui/core/Typography';
 
-import Icon from '@material-ui/core/Icon';
+// Material UI Components for Champion selecting/comparing
+import Checkbox from '@material-ui/core/Checkbox';
 
-import { Link } from 'react-router-dom'
-
+// Own Components
 import Progress from './Progress'
+
+const MAX_SELECTED = 2;
 
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -65,8 +72,8 @@ function toLower(item) {
 }
 
 function EnhancedTableHead(props) {
-//   const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } = props;
-  const { order, orderBy, onRequestSort } = props;
+  const { onClearAllClick, order, orderBy, numSelected, onRequestSort } = props;
+//   const { order, orderBy, onRequestSort } = props;
   const createSortHandler = property => event => {
     onRequestSort(event, property);
   };
@@ -80,6 +87,13 @@ function EnhancedTableHead(props) {
             checked={numSelected === rowCount}
             onChange={onSelectAllClick}
           /> */}
+          { numSelected > 0 ?
+            <Tooltip title="Unselect All">
+          <IconButton aria-label="UnselectAll" onClick={onClearAllClick}>
+              <Icon>clear</Icon>
+            </IconButton>
+            </Tooltip>
+            : <div></div> }
         </TableCell>
         {rows.map(
           row => (
@@ -134,7 +148,7 @@ const useToolbarStyles = makeStyles(theme => ({
 
 const EnhancedTableToolbar = props => {
   const classes = useToolbarStyles();
-  const { numSelected, isUpdating } = props;
+  const { numSelected, isUpdating, onHandleCompareClick } = props;
 
   return (
     <Toolbar
@@ -144,21 +158,31 @@ const EnhancedTableToolbar = props => {
     >
       <div className={classes.title}>
         {numSelected > 0 ? (
-          <Typography color="inherit" variant="subtitle1">
-            {numSelected} selected
-          </Typography>
-        ) : (
+            <div>
           <Typography style={{display: 'inline-block'}} variant="h5" id="tableTitle">
             Champions Summary
           </Typography>
+          <Typography color="inherit" variant="subtitle1">
+            {numSelected} selected
+          </Typography>
+          </div>
+        ) : (
+           <div>
+          <Typography style={{display: 'inline-block'}} variant="h5" id="tableTitle">
+            Champions Summary
+          </Typography>
+          <Typography color="inherit" variant="subtitle1">
+            Select {MAX_SELECTED} Champions for comparison
+          </Typography>
+          </div>
         )}
         {isUpdating === true ? (<Progress size={30}/>) : (<div></div>)}
       </div>
       <div className={classes.spacer} />
       <div className={classes.actions}>
-        {numSelected > 0 ? (
-          <Tooltip title="Compare">
-            <IconButton aria-label="Compare">
+        {numSelected === MAX_SELECTED ? (
+          <Tooltip title="Compare" style={{display: 'inline-block'}}>
+            <IconButton aria-label="Compare" style={{display: 'inline-block'}} onClick={onHandleCompareClick}>
               <Icon>compare</Icon>
               Compare
             </IconButton>
@@ -214,32 +238,47 @@ function EnhancedTable(props) {
 
     function handleSelectAllClick(event) {
         if (event.target.checked) {
-        const newSelecteds = filteredData.map(n => n.id);
+        const newSelecteds = filteredData.map(n => n.key);
         setSelected(newSelecteds);
         return;
         }
         setSelected([]);
     }
 
-    // function handleClick(event, id) {
-    //     const selectedIndex = selected.indexOf(id);
-    //     let newSelected = [];
+    function handleClearAllClick(event) {
+        setSelected([]);
+    }
 
-    //     if (selectedIndex === -1) {
-    //     newSelected = newSelected.concat(selected, id);
-    //     } else if (selectedIndex === 0) {
-    //     newSelected = newSelected.concat(selected.slice(1));
-    //     } else if (selectedIndex === selected.length - 1) {
-    //     newSelected = newSelected.concat(selected.slice(0, -1));
-    //     } else if (selectedIndex > 0) {
-    //     newSelected = newSelected.concat(
-    //         selected.slice(0, selectedIndex),
-    //         selected.slice(selectedIndex + 1),
-    //     );
-    //     }
+    function handleCompareClick(event) {
+        if (selected.length === MAX_SELECTED) {
+            const sortedSelected = selected.sort();
+            props.routerHistory.push('/championcomparison/' + sortedSelected[0] + '/' + sortedSelected[1]);
+        } else {
+            console.log("Error in compare click logic, not doing anything");
+        }
+    }
 
-    //     setSelected(newSelected);
-    // }
+    function handleClick(event, id) {
+        const selectedIndex = selected.indexOf(id);
+        let newSelected = [];
+
+        if (selectedIndex === -1 && selected.length < MAX_SELECTED) {
+            newSelected = newSelected.concat(selected, id);
+        } else if (selectedIndex === 0) {
+            newSelected = newSelected.concat(selected.slice(1));
+        } else if (selectedIndex === selected.length - 1) {
+            newSelected = newSelected.concat(selected.slice(0, -1));
+        } else if (selectedIndex > 0) {
+            newSelected = newSelected.concat(
+                selected.slice(0, selectedIndex),
+                selected.slice(selectedIndex + 1),
+            );
+        } else {
+            return;
+        }
+
+        setSelected(newSelected);
+    }
 
     function handleChangePage(event, newPage) {
         setPage(newPage);
@@ -291,8 +330,11 @@ function EnhancedTable(props) {
 
     return (
         <Paper className={classes.root}>
-        <EnhancedTableToolbar numSelected={selected.length} 
-                gameVersion={props.gameVersion} isUpdating={props.isUpdating}/>
+        <EnhancedTableToolbar 
+            numSelected={selected.length} 
+            gameVersion={props.gameVersion}
+            isUpdating={props.isUpdating}
+            onHandleCompareClick={handleCompareClick}/>
         <div style={{margin: 5,}}>
             <TextField
                 id="outlined-full-width"
@@ -318,26 +360,27 @@ function EnhancedTable(props) {
                 onSelectAllClick={handleSelectAllClick}
                 onRequestSort={handleRequestSort}
                 rowCount={filteredData.length}
+                onClearAllClick={handleClearAllClick}
             />
             <TableBody>
                 {stableSort(filteredData, getSorting(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map(n => {
-                    const isItemSelected = isSelected(n.id);
+                    const isItemSelected = isSelected(n.key);
                     return (
                     <TableRow
                         hover
                         role="checkbox"
                         aria-checked={isItemSelected}
                         tabIndex={-1}
-                        key={n.id}
+                        key={n.key}
                         selected={isItemSelected}
                     >
                         <TableCell padding="checkbox">
-                        {/* <Checkbox 
+                        <Checkbox 
                             checked={isItemSelected}
-                            onClick={event => handleClick(event, n.id)}
-                        /> */}
+                            onClick={event => handleClick(event, n.key)}
+                        />
                         </TableCell>
                         <TableCell scope="row" padding="none" style={{ "text-decoration": "none", "justify-content": "center", "align-items": "center", "text-align": "center",}} component={props => <Link to={`/champions/${n.key}`} {...props}/>}>
                             <div style={{ "justify-content": "left", "align-items": "center", "text-align": "center", display: 'flex', flexDirection: 'row',}}>

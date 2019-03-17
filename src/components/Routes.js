@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, withRouter } from "react-router-dom";
 
 import FreeRotation from "./FreeRotation";
 import Champions from "./Champions";
@@ -23,7 +23,7 @@ class MainPage extends Component {
                     render={(props) => <ChampionComparison {...props} parentProps={this.props}/>}
                 />
 
-                <Route path="/championssummary" exact render={()=><ChampionsSummary parentProps={this.props}/>}/>
+                <Route path="/championssummary" exact render={()=><ChampionsSummary parentProps={this.props} routerHistory={this.props.history}/>}/>
 
                 <Route
                     path='/champions/:champion'
@@ -37,4 +37,4 @@ class MainPage extends Component {
     }
 }
 
-export default MainPage;
+export default withRouter(MainPage);

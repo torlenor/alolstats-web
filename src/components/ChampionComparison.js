@@ -7,12 +7,12 @@ import Grid from '@material-ui/core/Grid';
 
 import Typography from '@material-ui/core/Typography';
 
-const DEFAULTGAMEVERSION = "9.4"
-
 const API_URL = `${process.env.REACT_APP_API_BASE_URL}`;
 const API = `${API_URL}/v1/stats/champion/byid?id=`;
 const VERSIONPARAMETER = `&gameversion=`;
 const LEAGUEPARAMETER = `&tier=`;
+
+window.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true;
 
 class ChampionComparison extends Component {
 
@@ -34,7 +34,7 @@ class ChampionComparison extends Component {
         if (props.parentProps.selectedVersion !== undefined) {
             version = props.parentProps.selectedVersion;
         } else {
-            version = DEFAULTGAMEVERSION;
+            return;
         }
 
         let league = "";
@@ -97,22 +97,25 @@ class ChampionComparison extends Component {
 
         if (this.state.didMount1 === false || this.state.didMount2 === false) {
             page = <div className="content">
-                <Typography variant="h5" gutterBottom component="h3">
+                <Typography variant="h5" gutterBottom>
                 Loading Champion informations for comparison...<br></br>
                     Please wait...
                 </Typography>
             </div>;
         } else if (this.state.error || championstats1 === null || championstats2 === null) {
             page = <div className="content">
-                <Typography variant="h5" gutterBottom component="h3">
+                <Typography variant="h5" gutterBottom>
                     Ooops, something bad happened!<br></br>
                     <br></br>Error receiving Champion Stats, please try again later!
                     </Typography>
             </div>;
         } else {
             page = <div className="Champion">
-            <Typography variant="h4" gutterBottom component="h2">
+            <Typography variant="h4">
                 {championstats1.championname} vs. {championstats2.championname}
+            </Typography>
+            <Typography>
+                Overall and matching roles comparison (if any)
             </Typography>
             <div style={{ padding: 12 }}>
             <Grid container spacing={24} justify="center">
@@ -122,12 +125,14 @@ class ChampionComparison extends Component {
                     </Paper>
                 </Grid>
                 {/* <Grid item xs={12} sm={12} md={12} lg={12} xl={12}> */}
-                {championstats1.roles !== null ? ["Top", "Mid", "Jungle", "Carry", "Support"].map(value => (
+                {championstats1.roles !== null && championstats2.roles !== null ? ["Top", "Mid", "Jungle", "Carry", "Support"].map(value => (
+                    championstats1.roles.includes(value) && championstats2.roles.includes(value) ? 
                     <Grid item xs={12} sm={12} md={6} lg={6} xl={6} key={value+'stats'}>
                         <Paper>
-                            <ChampionComparisonTextStatistics championStats1={championstats1.statsperrole[value]} championStats2={championstats2.statsperrole[value]} role={value}/>
+                            <ChampionComparisonTextStatistics champName1={championstats1.championname} champName2={championstats2.championname} championStats1={championstats1.statsperrole[value]} championStats2={championstats2.statsperrole[value]} role={value}/>
                         </Paper>
                     </Grid>
+                    : <div></div>
                 )) : <div></div>}
                 </Grid>
             {/* </Grid> */}

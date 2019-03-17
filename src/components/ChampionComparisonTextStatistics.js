@@ -55,7 +55,7 @@ function createData(name, avgValue1, stddevValue1, avgValue2, stddevValue2, unit
 
 class ChampionComparisonTextStatistics extends Component {
     render() {
-        const {championStats1, championStats2, role} = this.props;
+        const {championStats1, championStats2, role, champName1, champName2} = this.props;
 
         var rows = [];
         if (role !== undefined) {
@@ -136,8 +136,8 @@ class ChampionComparisonTextStatistics extends Component {
                 <TableHead>
                     <TableRow>
                         <TableCell></TableCell>
-                        <TableCell align="right">{championStats1.championname}</TableCell>
-                        <TableCell align="right">{championStats2.championname}</TableCell>
+                        <TableCell align="right">{champName1}</TableCell>
+                        <TableCell align="right">{champName2}</TableCell>
                         <TableCell align="right">Diff (Mean)</TableCell>
                     </TableRow>
                 </TableHead>

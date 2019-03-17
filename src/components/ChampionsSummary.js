@@ -78,7 +78,7 @@ function ChampionsSummary(props) {
     if (didLoad && !error) {
         document.title = "Champions Summary - fuu.la";
         return <div style={{margin: 5,}}>
-            <ChampionsSummaryTable data={data} gameVersion={fetchedGameVersion} league={fetchedLeague} isUpdating={isUpdating}/></div>;
+            <ChampionsSummaryTable data={data} gameVersion={fetchedGameVersion} league={fetchedLeague} isUpdating={isUpdating} routerHistory={props.routerHistory}/></div>;
     } else if ( didLoad && error) {
         return <div>
             <Typography variant="h5" gutterBottom component="h3">Ooops, something bad happened!<br></br><br></br>Error receiving Champions Summary, please try again later!</Typography></div>;
