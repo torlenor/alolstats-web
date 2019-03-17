@@ -401,10 +401,10 @@ function EnhancedTable(props) {
                             onClick={event => handleClick(event, n.key)}
                         />
                         </TableCell>
-                        <TableCell scope="row" padding="none" style={{ "text-decoration": "none", "justify-content": "center", "align-items": "center", "text-align": "center",}} component={props => <Link to={`/champions/${n.key}`} {...props}/>}>
-                            <div style={{ "justify-content": "left", "align-items": "center", "text-align": "center", display: 'flex', flexDirection: 'row',}}>
+                        <TableCell scope="row" padding="none" style={{ "textDecoration": "none", "justifyContent": "left", "alignItems": "center", "textAlign": "left",}} component={props => <Link to={`/champions/${n.key}`} {...props}/>}>
+                            <div style={{ "justifyContent": "left", "alignItems": "center", "textAlign": "left", display: 'flex', flexDirection: 'row',}}>
                                 <img src={`https://ddragon.leagueoflegends.com/cdn/9.5.1/img/champion/${n.key}.png`} height={32} width={32} style={{justify: "left",}} alt="Logo" />
-                                <Typography component={'span'} style={{"text-decoration": "none",  "marginLeft": 4}}>
+                                <Typography component={'span'} style={{"textDecoration": "none",  "marginLeft": 4}}>
                                     {n.name}
                                 </Typography>
                             </div>
