@@ -109,6 +109,7 @@ class ChampionComparison extends Component {
                     </Typography>
             </div>;
         } else {
+            document.title = `${championstats1.championname} vs. ${championstats2.championname} - fuu.la`;
             page = <div className="Champion">
             <Typography variant="h4">
                 {championstats1.championname} vs. {championstats2.championname}
