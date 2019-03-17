@@ -76,6 +76,9 @@ class ChampionComparisonTextStatistics extends Component {
                 createData('Average Minions Killed', championStats1.average_totalminionskilled.toFixed(2), championStats1.stddev_totalminionskilled.toFixed(2),
                                                     championStats2.average_totalminionskilled.toFixed(2), championStats2.stddev_totalminionskilled.toFixed(2), "", 2
                                                     ),
+                createData('Average Total Damage Dealt To Champs', championStats1.average_totaldamagedealttochampions.toFixed(0), championStats1.stddev_totaldamagedealttochampions.toFixed(0),
+                                                    championStats2.average_totaldamagedealttochampions.toFixed(0), championStats2.stddev_totaldamagedealttochampions.toFixed(0), "", 0
+                                                    ),
                 createData('Average Total Damage Dealt', championStats1.average_totaldamagedealt.toFixed(0), championStats1.stddev_totaldamagedealt.toFixed(0),
                                                         championStats2.average_totaldamagedealt.toFixed(0), championStats2.stddev_totaldamagedealt.toFixed(0), "", 0
                                                         ),
@@ -107,6 +110,9 @@ class ChampionComparisonTextStatistics extends Component {
                 createData('Average Minions Killed', championStats1.average_totalminionskilled.toFixed(2), championStats1.stddev_totalminionskilled.toFixed(2),
                                                     championStats2.average_totalminionskilled.toFixed(2), championStats2.stddev_totalminionskilled.toFixed(2), "", 2
                                                     ),
+                createData('Average Total Damage Dealt To Champs', championStats1.average_totaldamagedealttochampions.toFixed(0), championStats1.stddev_totaldamagedealttochampions.toFixed(0),
+                                                        championStats2.average_totaldamagedealttochampions.toFixed(0), championStats2.stddev_totaldamagedealttochampions.toFixed(0), "", 0
+                                                        ),
                 createData('Average Total Damage Dealt', championStats1.average_totaldamagedealt.toFixed(0), championStats1.stddev_totaldamagedealt.toFixed(0),
                                                         championStats2.average_totaldamagedealt.toFixed(0), championStats2.stddev_totaldamagedealt.toFixed(0), "", 0
                                                         ),
