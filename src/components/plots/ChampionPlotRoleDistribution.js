@@ -1,10 +1,15 @@
+import PropTypes from 'prop-types';
+
 import React, {Component} from 'react';
 
-import "./ChampionPlotRoleDistribution.css"
+import { withTheme } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 
 import Plot from 'react-plotly.js';
 
-import Typography from '@material-ui/core/Typography';
+import { getPlotlyThemeDefault, getPlotlyConfigDefault } from '../../theme/PlotlyTheme';
+
+const PLOTLY_CONFIG = getPlotlyConfigDefault();
 
 class ChampionStats extends Component {
     constructor(props) {
@@ -13,96 +18,64 @@ class ChampionStats extends Component {
         this.state = {
             didMount: false,
             championstats: null,
-            error: false
         };
     }
 
     componentWillReceiveProps(props) {
-        this.setState({championstats: props.championStats, error: false, didMount: true});
+        this.setState({championstats: props.championStats, didMount: true});
     }
 
     componentDidMount() {
-        this.setState({championstats: this.props.championStats, error: false, didMount: true});
+        this.setState({championstats: this.props.championStats, didMount: true});
     }
 
     render() {
-        const {championstats} = this.state;
-
-        let page;
+        const { theme } = this.props;
+        const { championstats } = this.state;
 
         if (this.state.didMount === false) {
-            page = <div className="content">
-                <div className="ChampionStats">
-                    Loading Champion informations...<br></br>
-                    Please wait...
-                </div>
-            </div>;
-        } else if (this.state.error || championstats === null) {
-            page = <div className="content">
-                <div className="ChampionStats">
-                    Ooops, something bad happened!<br></br>
-                    <br></br>Error receiving Champion Stats, please try again later!
-                </div>
-            </div>;
+            return <div>
+                    <Typography>
+                        Preparing Plot...
+                    </Typography>
+                </div>;
         } else {
-            var data = championstats.lanerolepercentageplotly;
+            const data = championstats.lanerolepercentageplotly;
 
-            // data[0].text = ['WP: Text A', 'WP: Text B', 'WP: Text C', 'WP: Text D', 'WP: Text E'];
-            // data[0].textposition = 'auto';
-
-            // data[1].text = ['Text A', 'Text B', 'Text C', 'Text D', 'Text E'];
-            // data[1].textposition = 'auto';
-
-            // data[2].text = ['Text A', 'Text B', 'Text C', 'Text D', 'Text E'];
-            // data[2].textposition = 'auto';
-
-            // data[3].text = ['Text A', 'Text B', 'Text C', 'Text D', 'Text E'];
-            // data[3].textposition = 'auto';
+            const defaultTheme = getPlotlyThemeDefault(theme);
 
             var layout = {
+                ...defaultTheme,
                 barmode: 'stack',
-                autosize: true,
-                margin: {
-                    l: 60,
-                    r: 20,
-                    t: 20,
-                    b: 60,
-                    autoexpand: false,
-                },
                 xaxis: {
+                    ...defaultTheme.xaxis,
                     title: {
                         text: 'Lane',
                     },
                     fixedrange: true,
                 },
                 yaxis: {
+                    ...defaultTheme.yaxis,
                     title: {
                         text: 'Percentage [%]',
                     },
                     fixedrange: true,
                     range: [0, 100]
                 },
-                dragmode: false,
             };
 
-            const config={'displayModeBar': false, responsive: true};
-
-            page = <div className="ChampionStats">
-                <div className="ChampionStats">
-                    <Typography variant="h6" gutterBottom component="h4">
+            return <div>
+                    <Typography variant="h6">
                         Role Distribution
                     </Typography>
-                    </div>
-                    <Plot useResizeHandler style={{ width: '100%', height: '300px' }} data={data} layout={layout} config={config} />
+                    <Plot useResizeHandler style={{ minWidth: 300, width: '100%', height: '300px' }} data={data} layout={layout} config={PLOTLY_CONFIG} />
             </div>;
         }
-
-        return (
-            <div>
-                {page}
-            </div>
-        )
     }
 }
 
-export default ChampionStats;
+ChampionStats.propTypes = {
+    theme: PropTypes.object.isRequired,
+  };
+
+export default withTheme()(ChampionStats);

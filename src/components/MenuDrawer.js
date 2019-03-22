@@ -43,21 +43,21 @@ function TemporaryDrawer(props) {
 
   const sideList = (
     <div className={classes.list}>
-    <Typography variant="h6" align="center" color="inherit" >
+    <Typography variant="h6" align="center">
                                     fuu.la
                                     </Typography>
-        <Divider />
+      <Divider />
       <List>
           <ListItem button key={"Free Rotation"} component={LinkFreeRotation}>
-            <ListItemIcon><ThreeSixty/></ListItemIcon>
+            <ListItemIcon><ThreeSixty color="primary"/></ListItemIcon>
             <ListItemText primary={"Free Rotation"} />
           </ListItem>
           <ListItem button key={"Champions"} component={LinkChampions}>
-            <ListItemIcon><FaceIcon/></ListItemIcon>
+            <ListItemIcon><FaceIcon color="primary"/></ListItemIcon>
             <ListItemText primary={"Champions"} />
           </ListItem>
           <ListItem button key={"Summary"} component={LinkChampionsSummary}>
-            <ListItemIcon><ListIcon/></ListItemIcon>
+            <ListItemIcon><ListIcon color="primary"/></ListItemIcon>
             <ListItemText primary={"Summary"} />
           </ListItem>
       </List>

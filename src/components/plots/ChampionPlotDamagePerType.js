@@ -1,10 +1,15 @@
+import PropTypes from 'prop-types';
+
 import React, {Component} from 'react';
 
-import "./ChampionPlotDamagePerType.css"
+import { withTheme } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 
 import Plot from 'react-plotly.js';
 
-import Typography from '@material-ui/core/Typography';
+import { getPlotlyThemeDefault, getPlotlyConfigDefault } from '../../theme/PlotlyTheme';
+
+const PLOTLY_CONFIG = getPlotlyConfigDefault();
 
 class ChampionStats extends Component {
     constructor(props) {
@@ -13,103 +18,88 @@ class ChampionStats extends Component {
         this.state = {
             didMount: false,
             championstats: null,
-            error: false
         };
     }
 
     componentWillReceiveProps(props) {
-        this.setState({championstats: props.championStats, error: false, didMount: true});
+        this.setState({championstats: props.championStats, didMount: true});
     }
 
     componentDidMount() {
-        this.setState({championstats: this.props.championStats, error: false, didMount: true});
+        this.setState({championstats: this.props.championStats, didMount: true});
+    }
+
+    preparePlotData() {
+        const { theme } = this.props;
+        const { championstats } = this.state;
+
+        var trueColor = theme.palette.primary.main;
+        var magicColor = theme.palette.primary.main;
+        var physicalColor = theme.palette.primary.main;
+        const mainColor = '#CC0000';
+        if (championstats.average_truedamagedealt > championstats.average_magicdamagedealt && championstats.average_truedamagedealt > championstats.average_physicaldamagedealt) {
+            trueColor = mainColor;
+        } else if (championstats.average_magicdamagedealt > championstats.average_physicaldamagedealt) {
+            magicColor = mainColor;
+        } else {
+            physicalColor = mainColor;
+        }
+        return {
+            x: ["True", "Magic", "Physical"],
+            y: [championstats.average_truedamagedealt, championstats.average_magicdamagedealt, championstats.average_physicaldamagedealt],
+            type: "bar",
+            marker:{
+                color: [trueColor, magicColor, physicalColor]
+              },
+          };
     }
 
     render() {
-        const {championstats} = this.state;
-
-        let page;
+        const { theme } = this.props;
 
         if (this.state.didMount === false) {
-            page = <div className="content">
-                <div className="ChampionStats">
-                    Loading Champion informations...<br></br>
-                    Please wait...
-                </div>
-            </div>;
-        } else if (this.state.error || championstats === null) {
-            page = <div className="content">
-                <div className="ChampionStats">
-                    Ooops, something bad happened!<br></br>
-                    <br></br>Error receiving Champion Stats, please try again later!
-                </div>
-            </div>;
+            return <div>
+                    <Typography>
+                        Preparing Plot...
+                    </Typography>
+                </div>;
         } else {
-            var trueColor = 'rgba(204,204,204,1)'
-            var magicColor = 'rgba(204,204,204,1)'
-            var physicalColor = 'rgba(204,204,204,1)'
-            if (championstats.average_truedamagedealt > championstats.average_magicdamagedealt && championstats.average_truedamagedealt > championstats.average_physicaldamagedealt) {
-                trueColor = 'rgba(222,45,38,0.8)';
-            } else if (championstats.average_magicdamagedealt > championstats.average_physicaldamagedealt) {
-                magicColor = 'rgba(222,45,38,0.8)';
-            } else {
-                physicalColor = 'rgba(222,45,38,0.8)';
-            }
-            var damageData = {
-                x: ["True", "Magic", "Physical"],
-                y: [championstats.average_truedamagedealt, championstats.average_magicdamagedealt, championstats.average_physicaldamagedealt],
-                type: "bar",
-                marker:{
-                    color: [trueColor, magicColor, physicalColor]
-                  },
-              };
+            const defaultTheme = getPlotlyThemeDefault(theme);
 
             const layout = {
+                ...defaultTheme,
                 barmode: 'stack',
-                autosize: true,
-                margin: {
-                    l: 60,
-                    r: 20,
-                    t: 20,
-                    b: 60,
-                    autoexpand: false,
-                },
                 displayModeBar: false,
                 xaxis: {
+                    ...defaultTheme.xaxis,
                     title: {
-                        text: 'Damage Type'
+                        text: 'Damage Type',
                     },
                     fixedrange: true,
                 },
                 yaxis: {
+                    ...defaultTheme.yaxis,
                     title: {
                         text: 'Damage',
                     },
                     fixedrange: true,
                 },
-                dragmode: false,
             };
 
-            const config={'displayModeBar': false};
+            const data = [this.preparePlotData()];
 
-            const data = [damageData];
-
-            page = <div className="ChampionPlotDamagePerType">
-                <div className="ChampionPlotDamagePerType">
-                    <Typography variant="h6" gutterBottom component="h4">
+            return <div>
+                    <Typography variant="h6" gutterBottom>
                         Damage Per Type
                     </Typography>
-                    </div>
-                    <Plot useResizeHandler style={{ width: '100%', height: '300px' }} data={data} layout={layout} config={config}/>
+                    <Plot useResizeHandler style={{ width: '100%', height: '300px' }} data={data} layout={layout} config={PLOTLY_CONFIG}/>
             </div>;
         }
-
-        return (
-            <div>
-                {page}
-            </div>
-        )
     }
 }
 
-export default ChampionStats;
+ChampionStats.propTypes = {
+    theme: PropTypes.object.isRequired,
+};
+
+export default withTheme()(ChampionStats);

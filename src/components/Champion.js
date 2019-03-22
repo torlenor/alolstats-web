@@ -105,7 +105,7 @@ class Champion extends Component {
             </div>;
         } else if ( fetchChampionError || fetchChampionHistoryError || fetchChampionInfoError ) {
             page = <div className="content">
-                <Typography variant="h5" gutterBottom component="h3">
+                <Typography variant="h5" gutterBottom>
                     Ooops, something bad happened!<br></br>
                     <br></br>Error receiving Champion Stats, please try again later!
                     </Typography>
@@ -119,7 +119,7 @@ class Champion extends Component {
             <div style={{ padding: PADDING }}>
             <Grid container layout={"row"} spacing={24} justify="center">
                 <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
-                    <Paper>
+                    <Paper style={{ padding: PADDING }}>
                         <ChampionTextStatistics championStats={fetchChampionData}/>
                     </Paper>
                 </Grid>
@@ -127,6 +127,7 @@ class Champion extends Component {
                     <Paper style={{ height: 356, padding: PADDING }}>
                         <ChampionStats championStats={fetchChampionData}/>
                     </Paper>
+                    <div style={ {padding: PADDING }} />
                     <Paper style={{ height: 356, padding: PADDING }}>
                         <ChampionPlotDamagePerType championStats={fetchChampionData}/>
                     </Paper>
@@ -135,6 +136,7 @@ class Champion extends Component {
                     <Paper style={{ height: 356, padding: PADDING }}>
                         <ChampionHistoryWin championHistoryData={fetchChampionHistoryData} height={300}/>
                     </Paper>
+                    <div style={ {padding: PADDING }} />
                     <Paper style={{ height: 356, padding: PADDING }}>
                         <ChampionHistoryPickBan championHistoryData={fetchChampionHistoryData}/>
                     </Paper>
@@ -143,7 +145,7 @@ class Champion extends Component {
                 {fetchChampionData.roles !== null ? fetchChampionData.roles.map(value => (
                     <Grid container spacing={24} justify="center" key={value+'container'}>
                     <Grid item xs={12} sm={12} md={6} lg={6} xl={6} key={value+'stats'}>
-                        <Paper>
+                        <Paper style={{ padding: PADDING }}>
                             <ChampionTextStatistics championStats={fetchChampionData.statsperrole[value]} role={value}/>
                         </Paper>
                     </Grid>
@@ -151,6 +153,7 @@ class Champion extends Component {
                         <Paper style={{ height: 310, padding: PADDING }}>
                             <ChampionHistoryWin championHistoryData={fetchChampionHistoryData.historyperrole[value]} role={value} height={280}/>
                         </Paper>
+                        <div style={ {padding: PADDING }} key={value+'div'} />
                         <Paper style={{ height: 310, padding: PADDING }}>
                             <ChampionHistoryKDA championHistoryData={fetchChampionHistoryData.historyperrole[value]} role={value} height={280}/>
                         </Paper>
@@ -159,7 +162,7 @@ class Champion extends Component {
                 )) : <div></div>}
                 </Grid>
                 <Grid item xs>
-                    <Paper>
+                    <Paper style={{ padding: PADDING }}>
                         <ChampionTextStatisticsAdditional championStats={fetchChampionData}/>
                     </Paper>
                 </Grid>

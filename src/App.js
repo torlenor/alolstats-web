@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import CookieConsent from "react-cookie-consent";
 
 // THEME
+import CssBaseline from '@material-ui/core/CssBaseline';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import muiTheme from './theme/MuiTheme';
 
@@ -119,13 +120,14 @@ class App extends Component {
         } else {
             page =<MuiThemeProvider theme={muiTheme}>
                     <div className="App">
+                        <CssBaseline />
                         <NavBar versions={this.state.versions} leagues={this.state.leagues} handlerPatch={this.handlerPatch} handlerLeague={this.handlerLeague} />
                         <Routes versions={this.state.versions} leagues={this.state.leagues} selectedVersion={this.state.patch} selectedLeague={this.state.league}/>
                         <Footer appVersion={VERSION} buildDate={BUILD_DATE}/>
+                        <CookieConsent>
+                            This website uses cookies to enhance the user experience.
+                        </CookieConsent>
                     </div>
-                    <CookieConsent>
-                        This website uses cookies to enhance the user experience.
-                    </CookieConsent>
                 </MuiThemeProvider>;
         }
         return(page);

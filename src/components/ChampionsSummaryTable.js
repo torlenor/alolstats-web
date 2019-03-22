@@ -13,7 +13,6 @@ import IconButton from '@material-ui/core/IconButton';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
@@ -28,6 +27,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 
 // Own Components
 import Progress from './Progress'
+import { TableCell } from './ThemedTableCell';
 
 const MAX_SELECTED = 2;
 
@@ -89,7 +89,7 @@ function EnhancedTableHead(props) {
           { numSelected > 0 ?
             <Tooltip title="Unselect All">
           <IconButton aria-label="UnselectAll" onClick={onClearAllClick}>
-              <Icon>clear</Icon>
+              <Icon color="primary">clear</Icon>
             </IconButton>
             </Tooltip>
             : <div></div> }
@@ -161,7 +161,7 @@ const EnhancedTableToolbar = props => {
           <Typography style={{display: 'inline-block'}} variant="h5" id="tableTitle">
             Champions Summary
           </Typography>
-          <Typography color="inherit" variant="subtitle1">
+          <Typography  variant="subtitle1">
             {numSelected} selected
           </Typography>
           </div>
@@ -170,7 +170,7 @@ const EnhancedTableToolbar = props => {
           <Typography style={{display: 'inline-block'}} variant="h5" id="tableTitle">
             Champions Summary
           </Typography>
-          <Typography color="inherit" variant="subtitle1">
+          <Typography variant="subtitle1">
             Select {MAX_SELECTED} Champions for comparison
           </Typography>
           </div>
@@ -178,7 +178,7 @@ const EnhancedTableToolbar = props => {
         {isUpdating === true ? (<Progress size={30}/>) : (<div></div>)}
       </div>
       <div className={classes.spacer} />
-      <div className={classes.actions}>
+      <div>
         {numSelected === MAX_SELECTED ? (
           <Tooltip title="Compare" style={{display: 'inline-block'}}>
             <IconButton aria-label="Compare" style={{display: 'inline-block'}} onClick={onHandleCompareClick}>

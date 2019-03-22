@@ -2,9 +2,10 @@ import React, {Component} from 'react';
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
+
+import { TableCell } from './ThemedTableCell';
 
 let id = 0;
 function createData(name, value) {
@@ -33,7 +34,7 @@ class ChampionTextStatistics extends Component {
       
         return (
         <div>
-            <Typography variant="h5" gutterBottom component="h3">
+            <Typography variant="h6" gutterBottom>
             Additional Statistics
           </Typography>
 

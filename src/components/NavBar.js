@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { withRouter } from 'react-router-dom';
 
-import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { withStyles, withTheme, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import AppBar from '@material-ui/core/AppBar';
 import IconButton from '@material-ui/core/IconButton';
@@ -124,21 +124,21 @@ class NavBar extends Component {
     }
                 
         render() {
-            const { classes } = this.props;
+            const { classes, theme } = this.props;
 
-            const theme = createMuiTheme({
-                // eslint-disable-next-line
+            const navTheme = createMuiTheme({
                 ...theme,
-                palette: { type: 'dark', },
+                // palette: { type: 'dark', },
             });
 
             return (
                 <div className={classes.root}>
+                <MuiThemeProvider theme={navTheme}>
                     <MenuDrawer open={this.state.showDrawer} onClose={this.handleMenuButtonClose} 
                                 versions={this.props.versions} leagues={this.props.leagues} 
                                 selectedVersion={this.state.selectedPatch} selectedLeague={this.state.selectedLeague}
                                 handlerPatch={this.props.handlerPatch} handlerLeague={this.props.handlerLeague}
-                                />
+                                />           
                     <AppBar position="fixed">
                         <Toolbar>
                             <IconButton className={classes.menuButton} color="inherit" aria-label="Menu" onClick={() => { this.setState({showDrawer: true}); }}>
@@ -152,7 +152,6 @@ class NavBar extends Component {
 
                             <ChampionSearch selectedVersion={this.state.selectedPatch} selectedLeague={this.state.selectedLeague} routerHistory={this.props.history}/>
 
-                            <MuiThemeProvider theme={theme}>
                                 <TextField
                                 select
                                 variant="outlined"
@@ -182,9 +181,10 @@ class NavBar extends Component {
                                         ))
                                     }
                                 </TextField>
-                            </MuiThemeProvider>
+                            
                         </Toolbar>
                     </AppBar>
+                    </MuiThemeProvider>
                 </div>
         );
     }
@@ -192,6 +192,7 @@ class NavBar extends Component {
         
 NavBar.propTypes = {
     classes: PropTypes.object.isRequired,
+    theme: PropTypes.object.isRequired,
 };
         
-export default withStyles(styles)(withRouter(NavBar));
+export default withTheme()(withStyles(styles)(withRouter(NavBar)));

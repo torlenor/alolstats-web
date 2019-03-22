@@ -1,11 +1,24 @@
 import React from 'react';
 import Plot from 'react-plotly.js';
 
+import PropTypes from 'prop-types';
+import { withTheme } from '@material-ui/core/styles';
+
 import Typography from '@material-ui/core/Typography';
 
+import { getPlotlyThemeDefault, getPlotlyConfigDefault } from '../../theme/PlotlyTheme';
+
 const MAX_VERSIONS = 5;
+const PLOTLY_CONFIG = getPlotlyConfigDefault();
 
 function ChampionHistoryWin(props) {
+    
+    if (props.championHistoryData === undefined) {
+        return <div></div>;
+    }
+    
+    const { championHistoryData, theme } = props;
+
     var displayRole = "";
     if (props.role !== undefined) {
         displayRole = props.role;
@@ -13,14 +26,10 @@ function ChampionHistoryWin(props) {
         displayRole = "Overall";
     }
 
-    if (props.championHistoryData === undefined) {
-        return <div></div>;
-    }
-
     const winRate = 
         {
-            x: props.championHistoryData.versions.slice(0, MAX_VERSIONS),
-            y: props.championHistoryData.winRateHistory.slice(0, MAX_VERSIONS).map(value => value*100),
+            x: championHistoryData.versions.slice(0, MAX_VERSIONS),
+            y: championHistoryData.winRateHistory.slice(0, MAX_VERSIONS).map(value => value*100),
             type: 'scatter',
             mode: 'lines+markers',
             'line': {
@@ -32,18 +41,13 @@ function ChampionHistoryWin(props) {
             name: 'Win Rate'
             };
 
+    const defaultTheme = getPlotlyThemeDefault(theme);
+
     const layout = 
         {
-            autosize: true,
-            showlegend: false,
-            margin: {
-                l: 60,
-                r: 20,
-                t: 20,
-                b: 60,
-                autoexpand: false,
-            },
+            ...defaultTheme,
             xaxis: {
+                ...defaultTheme.xaxis,
                 type: 'category',
                 title: {
                     text: 'Game Version'
@@ -53,13 +57,13 @@ function ChampionHistoryWin(props) {
                 categoryarray: winRate.x,
             },
             yaxis: {
+                ...defaultTheme.yaxis,
                 title: {
                     text: 'Win Rate [%]',
                 },
                 fixedrange: true,
                 range: [30, 70]
             },
-            dragmode: false,
             'shapes': [
                 {
                     'type': 'line',
@@ -69,26 +73,25 @@ function ChampionHistoryWin(props) {
                     'x1': 1,
                     'y1': 50,
                     'line': {
-                        'color': 'rgb(80, 80, 80)',
+                        'color': theme.palette.common.white,
                         'width': 1,
-                        // 'dash': 'dot',
                     },
                 },
             ]
         };
 
-        const config={'displayModeBar': false};
-
         const plotData = [winRate];
 
-        return <div className="ChampionPlotWinRateAsFunctionOfPatch">
-            <div className="ChampionPlotWinRateAsFunctionOfPatch">
-            <Typography variant="h6" gutterBottom component="h4">
+        return <div>
+            <Typography variant="h6">
                     {displayRole} Win Rate
-                </Typography>
-                </div>
-                <Plot useResizeHandler style={{ minWidth: '300px', width: '100%', height: props.height }} data={plotData} layout={layout} config={config}/>
+            </Typography>
+            <Plot useResizeHandler style={{ width: '100%', height: props.height }} data={plotData} layout={layout} config={PLOTLY_CONFIG}/>
         </div>;
 }
 
-export default ChampionHistoryWin;
+ChampionHistoryWin.propTypes = {
+    theme: PropTypes.object.isRequired,
+  };
+
+export default withTheme()(ChampionHistoryWin);

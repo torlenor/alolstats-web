@@ -3,10 +3,11 @@ import React, {Component} from 'react';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
 import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 
 import Typography from '@material-ui/core/Typography';
+
+import { TableCell } from './ThemedTableCell';
 
 let id = 0;
 function createData(name, avgValue1, stddevValue1, avgValue2, stddevValue2, unit, prec, noColor=false, lowerIsBetter=false) {
