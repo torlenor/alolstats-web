@@ -13,6 +13,8 @@ create_docker_image:
   stage: build_image
   tags:
     - docker-from-docker
+  only:
+    - master
   script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN git.abyle.org:5000
     - docker pull $CONTAINER_IMAGE:latest_dev || true
@@ -33,6 +35,8 @@ deploy_testing:
     - chmod 700 "${HOME}/.ssh/id_rsa"
     - echo "$SSH_KNOWN_HOSTS" > "${HOME}/.ssh/known_hosts"
     - chmod 644 "${HOME}/.ssh/known_hosts"
+  only:
+    - master
   script:
     - echo deploying to testing environment... $CONTAINER_IMAGE:$CI_COMMIT_SHA
     - export TRANSACTIONID=`uuidgen`
