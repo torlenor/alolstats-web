@@ -14,6 +14,8 @@ import Slider from '@material-ui/lab/Slider';
 
 import { TableCell } from './ThemedTableCell';
 
+import { numberWithCommas } from '../utils/numberMods'
+
 const styles = {
     slider: {
       padding: '24px 10px',
@@ -46,9 +48,9 @@ function createData(name, avgValue1, stddevValue1, avgValue2, stddevValue2, unit
     }
     let diffVal = ( parseFloat(avgValue2) - parseFloat(avgValue1) );
     if (unit !== null && unit !== undefined) {
-        value1 = value1 + " " + unit;
-        value2 = value2 + " " + unit;
-        diff = diff + " " + unit;
+        value1 = numberWithCommas(value1) + " " + unit;
+        value2 = numberWithCommas(value2) + " " + unit;
+        diff = numberWithCommas(diff) + " " + unit;
     }
     if(!noColor) {
         if (diffVal < 0) {

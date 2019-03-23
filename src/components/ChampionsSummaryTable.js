@@ -25,8 +25,9 @@ import Typography from '@material-ui/core/Typography';
 import Checkbox from '@material-ui/core/Checkbox';
 
 // Own Components
-import Progress from './Progress'
+// import Progress from './Progress'
 import { TableCell } from './ThemedTableCell';
+import { numberWithCommas } from '../utils/numberMods'
 
 const MAX_SELECTED = 2;
 
@@ -169,7 +170,7 @@ const EnhancedTableToolbar = props => {
           </Typography>
           </div>
         )}
-        {isUpdating === true ? (<Progress size={30}/>) : (<div></div>)}
+        {/* {isUpdating === true ? (<Progress size={30}/>) : (<div></div>)} */}
       </div>
       <div className={classes.spacer} />
       <div>
@@ -390,7 +391,7 @@ function EnhancedTable(props) {
                             </div>
                         </TableCell>
                         <TableCell padding="none">{renderRoles(n.roles)}</TableCell>
-                        <TableCell align="right">{n.sampleSize}</TableCell>
+                        <TableCell align="right">{numberWithCommas(n.sampleSize)}</TableCell>
                         <TableCell align="right">{n.winRate}</TableCell>
                         <TableCell align="right">{n.pickRate}</TableCell>
                         <TableCell align="right">{n.banRate}</TableCell>

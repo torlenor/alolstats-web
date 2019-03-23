@@ -9,6 +9,8 @@ import Typography from '@material-ui/core/Typography';
 
 import { TableCell } from './ThemedTableCell';
 
+import { numberWithCommas } from '../utils/numberMods'
+
 let id = 0;
 function createData(name, avgValue1, stddevValue1, avgValue2, stddevValue2, unit, prec, noColor=false, lowerIsBetter=false) {
     id += 1;
@@ -29,9 +31,9 @@ function createData(name, avgValue1, stddevValue1, avgValue2, stddevValue2, unit
     }
     let diffVal = ( parseFloat(avgValue2) - parseFloat(avgValue1) );
     if (unit !== null && unit !== undefined) {
-        value1 = value1 + " " + unit;
-        value2 = value2 + " " + unit;
-        diff = diff + " " + unit;
+        value1 = numberWithCommas(value1) + " " + unit;
+        value2 = numberWithCommas(value2) + " " + unit;
+        diff = numberWithCommas(diff) + " " + unit;
     }
     if(!noColor) {
         if (diffVal < 0) {
