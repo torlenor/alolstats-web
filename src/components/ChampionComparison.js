@@ -187,22 +187,24 @@ class ChampionComparison extends Component {
             </div>;
         } else {
             document.title = `${championstats1.championname} vs. ${championstats2.championname} - fuu.la`;
-            page = <div className="Champion">
-            <Typography variant="h4">
-                {championstats1.championname} vs. {championstats2.championname}
-            </Typography>
-            <Typography>
-                Overall and matching roles comparison (if any)
-            </Typography>
+            page = <div className="Champion"style={{marginLeft: themeConstants.padding/2, marginRight: themeConstants.padding/2 + themeConstants.padding/4}}>
+            <Paper style={{ padding: themeConstants.padding, margin: themeConstants.padding }}>
+                <Typography variant="h4">
+                    {championstats1.championname} vs. {championstats2.championname}
+                </Typography>
+                <Typography>
+                    Overall and matching roles comparison (if any)
+                </Typography>
+            </Paper>
             <div style={{ padding: themeConstants.padding }}>
-            <Grid container spacing={24} justify="center">
+            <Grid container spacing={themeConstants.padding*2} justify="center">
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-                    <Paper>
+                    <Paper style={{ padding: themeConstants.padding }}>
                         <ChampionComparisonTextStatistics champName1={championstats1.championname} champName2={championstats2.championname} championStats1={championstats1} championStats2={championstats2}/>
                     </Paper>
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-                    <Paper>
+                    <Paper style={{ padding: themeConstants.padding }}>
                         <ChampionComparisonTextStatisticsBaseStats champName1={championstats1.championname} champName2={championstats2.championname} championBaseStats1={championstatsInfo1} championBaseStats2={championstatsInfo2}/>
                     </Paper>
                 </Grid>
@@ -210,7 +212,7 @@ class ChampionComparison extends Component {
                 {championstats1.roles !== null && championstats2.roles !== null ? ["Top", "Mid", "Jungle", "Carry", "Support"].map(value => (
                     championstats1.roles.includes(value) && championstats2.roles.includes(value) ? 
                     <Grid item xs={12} sm={12} md={6} lg={6} xl={6} key={value+'stats'}>
-                        <Paper>
+                        <Paper style={{ padding: themeConstants.padding }}>
                             <ChampionComparisonTextStatistics champName1={championstats1.championname} champName2={championstats2.championname} championStats1={championstats1.statsperrole[value]} championStats2={championstats2.statsperrole[value]} role={value}/>
                         </Paper>
                     </Grid>
