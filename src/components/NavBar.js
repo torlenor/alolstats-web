@@ -22,7 +22,7 @@ import ChampionSearch from './ChampionSearch'
 const styles = theme => ({
     root: {
         // flexGrow: 1,
-        paddingBottom: 80,
+        paddingBottom: 64+12,
     },
     grow: {
         flexGrow: 1,
@@ -133,7 +133,7 @@ class NavBar extends Component {
     }
                 
         render() {
-            const { classes } = this.props;
+            const { classes, theme } = this.props;
 
             return (
                 <div className={classes.root}>
@@ -143,7 +143,7 @@ class NavBar extends Component {
                         selectedVersion={this.state.selectedPatch} selectedLeague={this.state.selectedLeague}
                         handlerPatch={this.props.handlerPatch} handlerLeague={this.props.handlerLeague}
                     />
-                    <AppBar position="fixed">
+                    <AppBar position="fixed" color="primary" style={{ background: theme.palette.background.paper }}>
                         <Toolbar>
                             <IconButton className={classes.menuButton} color="inherit" aria-label="Menu" onClick={() => { this.setState({showDrawer: true}); }}>
                                 <MenuIcon />

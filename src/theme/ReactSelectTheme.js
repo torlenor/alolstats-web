@@ -3,7 +3,7 @@ import muiTheme from './MuiTheme';
 const theme = {
     control: (provided, state) => ({
         ...provided,
-        color: state.isSelected ? 'red' : 'blue', backgroundColor: muiTheme.palette.primary.main, minWidth: 100, boxShadow: state.isFocused ? null : null,
+        color: state.isSelected ? 'red' : 'blue', backgroundColor: 'rgba(0,0,0,0)', minWidth: 100, boxShadow: state.isFocused ? null : null,
     borderColor: muiTheme.palette.text.primary,
     '&:hover': {
       borderColor: muiTheme.palette.text.primary,
@@ -13,7 +13,7 @@ const theme = {
         ...provided,
         fontSize: muiTheme.typography.fontSize+2,
         color: state.isSelected ? muiTheme.palette.text.primary : muiTheme.palette.text.primary,
-        backgroundColor: muiTheme.palette.background.paper,
+        backgroundColor: state.isSelected ? muiTheme.palette.background.default : muiTheme.palette.background.paper,
         height: '100%',
         '&:hover': {
             backgroundColor: muiTheme.palette.background.default,
@@ -24,7 +24,7 @@ const theme = {
     placeholder:  styles => ({
         ...styles,
         fontSize: muiTheme.typography.fontSize+2,
-        color: muiTheme.palette.text.primary
+        color: "#6d6d6f" //muiTheme.palette.text.primary
     }),
     dropdownIndicator: styles => ({...styles, color: muiTheme.palette.text.primary}),
     singleValue: styles => ({...styles, color: muiTheme.palette.text.primary,
