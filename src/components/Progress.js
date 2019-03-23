@@ -9,6 +9,7 @@ const DEFAULTSIZE = 40;
 const styles = theme => ({
   progress: {
     margin: theme.spacing.unit * 2,
+    color: theme.palette.text.primary,
   },
   root: {
     "text-align": "center"

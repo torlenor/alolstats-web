@@ -30,7 +30,7 @@ const styles = theme => ({
         flexGrow: 1,
     },
     menuButton: {
-        marginLeft: -20,
+        marginLeft: -16,
         marginRight: -8,
     },
 

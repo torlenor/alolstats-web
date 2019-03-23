@@ -8,7 +8,6 @@ import PropTypes from 'prop-types';
 // Material UI
 import { makeStyles } from '@material-ui/styles';
 
-import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -20,12 +19,13 @@ import TextField from '@material-ui/core/TextField';
 import Toolbar from '@material-ui/core/Toolbar';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
+import Clear from '@material-ui/icons/Clear';
+import Compare from '@material-ui/icons/Compare';
 
 // Material UI Components for Champion selecting/comparing
 import Checkbox from '@material-ui/core/Checkbox';
 
 // Own Components
-// import Progress from './Progress'
 import { TableCell } from './ThemedTableCell';
 import { numberWithCommas } from '../utils/numberMods'
 
@@ -84,7 +84,7 @@ function EnhancedTableHead(props) {
           { numSelected > 0 ?
             <Tooltip title="Unselect All">
           <IconButton aria-label="UnselectAll" onClick={onClearAllClick}>
-              <Icon color="primary">clear</Icon>
+              <Clear nativeColor="#FFFFFF">clear</Clear>
             </IconButton>
             </Tooltip>
             : <div></div> }
@@ -175,8 +175,8 @@ const EnhancedTableToolbar = props => {
       <div>
         {numSelected === MAX_SELECTED ? (
           <Tooltip title="Compare" style={{display: 'inline-block'}}>
-            <IconButton aria-label="Compare" style={{display: 'inline-block'}} onClick={onHandleCompareClick}>
-              <Icon>compare</Icon>
+            <IconButton aria-label="Compare" style={{display: 'inline-block', color: "white"}} onClick={onHandleCompareClick}>
+              <Compare nativeColor="white">compare</Compare>
               Compare
             </IconButton>
           </Tooltip>

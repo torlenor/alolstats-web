@@ -4,6 +4,8 @@ import ChampionsSummaryTable from './ChampionsSummaryTable'
 import Typography from '@material-ui/core/Typography';
 import Progress from './Progress'
 
+import { constants as themeConstants } from "../theme/ConstantsTheme";
+
 const API_URL = `${process.env.REACT_APP_API_BASE_URL}`;
 const ChampionsStatsAPI = `${API_URL}/v1/stats/champions`;
 
@@ -77,13 +79,15 @@ function ChampionsSummary(props) {
 
     if (didLoad && !error) {
         document.title = "Champions Summary - fuu.la";
-        return <div style={{margin: 5,}}>
-            <ChampionsSummaryTable data={data} gameVersion={fetchedGameVersion} league={fetchedLeague} isUpdating={isUpdating} routerHistory={props.routerHistory} cookies={props.cookies}/></div>;
+        return <div style={{marginLeft: themeConstants.padding, marginRight: themeConstants.padding}}>
+                <ChampionsSummaryTable data={data} gameVersion={fetchedGameVersion} league={fetchedLeague} isUpdating={isUpdating} routerHistory={props.routerHistory} cookies={props.cookies}/>
+            </div>;
     } else if ( didLoad && error) {
         return <div>
-            <Typography variant="h5" gutterBottom component="h3">Ooops, something bad happened!<br></br><br></br>Error receiving Champions Summary, please try again later!</Typography></div>;
+                <Typography variant="h5" gutterBottom component="h3">Ooops, something bad happened!<br></br><br></br>Error receiving Champions Summary, please try again later!</Typography>
+            </div>;
     } else {
-        return <div><Progress text="Loading Champions Summary..."/></div>;
+        return <Progress text="Loading Champions Summary..."/>;
     }
 }
 
