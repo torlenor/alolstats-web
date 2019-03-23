@@ -193,16 +193,41 @@ EnhancedTableToolbar.propTypes = {
 };
 
 const useStyles = makeStyles(theme => ({
-  root: {
+    root: {
     width: '100%',
     marginTop: 5 * 3,
-  },
-  table: {
+    },
+    table: {
     minWidth: 1020,
-  },
-  tableWrapper: {
+    },
+    tableWrapper: {
     overflowX: 'auto',
-  },
+    },
+
+    textField: {
+        marginLeft: 0,
+        minWidth: 80,
+    },
+    textFieldOutlinedInput: {
+        '&$textFieldFocused': {
+            borderWidth: '1px',
+            borderColor: 'white !important',
+        }
+    },
+    textFieldInput: {
+        padding: 11,
+    },
+    textFieldLabel: {
+        '&$textFieldFocused': {
+            color: 'white',
+        },
+        color : 'white',
+    },
+    textFieldFocused: { },
+    textFieldNotchedOutline: {
+        borderWidth: '1px',
+        borderColor: `white !important`,
+    },
 }));
 
 function EnhancedTable(props) {
@@ -346,8 +371,21 @@ function EnhancedTable(props) {
                 onChange={handleChangeFilter}
                 margin="normal"
                 variant="outlined"
+                className={classes.textField}
                 InputLabelProps={{
-                shrink: true,
+                    classes: {
+                        root: classes.textFieldLabel,
+                        focused: classes.textFieldFocused,
+                    },
+                    shrink: true,
+                }}
+                InputProps={{
+                    classes: {
+                        root: classes.textFieldOutlinedInput,
+                        focused: classes.textFieldFocused,
+                        notchedOutline: classes.textFieldNotchedOutline,
+                        input: classes.textFieldInput,
+                    },
                 }}
             />
         </div>

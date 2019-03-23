@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 // CSS
 import './Champions.css';
@@ -7,6 +8,7 @@ import './Champions.css';
 import Grid from "@material-ui/core/Grid";
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
+import { withStyles, withTheme } from '@material-ui/core/styles';
 
 // ALoLStats Components
 import ChampionCard from './ChampionCard.js'
@@ -21,7 +23,34 @@ const section = {
     height: "100%",
 };
 
-export default class Champions extends Component {
+const styles = theme => ({
+    textField: {
+        marginLeft: theme.spacing.unit*0,
+        minWidth: 80,
+    },
+    textFieldOutlinedInput: {
+        '&$textFieldFocused': {
+            borderWidth: '1px',
+            borderColor: `${theme.palette.primary.main} !important`,
+        }
+    },
+    textFieldInput: {
+        padding: 11,
+    },
+    textFieldLabel: {
+        '&$textFieldFocused': {
+            color: 'white',
+        },
+        color : 'white',
+        },
+    textFieldFocused: { },
+    textFieldNotchedOutline: {
+        borderWidth: '1px',
+        borderColor: `white !important`,
+    },
+});
+
+class Champions extends Component {
     constructor(props) {
         super(props);
 
@@ -97,6 +126,7 @@ export default class Champions extends Component {
 
     render() {
         const {fetchChampionsData, fetchChampionsError, fetchChampionsDone, isFiltered, filteredHits} = this.state;
+        const { classes } = this.props;
 
         let page;
 
@@ -124,8 +154,21 @@ export default class Champions extends Component {
                             onChange={this.handleChangeFilter}
                             margin="normal"
                             variant="outlined"
+                            className={classes.textField}
                             InputLabelProps={{
-                            shrink: true,
+                                classes: {
+                                    root: classes.textFieldLabel,
+                                    focused: classes.textFieldFocused,
+                                },
+                                shrink: true,
+                            }}
+                            InputProps={{
+                                classes: {
+                                    root: classes.textFieldOutlinedInput,
+                                    focused: classes.textFieldFocused,
+                                    notchedOutline: classes.textFieldNotchedOutline,
+                                    input: classes.textFieldInput,
+                                },
                             }}
                         />
                         <Grid container className="ChampionCards" justify="center" spacing={themeConstants.padding + 4}>
@@ -151,8 +194,21 @@ export default class Champions extends Component {
                 onChange={this.handleChangeFilter}
                 margin="normal"
                 variant="outlined"
+                className={classes.textField}
                 InputLabelProps={{
-                shrink: true,
+                    classes: {
+                        root: classes.textFieldLabel,
+                        focused: classes.textFieldFocused,
+                    },
+                    shrink: true,
+                }}
+                InputProps={{
+                    classes: {
+                        root: classes.textFieldOutlinedInput,
+                        focused: classes.textFieldFocused,
+                        notchedOutline: classes.textFieldNotchedOutline,
+                        input: classes.textFieldInput,
+                    },
                 }}
             />
             <Grid container className="ChampionCards" justify="center" spacing={themeConstants.padding}>
@@ -168,3 +224,10 @@ export default class Champions extends Component {
         return ( page );
     }
 }
+
+Champions.propTypes = {
+    classes: PropTypes.object.isRequired,
+    theme: PropTypes.object.isRequired,
+};
+
+export default withTheme()(withStyles(styles)(Champions));
