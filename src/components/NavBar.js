@@ -21,6 +21,8 @@ import ChampionSearch from './ChampionSearch'
 
 import { constants as themeConstants } from "../theme/ConstantsTheme";
 
+import ArrowDropDown from '@material-ui/icons/ArrowDropDown'
+
 const styles = theme => ({
     root: {
         // flexGrow: 1,
@@ -46,7 +48,8 @@ const styles = theme => ({
         }
     },
     textFieldInput: {
-        padding: 11,
+        paddingTop: 11,
+        paddingBottom: 11,
     },
     textFieldLabel: {
         '&$textFieldFocused': {
@@ -58,6 +61,9 @@ const styles = theme => ({
     textFieldNotchedOutline: {
         borderWidth: '1px',
         borderColor: `white !important`,
+    },
+    icon: {
+        fill: 'white',
     },
 });
 
@@ -177,6 +183,13 @@ class NavBar extends Component {
                                         input: classes.textFieldInput,
                                     },
                                 }}
+                                SelectProps={{
+                                    inputProps: {
+                                        classes: {
+                                            icon: classes.icon,
+                                        },
+                                    }
+                                }}
                                 onChange={this.handleChangePatch}>
                                 {
                                     this.state.versions.map(option => (
@@ -204,6 +217,13 @@ class NavBar extends Component {
                                         notchedOutline: classes.textFieldNotchedOutline,
                                         input: classes.textFieldInput,
                                     },
+                                }}
+                                SelectProps={{
+                                    inputProps: {
+                                        classes: {
+                                            icon: classes.icon,
+                                        },
+                                    }
                                 }}
                                 onChange={this.handleChangeLeague}>
                                 {
