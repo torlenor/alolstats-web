@@ -63,3 +63,10 @@ export const getPlotlyThemeDefault = (theme) =>  {
 export const getPlotlyConfigDefault = () => {
     return {'displayModeBar': false};
 }
+
+export const getPlotlyColors = {
+    red: "#D62728",
+    green: "#2CA02C",
+    orange: "#FF7F0E",
+    blue: "#1F77B4",
+}

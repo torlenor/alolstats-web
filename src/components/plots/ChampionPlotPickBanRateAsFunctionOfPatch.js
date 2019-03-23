@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 
 import Plot from 'react-plotly.js';
 
-import { getPlotlyThemeDefault, getPlotlyConfigDefault } from '../../theme/PlotlyTheme';
+import { getPlotlyThemeDefault, getPlotlyConfigDefault, getPlotlyColors } from '../../theme/PlotlyTheme';
 
 const MAX_VERSIONS = 5;
 const PLOTLY_CONFIG = getPlotlyConfigDefault();
@@ -32,10 +32,11 @@ function ChampionHistoryPickBan(props) {
             type: 'scatter',
             mode: 'lines+markers',
             'line': {
-                'color': 'rgb(0, 51, 204)'
+                'color': getPlotlyColors.blue,
+                shape: 'spline',
             },
             'marker': {
-                'color': 'rgb(0, 51, 204)'
+                'color': getPlotlyColors.blue,
             },
             name: 'Pick Rate'
             };
@@ -47,10 +48,11 @@ function ChampionHistoryPickBan(props) {
             type: 'scatter',
             mode: 'lines+markers',
             'line': {
-                'color': 'rgb(204, 0, 0)'
+                'color': getPlotlyColors.red,
+                shape: 'spline',
             },
             'marker': {
-                'color': 'rgb(204, 0, 0)'
+                'color': getPlotlyColors.red,
             },
             name: 'Ban Rate'
             };

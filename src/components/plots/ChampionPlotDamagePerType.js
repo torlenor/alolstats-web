@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 
 import Plot from 'react-plotly.js';
 
-import { getPlotlyThemeDefault, getPlotlyConfigDefault } from '../../theme/PlotlyTheme';
+import { getPlotlyThemeDefault, getPlotlyConfigDefault, getPlotlyColors } from '../../theme/PlotlyTheme';
 
 const PLOTLY_CONFIG = getPlotlyConfigDefault();
 
@@ -36,7 +36,7 @@ class ChampionStats extends Component {
         var trueColor = theme.palette.primary.main;
         var magicColor = theme.palette.primary.main;
         var physicalColor = theme.palette.primary.main;
-        const mainColor = '#CC0000';
+        const mainColor = getPlotlyColors.red;
         if (championstats.average_truedamagedealt > championstats.average_magicdamagedealt && championstats.average_truedamagedealt > championstats.average_physicaldamagedealt) {
             trueColor = mainColor;
         } else if (championstats.average_magicdamagedealt > championstats.average_physicaldamagedealt) {

@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 
 import Plot from 'react-plotly.js';
 
-import { getPlotlyThemeDefault, getPlotlyConfigDefault } from '../../theme/PlotlyTheme';
+import { getPlotlyThemeDefault, getPlotlyConfigDefault, getPlotlyColors } from '../../theme/PlotlyTheme';
 
 const MAX_VERSIONS = 5;
 const PLOTLY_CONFIG = getPlotlyConfigDefault();
@@ -39,10 +39,11 @@ function ChampionHistoryKDA(props) {
             type: 'scatter',
             mode: 'lines+markers',
             'line': {
-                'color': 'rgb(15, 35, 168)'
+                'color': getPlotlyColors.blue,
+                shape: 'spline',
             },
             'marker': {
-                'color': 'rgb(15, 35, 168)'
+                'color': getPlotlyColors.blue,
             },
             name: 'Kills'
         };
@@ -59,10 +60,11 @@ function ChampionHistoryKDA(props) {
         type: 'scatter',
         mode: 'lines+markers',
         'line': {
-            'color': 'rgb(168, 15, 15)'
+            'color': getPlotlyColors.red,
+            shape: 'spline',
         },
         'marker': {
-            'color': 'rgb(168, 15, 15)'
+            'color': getPlotlyColors.red,
         },
         name: 'Deaths'
     };
@@ -79,10 +81,11 @@ function ChampionHistoryKDA(props) {
         type: 'scatter',
         mode: 'lines+markers',
         'line': {
-            'color': 'rgb(30, 104, 11)'
+            'color': getPlotlyColors.green,
+            shape: 'spline',
         },
         'marker': {
-            'color': 'rgb(30, 104, 11)'
+            'color': getPlotlyColors.green,
         },
         name: 'Assists'
     };

@@ -6,7 +6,7 @@ import { withTheme } from '@material-ui/core/styles';
 
 import Typography from '@material-ui/core/Typography';
 
-import { getPlotlyThemeDefault, getPlotlyConfigDefault } from '../../theme/PlotlyTheme';
+import { getPlotlyThemeDefault, getPlotlyConfigDefault, getPlotlyColors } from '../../theme/PlotlyTheme';
 
 const MAX_VERSIONS = 5;
 const PLOTLY_CONFIG = getPlotlyConfigDefault();
@@ -33,10 +33,11 @@ function ChampionHistoryWin(props) {
             type: 'scatter',
             mode: 'lines+markers',
             'line': {
-                'color': 'rgb(19, 160, 49)'
+                'color': getPlotlyColors.green,
+                shape: 'spline',
             },
             'marker': {
-                'color': 'rgb(19, 160, 49)'
+                'color': getPlotlyColors.green,
             },
             name: 'Win Rate'
             };
