@@ -142,7 +142,7 @@ const useToolbarStyles = makeStyles(theme => ({
 
 const EnhancedTableToolbar = props => {
   const classes = useToolbarStyles();
-  const { numSelected, isUpdating, onHandleCompareClick } = props;
+  const { numSelected, onHandleCompareClick } = props;
 
   return (
     <Toolbar
@@ -170,7 +170,6 @@ const EnhancedTableToolbar = props => {
           </Typography>
           </div>
         )}
-        {/* {isUpdating === true ? (<Progress size={30}/>) : (<div></div>)} */}
       </div>
       <div className={classes.spacer} />
       <div>
