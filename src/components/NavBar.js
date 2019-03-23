@@ -38,7 +38,8 @@ const styles = theme => ({
         minWidth: 80,
     },
     textFieldOutlinedInput: {
-        '&$cssFocused $notchedOutline': {
+        '&$textFieldFocused': {
+            borderWidth: '1px',
             borderColor: `${theme.palette.primary.main} !important`,
         }
     },
@@ -46,17 +47,12 @@ const styles = theme => ({
         padding: 11,
     },
     textFieldLabel: {
-        '&$cssFocused': {
+        '&$textFieldFocused': {
             color: 'white',
         },
-            color : 'white',
+        color : 'white',
         },
-        textFieldFocused: {
-            '&$cssFocused $notchedOutline': {
-            borderWidth: '1px',
-            borderColor: `white !important`,
-        },
-    },
+    textFieldFocused: { },
     textFieldNotchedOutline: {
         borderWidth: '1px',
         borderColor: `white !important`,

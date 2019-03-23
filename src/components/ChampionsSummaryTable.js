@@ -92,7 +92,7 @@ function EnhancedTableHead(props) {
           row => (
             <TableCell
               key={row.id}
-              numeric={row.numeric}
+              align={row.numeric ? 'right' : 'inherit'}
               padding={row.disablePadding ? 'none' : 'default'}
               sortDirection={orderBy === row.id ? order : false}
             >
@@ -390,13 +390,13 @@ function EnhancedTable(props) {
                             </div>
                         </TableCell>
                         <TableCell padding="none">{renderRoles(n.roles)}</TableCell>
-                        <TableCell numeric>{n.sampleSize}</TableCell>
-                        <TableCell numeric>{n.winRate}</TableCell>
-                        <TableCell numeric>{n.pickRate}</TableCell>
-                        <TableCell numeric>{n.banRate}</TableCell>
-                        <TableCell numeric>{n.averageKills}</TableCell>
-                        <TableCell numeric>{n.averageDeaths}</TableCell>
-                        <TableCell numeric>{n.averageAssists}</TableCell>
+                        <TableCell align="right">{n.sampleSize}</TableCell>
+                        <TableCell align="right">{n.winRate}</TableCell>
+                        <TableCell align="right">{n.pickRate}</TableCell>
+                        <TableCell align="right">{n.banRate}</TableCell>
+                        <TableCell align="right">{n.averageKills}</TableCell>
+                        <TableCell align="right">{n.averageDeaths}</TableCell>
+                        <TableCell align="right">{n.averageAssists}</TableCell>
                     </TableRow>
                     );
                 })}
