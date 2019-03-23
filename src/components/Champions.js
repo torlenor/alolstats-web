@@ -171,7 +171,7 @@ class Champions extends Component {
                                 },
                             }}
                         />
-                        <Grid container className="ChampionCards" justify="center" spacing={themeConstants.padding + 4}>
+                        <Grid container className="ChampionCards" justify="center" spacing={themeConstants.padding}>
                             {filteredHits.map(value => (
                                 <Grid key={value.key} item>
                                     <div style={section}>
@@ -214,7 +214,9 @@ class Champions extends Component {
             <Grid container className="ChampionCards" justify="center" spacing={themeConstants.padding}>
                 {fetchChampionsData.map(value => (
                     <Grid key={value.key} item>
-                        <ChampionCard champion={value}/>
+                        <div style={section}>
+                            <ChampionCard champion={value}/>
+                        </div>
                     </Grid>
                 ))}
             </Grid>
