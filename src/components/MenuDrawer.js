@@ -49,15 +49,15 @@ function TemporaryDrawer(props) {
       <Divider />
       <List>
           <ListItem button key={"Free Rotation"} component={LinkFreeRotation}>
-            <ListItemIcon><ThreeSixty color="primary"/></ListItemIcon>
+            <ListItemIcon><ThreeSixty nativeColor="#FFFFFF"/></ListItemIcon>
             <ListItemText primary={"Free Rotation"} />
           </ListItem>
           <ListItem button key={"Champions"} component={LinkChampions}>
-            <ListItemIcon><FaceIcon color="primary"/></ListItemIcon>
+            <ListItemIcon><FaceIcon nativeColor="#FFFFFF"/></ListItemIcon>
             <ListItemText primary={"Champions"} />
           </ListItem>
           <ListItem button key={"Summary"} component={LinkChampionsSummary}>
-            <ListItemIcon><ListIcon color="primary"/></ListItemIcon>
+            <ListItemIcon><ListIcon nativeColor="#FFFFFF"/></ListItemIcon>
             <ListItemText primary={"Summary"} />
           </ListItem>
       </List>

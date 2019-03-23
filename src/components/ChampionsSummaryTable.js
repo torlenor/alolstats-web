@@ -14,7 +14,6 @@ import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableHead from '@material-ui/core/TableHead';
-import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import TextField from '@material-ui/core/TextField';
@@ -81,11 +80,6 @@ function EnhancedTableHead(props) {
     <TableHead>
       <TableRow>
         <TableCell padding="checkbox">
-          {/* <Checkbox
-            indeterminate={numSelected > 0 && numSelected < rowCount}
-            checked={numSelected === rowCount}
-            onChange={onSelectAllClick}
-          /> */}
           { numSelected > 0 ?
             <Tooltip title="Unselect All">
           <IconButton aria-label="UnselectAll" onClick={onClearAllClick}>
@@ -223,13 +217,10 @@ function EnhancedTable(props) {
     }
     const [data, setData] = React.useState(props.data);
     const [filteredData, setFilteredData] = React.useState(props.data);
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(5);
     
     React.useEffect(() => {
         setFilteredData(props.data);
         setData(props.data);
-        setRowsPerPage(props.data.length);
         changeFilter(filterText, props.data);
     }, [props.data, filterText]);
 
@@ -297,17 +288,7 @@ function EnhancedTable(props) {
         setSelected(newSelected);
     }
 
-    function handleChangePage(event, newPage) {
-        setPage(newPage);
-    }
-
-    function handleChangeRowsPerPage(event) {
-        setRowsPerPage(event.target.value);
-    }
-
     const isSelected = id => selected.indexOf(id) !== -1;
-
-    // const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
 
     function changeFilter(newFilterText, data) {
         setFilterText(newFilterText)
@@ -383,7 +364,6 @@ function EnhancedTable(props) {
             />
             <TableBody>
                 {stableSort(filteredData, getSorting(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map(n => {
                     const isItemSelected = isSelected(n.key);
                     return (
@@ -420,29 +400,9 @@ function EnhancedTable(props) {
                     </TableRow>
                     );
                 })}
-                {/* {emptyRows > 0 && (
-                <TableRow style={{ height: 49 * emptyRows }}>
-                    <TableCell colSpan={9} />
-                </TableRow>
-                )} */}
             </TableBody>
             </Table>
         </div>
-        <TablePagination
-            rowsPerPageOptions={[5, 10, 25, filteredData.length]}
-            component="div"
-            count={filteredData.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            backIconButtonProps={{
-            'aria-label': 'Previous Page',
-            }}
-            nextIconButtonProps={{
-            'aria-label': 'Next Page',
-            }}
-            onChangePage={handleChangePage}
-            onChangeRowsPerPage={handleChangeRowsPerPage}
-        />
         </Paper>
     );
 }
