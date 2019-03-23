@@ -15,6 +15,12 @@ import Progress from './Progress'
 // API
 import { fetchChampions } from "../api/FetchChampions"
 
+import {constants as themeConstants } from '../theme/ConstantsTheme';
+
+const section = {
+    height: "100%",
+};
+
 export default class Champions extends Component {
     constructor(props) {
         super(props);
@@ -110,7 +116,6 @@ export default class Champions extends Component {
             page = <div className="Champions">
                         <TextField
                             id="outlined-full-width"
-                            style={{ margin: 8 }}
                             label="Filter"
                             autoComplete='off'
                             placeholder="Enter name or role"
@@ -123,10 +128,12 @@ export default class Champions extends Component {
                             shrink: true,
                             }}
                         />
-                        <Grid container className="ChampionCards" justify="center" spacing={16}>
+                        <Grid container className="ChampionCards" justify="center" spacing={themeConstants.padding + 4}>
                             {filteredHits.map(value => (
                                 <Grid key={value.key} item>
-                                    <ChampionCard champion={value}/>
+                                    <div style={section}>
+                                        <ChampionCard champion={value}/>
+                                    </div>
                                 </Grid>
                             ))}
                         </Grid>
@@ -136,7 +143,6 @@ export default class Champions extends Component {
             page = <div className="Champions">
             <TextField
                 id="outlined-full-width"
-                style={{ margin: 8 }}
                 label="Filter"
                 autoComplete='off'
                 placeholder="Enter name or role"
@@ -149,7 +155,7 @@ export default class Champions extends Component {
                 shrink: true,
                 }}
             />
-            <Grid container className="ChampionCards" justify="center" spacing={16}>
+            <Grid container className="ChampionCards" justify="center" spacing={themeConstants.padding}>
                 {fetchChampionsData.map(value => (
                     <Grid key={value.key} item>
                         <ChampionCard champion={value}/>

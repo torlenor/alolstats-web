@@ -11,10 +11,16 @@ import Typography from '@material-ui/core/Typography';
 import ChampionCard from './ChampionCard.js'
 import Progress from './Progress'
 
+import {constants as themeConstants } from '../theme/ConstantsTheme';
+
 // API
 const API_URL = `${process.env.REACT_APP_API_BASE_URL}`;
 const FreeRotationAPI = `${API_URL}/v1/champion-rotations`;
 const API = `${API_URL}/v1/champion/bykey?key=`;
+
+const section = {
+    height: "100%",
+};
 
 export default class FreeRotation extends Component {
     constructor(props) {
@@ -97,10 +103,12 @@ export default class FreeRotation extends Component {
         } else {
             document.title = "Free Rotation - fuu.la";
             page = <div className="FreeRotation">
-                <Grid container className="FreeRotationCards" justify="center" spacing={16}>
+                <Grid container className="FreeRotationCards" justify="center" spacing={themeConstants.padding}>
                     {hits.map(value => (
                         <Grid key={value.key} item>
-                            <ChampionCard champion={value}/>
+                            <div style={section}>
+                                <ChampionCard champion={value}/>
+                            </div>
                         </Grid>
                     ))}
                 </Grid>

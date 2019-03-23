@@ -15,12 +15,13 @@ const styles = {
   card: {
     minWidth: 120,
     maxWidth: 120,
+    height: "100%",
   },
   title: {
-    fontSize: 14,
+    // fontSize: 12,
   },
   pos: {
-    marginBottom: 0,
+    marginTop: 6,
   },
   media: {
     height: 75,
@@ -28,13 +29,7 @@ const styles = {
 };
 
 function ChampionCard(props) {
-  const { classes } = props;
-
-  const {champion} = props;
-
-//   champion.roles = [
-//       "Top", "Jungler"
-//   ];
+    const { champion, classes } = props;
 
     if (champion.roles === null) {
         champion.roles = []
@@ -42,7 +37,7 @@ function ChampionCard(props) {
 
   return (
     <Card className={classes.card}>
-    <CardActionArea component={props => <Link to={`/champions/${champion.id}`} {...props}/>}>
+    <CardActionArea className={classes.card} component={props => <Link to={`/champions/${champion.id}`} {...props}/>}>
       <CardContent>
         <Typography className={classes.title} gutterBottom>
           {`${champion.name}`}
