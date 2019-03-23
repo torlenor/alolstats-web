@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { withRouter } from 'react-router-dom';
 
-import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { withStyles, withTheme } from '@material-ui/core/styles';
 
 import AppBar from '@material-ui/core/AppBar';
 import IconButton from '@material-ui/core/IconButton';
@@ -19,32 +19,51 @@ import { Link } from 'react-router-dom'
 
 import ChampionSearch from './ChampionSearch'
 
+import { constants as themeConstants } from "../theme/ConstantsTheme";
+
+import ArrowDropDown from '@material-ui/icons/ArrowDropDown'
+
 const styles = theme => ({
     root: {
-        flexGrow: 1,
-        paddingBottom: 80,
+        // flexGrow: 1,
+        paddingBottom: 64 + themeConstants.padding,
     },
     grow: {
         flexGrow: 1,
     },
     menuButton: {
-        marginLeft: -20,
+        marginLeft: -16,
         marginRight: -8,
     },
-    inputPatch: {
-        marginTop: 0,
-        marginLeft: 8,
+
+    // Style for Patch and League select Text Field
+    textField: {
+        marginLeft: theme.spacing.unit*1,
         minWidth: 80,
-        height: 38,
-        color: "white",
-        // flex: 1,
     },
-    inputLeague: {
-        marginTop: 0,
-        marginLeft: 8,
-        minWidth: 90,
-        height: 38,
-        // flex: 1,
+    textFieldOutlinedInput: {
+        '&$textFieldFocused': {
+            borderWidth: '1px',
+            borderColor: `${theme.palette.primary.main} !important`,
+        }
+    },
+    textFieldInput: {
+        paddingTop: 11,
+        paddingBottom: 11,
+    },
+    textFieldLabel: {
+        '&$textFieldFocused': {
+            color: 'white',
+        },
+        color : 'white',
+        },
+    textFieldFocused: { },
+    textFieldNotchedOutline: {
+        borderWidth: '1px',
+        borderColor: `white !important`,
+    },
+    icon: {
+        fill: 'white',
     },
 });
 
@@ -97,8 +116,6 @@ class NavBar extends Component {
         if (this.props.versions !== undefined && this.props.versions.length > 0
             && this.props.leagues !== undefined && this.props.leagues.length > 0 ) {
                 this.setState({
-                    // selectedPatch: this.props.versions[0], 
-                    // selectedLeague: this.props.leagues[0],
                     versions: this.props.versions,
                     leagues: this.props.leagues,
                 });
@@ -124,65 +141,97 @@ class NavBar extends Component {
     }
                 
         render() {
-            const { classes } = this.props;
-
-            const theme = createMuiTheme({
-                // eslint-disable-next-line
-                ...theme,
-                palette: { type: 'dark', },
-            });
+            const { classes, theme } = this.props;
 
             return (
                 <div className={classes.root}>
-                    <MenuDrawer open={this.state.showDrawer} onClose={this.handleMenuButtonClose} 
-                                versions={this.props.versions} leagues={this.props.leagues} 
-                                selectedVersion={this.state.selectedPatch} selectedLeague={this.state.selectedLeague}
-                                handlerPatch={this.props.handlerPatch} handlerLeague={this.props.handlerLeague}
-                                />
-                    <AppBar position="fixed">
+                    <MenuDrawer
+                        open={this.state.showDrawer} onClose={this.handleMenuButtonClose}
+                        versions={this.props.versions} leagues={this.props.leagues}
+                        selectedVersion={this.state.selectedPatch} selectedLeague={this.state.selectedLeague}
+                        handlerPatch={this.props.handlerPatch} handlerLeague={this.props.handlerLeague}
+                    />
+                    <AppBar position="fixed" color="primary" style={{ background: theme.palette.background.paper }}>
                         <Toolbar>
                             <IconButton className={classes.menuButton} color="inherit" aria-label="Menu" onClick={() => { this.setState({showDrawer: true}); }}>
-                            <MenuIcon />
+                                <MenuIcon />
                             </IconButton>
                             <Typography variant="h6" color="inherit" style={{ textDecoration: 'none', marginRight: 10 }} component={LinkHome}>
-                            fuu.la
+                                fuu.la
                             </Typography>
 
                             <div className={classes.grow}></div>
 
                             <ChampionSearch selectedVersion={this.state.selectedPatch} selectedLeague={this.state.selectedLeague} routerHistory={this.props.history}/>
 
-                            <MuiThemeProvider theme={theme}>
-                                <TextField
-                                select
-                                variant="outlined"
+                            <TextField
                                 label="Patch"
+                                select variant="outlined"
                                 value={this.state.selectedPatch}
-                                className={classes.inputPatch}
+                                className={classes.textField}
+                                InputLabelProps={{
+                                    classes: {
+                                        root: classes.textFieldLabel,
+                                        focused: classes.textFieldFocused,
+                                    },
+                                }}
+                                InputProps={{
+                                    classes: {
+                                        root: classes.textFieldOutlinedInput,
+                                        focused: classes.textFieldFocused,
+                                        notchedOutline: classes.textFieldNotchedOutline,
+                                        input: classes.textFieldInput,
+                                    },
+                                }}
+                                SelectProps={{
+                                    inputProps: {
+                                        classes: {
+                                            icon: classes.icon,
+                                        },
+                                    }
+                                }}
                                 onChange={this.handleChangePatch}>
-                                    {
-                                        this.state.versions.map(option => (
-                                        <MenuItem key={option} value={option}>
-                                        {option}
-                                        </MenuItem>
-                                        ))
-                                    }
-                                </TextField>
-
-                                <TextField
-                                select
-                                variant="outlined"
+                                {
+                                    this.state.versions.map(option => (
+                                    <MenuItem key={option} value={option}>
+                                    {option}
+                                    </MenuItem>
+                                    ))
+                                }
+                            </TextField>
+                            <TextField
                                 label="League"
+                                select variant="outlined"
                                 value={this.state.selectedLeague}
-                                className={classes.inputLeague}
-                                onChange={this.handleChangeLeague}>
-                                    {
-                                        this.state.leagues.map(option => (
-                                        <MenuItem key={option} value={option}>{option}</MenuItem>
-                                        ))
+                                className={classes.textField}
+                                InputLabelProps={{
+                                    classes: {
+                                        root: classes.textFieldLabel,
+                                        focused: classes.textFieldFocused,
+                                    },
+                                }}
+                                InputProps={{
+                                    classes: {
+                                        root: classes.textFieldOutlinedInput,
+                                        focused: classes.textFieldFocused,
+                                        notchedOutline: classes.textFieldNotchedOutline,
+                                        input: classes.textFieldInput,
+                                    },
+                                }}
+                                SelectProps={{
+                                    inputProps: {
+                                        classes: {
+                                            icon: classes.icon,
+                                        },
                                     }
-                                </TextField>
-                            </MuiThemeProvider>
+                                }}
+                                onChange={this.handleChangeLeague}>
+                                {
+                                    this.state.leagues.map(option => (
+                                    <MenuItem key={option} value={option}>{option}</MenuItem>
+                                    ))
+                                }
+                            </TextField>
                         </Toolbar>
                     </AppBar>
                 </div>
@@ -192,6 +241,7 @@ class NavBar extends Component {
         
 NavBar.propTypes = {
     classes: PropTypes.object.isRequired,
+    theme: PropTypes.object.isRequired,
 };
         
-export default withStyles(styles)(withRouter(NavBar));
+export default withTheme()(withStyles(styles)(withRouter(NavBar)));

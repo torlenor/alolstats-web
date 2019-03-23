@@ -1,11 +1,24 @@
-import React from 'react';
-import Plot from 'react-plotly.js';
+import PropTypes from 'prop-types';
 
+import React from 'react';
+
+import { withTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 
+import Plot from 'react-plotly.js';
+
+import { getPlotlyThemeDefault, getPlotlyConfigDefault, getPlotlyColors } from '../../theme/PlotlyTheme';
+
 const MAX_VERSIONS = 5;
+const PLOTLY_CONFIG = getPlotlyConfigDefault();
 
 function ChampionHistoryPickBan(props) {
+    
+    if (props.championHistoryData === undefined) {
+        return <div></div>;
+    }
+
+    const { championHistoryData, theme } = props;
     var displayRole = "";
     if (props.role !== undefined) {
         displayRole = props.role;
@@ -14,46 +27,43 @@ function ChampionHistoryPickBan(props) {
     }
 
     const pickRate = {
-            x: props.championHistoryData.versions.slice(0, MAX_VERSIONS),
-            y: props.championHistoryData.pickRateHistory.slice(0, MAX_VERSIONS).map(value => value*100),
+            x: championHistoryData.versions.slice(0, MAX_VERSIONS),
+            y: championHistoryData.pickRateHistory.slice(0, MAX_VERSIONS).map(value => value*100),
             type: 'scatter',
             mode: 'lines+markers',
             'line': {
-                'color': 'rgb(0, 51, 204)'
+                'color': getPlotlyColors.blue,
+                shape: 'spline',
             },
             'marker': {
-                'color': 'rgb(0, 51, 204)'
+                'color': getPlotlyColors.blue,
             },
             name: 'Pick Rate'
             };
 
     const banRate = 
         {
-            x: props.championHistoryData.versions.slice(0, MAX_VERSIONS),
-            y: props.championHistoryData.banRateHistory.slice(0, MAX_VERSIONS).map(value => value*100),
+            x: championHistoryData.versions.slice(0, MAX_VERSIONS),
+            y: championHistoryData.banRateHistory.slice(0, MAX_VERSIONS).map(value => value*100),
             type: 'scatter',
             mode: 'lines+markers',
             'line': {
-                'color': 'rgb(204, 0, 0)'
+                'color': getPlotlyColors.red,
+                shape: 'spline',
             },
             'marker': {
-                'color': 'rgb(204, 0, 0)'
+                'color': getPlotlyColors.red,
             },
             name: 'Ban Rate'
             };
 
+    const defaultTheme = getPlotlyThemeDefault(theme);
+
     const layout = 
         {
-            autosize: true,
-            showlegend: false,
-            margin: {
-                    l: 60,
-                    r: 20,
-                    t: 20,
-                    b: 60,
-                    autoexpand: false,
-                },
+            ...defaultTheme,
             xaxis: {
+                ...defaultTheme.xaxis,
                 type: 'category',
                 title: {
                     text: 'Game Version'
@@ -63,27 +73,27 @@ function ChampionHistoryPickBan(props) {
                 categoryarray: pickRate.x,
             },
             yaxis: {
+                ...defaultTheme.yaxis,
                 title: {
                     text: 'Pick/Ban Rate [%]',
                 },  
                 fixedrange: true,
                 range: [0, Math.ceil((Math.max(...banRate.y, ...pickRate.y)+1) / 10.0) * 10.0]
             },
-            dragmode: false,
         };
 
         const plotData = [pickRate, banRate];
 
-        const config={'displayModeBar': false};
-
-        return <div className="ChampionPlotWinRateAsFunctionOfPatch">
-            <div className="ChampionPlotWinRateAsFunctionOfPatch">
-            <Typography variant="h6" gutterBottom component="h4">
-                    {displayRole} Pick / Ban Rate
-                </Typography>
-                </div>
-                <Plot useResizeHandler style={{ minWidth: '300px', width: '100%', height: '300px' }} data={plotData} layout={layout} config={config}/>
+        return <div>
+            <Typography variant="h6">
+                {displayRole} Pick / Ban Rate
+            </Typography>
+            <Plot useResizeHandler style={{ minWidth: '300px', width: '100%', height: props.height }} data={plotData} layout={layout} config={PLOTLY_CONFIG}/>
         </div>;
 }
 
-export default ChampionHistoryPickBan;
+ChampionHistoryPickBan.propTypes = {
+    theme: PropTypes.object.isRequired,
+  };
+
+export default withTheme()(ChampionHistoryPickBan);

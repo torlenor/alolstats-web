@@ -6,10 +6,12 @@ import Card from '@material-ui/core/Card';
 
 import Typography from '@material-ui/core/Typography';
 
+import { constants as themeConstants } from "../theme/ConstantsTheme";
+
 const styles = {
     card: {
-        paddingTop: 12,
-        paddingBottom:12,
+        paddingTop: themeConstants.padding,
+        paddingBottom: themeConstants.padding,
         width: "100%",
         display: 'flex',
         "justify-content": "center",
@@ -17,7 +19,6 @@ const styles = {
         "text-align": "center",
     },
     title: {
-        fontSize: 22,
         padding: 0,
         marginLeft: 10,
         marginRight: 10,
@@ -25,12 +26,10 @@ const styles = {
         flexDirection: 'column',
     },
     pos: {
-        fontSize: 12,
         marginBottom: 0,
     },
     baseStats: {
         marginTop: 0,
-        fontSize: 12,
         "justify-content": "center",
         "align-items": "center",
         "text-align": "center",
@@ -50,7 +49,7 @@ function ChampionInfo(props) {
       <Card className={classes.card}>
       <img src={`https://ddragon.leagueoflegends.com/cdn/${champion.version}/img/champion/${champion.id}.png`} height={102} width={102} justify="center" style={{justify: "center",}} alt="Logo" />
       <div className={classes.title}>
-            <Typography className={classes.title} style={{float: "left",}}>
+            <Typography variant="h4" className={classes.title} style={{float: "left",}}>
                 {champion.name}
             </Typography>
             <Typography component={'span'} className={classes.pos} color="textSecondary">

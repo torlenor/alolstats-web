@@ -6,12 +6,15 @@ import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
 import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 
 import Typography from '@material-ui/core/Typography';
 
 import Slider from '@material-ui/lab/Slider';
+
+import { TableCell } from './ThemedTableCell';
+
+import { numberWithCommas } from '../utils/numberMods'
 
 const styles = {
     slider: {
@@ -45,9 +48,9 @@ function createData(name, avgValue1, stddevValue1, avgValue2, stddevValue2, unit
     }
     let diffVal = ( parseFloat(avgValue2) - parseFloat(avgValue1) );
     if (unit !== null && unit !== undefined) {
-        value1 = value1 + " " + unit;
-        value2 = value2 + " " + unit;
-        diff = diff + " " + unit;
+        value1 = numberWithCommas(value1) + " " + unit;
+        value2 = numberWithCommas(value2) + " " + unit;
+        diff = numberWithCommas(diff) + " " + unit;
     }
     if(!noColor) {
         if (diffVal < 0) {
