@@ -22,7 +22,7 @@ import { fetchChampion } from "../api/FetchChampion";
 import { fetchChampionHistory } from "../api/FetchChampionHistory";
 import { fetchChampionInfo } from "../api/FetchChampionInfo";
 
-const PADDING = 12;
+import { constants as themeConstants } from "../theme/ConstantsTheme";
 
 class Champion extends Component {
 
@@ -113,31 +113,31 @@ class Champion extends Component {
         } else {
             document.title = fetchChampionData.championname + " - fuu.la";
             page = <div className="Champion">
-            <div style={{ padding: PADDING }}>
+            <div style={{ padding: themeConstants.padding }}>
                 <ChampionInfo champion={fetchChampionInfoData}/>
             </div>
-            <div style={{ padding: PADDING }}>
+            <div style={{ padding: themeConstants.padding }}>
             <Grid container layout={"row"} spacing={24} justify="center">
                 <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
-                    <Paper style={{ padding: PADDING }}>
+                    <Paper style={{ padding: themeConstants.padding }}>
                         <ChampionTextStatistics championStats={fetchChampionData}/>
                     </Paper>
                 </Grid>
                 <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
-                    <Paper style={{ height: 356, padding: PADDING }}>
+                    <Paper style={{ height: 356, padding: themeConstants.padding }}>
                         <ChampionStats championStats={fetchChampionData}/>
                     </Paper>
-                    <div style={ {padding: PADDING }} />
-                    <Paper style={{ height: 356, padding: PADDING }}>
+                    <div style={ {padding: themeConstants.padding }} />
+                    <Paper style={{ height: 356, padding: themeConstants.padding }}>
                         <ChampionPlotDamagePerType championStats={fetchChampionData}/>
                     </Paper>
                 </Grid>
                 <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
-                    <Paper style={{ height: 356, padding: PADDING }}>
+                    <Paper style={{ height: 356, padding: themeConstants.padding }}>
                         <ChampionHistoryWin championHistoryData={fetchChampionHistoryData} height={300}/>
                     </Paper>
-                    <div style={ {padding: PADDING }} />
-                    <Paper style={{ height: 356, padding: PADDING }}>
+                    <div style={ {padding: themeConstants.padding }} />
+                    <Paper style={{ height: 356, padding: themeConstants.padding }}>
                         <ChampionHistoryPickBan championHistoryData={fetchChampionHistoryData}/>
                     </Paper>
                 </Grid>
@@ -145,16 +145,16 @@ class Champion extends Component {
                 {fetchChampionData.roles !== null ? fetchChampionData.roles.map(value => (
                     <Grid container spacing={24} justify="center" key={value+'container'}>
                     <Grid item xs={12} sm={12} md={6} lg={6} xl={6} key={value+'stats'}>
-                        <Paper style={{ padding: PADDING }}>
+                        <Paper style={{ padding: themeConstants.padding }}>
                             <ChampionTextStatistics championStats={fetchChampionData.statsperrole[value]} role={value}/>
                         </Paper>
                     </Grid>
                     <Grid item xs={12} sm={12} md={6} lg={6} xl={6} key={value+'plot'}>
-                        <Paper style={{ height: 310, padding: PADDING }}>
+                        <Paper style={{ height: 310, padding: themeConstants.padding }}>
                             <ChampionHistoryWin championHistoryData={fetchChampionHistoryData.historyperrole[value]} role={value} height={280}/>
                         </Paper>
-                        <div style={ {padding: PADDING }} key={value+'div'} />
-                        <Paper style={{ height: 310, padding: PADDING }}>
+                        <div style={ {padding: themeConstants.padding }} key={value+'div'} />
+                        <Paper style={{ height: 310, padding: themeConstants.padding }}>
                             <ChampionHistoryKDA championHistoryData={fetchChampionHistoryData.historyperrole[value]} role={value} height={280}/>
                         </Paper>
                     </Grid>
@@ -162,7 +162,7 @@ class Champion extends Component {
                 )) : <div></div>}
                 </Grid>
                 <Grid item xs>
-                    <Paper style={{ padding: PADDING }}>
+                    <Paper style={{ padding: themeConstants.padding }}>
                         <ChampionTextStatisticsAdditional championStats={fetchChampionData}/>
                     </Paper>
                 </Grid>

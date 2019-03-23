@@ -8,12 +8,12 @@ import Grid from '@material-ui/core/Grid';
 
 import Typography from '@material-ui/core/Typography';
 
+import { constants as themeConstants } from "../theme/ConstantsTheme";
+
 const API_URL = `${process.env.REACT_APP_API_BASE_URL}`;
 const API = `${API_URL}/v1/stats/champion/byid?id=`;
 const VERSIONPARAMETER = `&gameversion=`;
 const LEAGUEPARAMETER = `&tier=`;
-
-window.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true;
 
 class ChampionComparison extends Component {
 
@@ -194,7 +194,7 @@ class ChampionComparison extends Component {
             <Typography>
                 Overall and matching roles comparison (if any)
             </Typography>
-            <div style={{ padding: 12 }}>
+            <div style={{ padding: themeConstants.padding }}>
             <Grid container spacing={24} justify="center">
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
                     <Paper>

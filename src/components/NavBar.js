@@ -19,10 +19,12 @@ import { Link } from 'react-router-dom'
 
 import ChampionSearch from './ChampionSearch'
 
+import { constants as themeConstants } from "../theme/ConstantsTheme";
+
 const styles = theme => ({
     root: {
         // flexGrow: 1,
-        paddingBottom: 64+12,
+        paddingBottom: 64 + themeConstants.padding,
     },
     grow: {
         flexGrow: 1,
