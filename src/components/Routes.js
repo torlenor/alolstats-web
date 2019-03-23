@@ -9,6 +9,7 @@ import Champions from "./Champions";
 import Champion from "./Champion";
 import ChampionComparison from "./ChampionComparison";
 import ChampionsSummary from "./ChampionsSummary";
+import Impressum from "./Impressum";
 import NotFound from "./NotFound";
 
 class MainPage extends Component {
@@ -36,6 +37,8 @@ class MainPage extends Component {
                     path='/champions/:champion'
                     render={(props) => <Champion {...props} parentProps={this.props} />}
                 />
+
+                <Route path="/impressum" exact render={()=><Impressum/>}/>
 
                 { /* Finally, catch all unmatched routes */ }
                 <Route component={NotFound} />
