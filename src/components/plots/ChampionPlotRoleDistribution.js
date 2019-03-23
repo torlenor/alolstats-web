@@ -33,6 +33,11 @@ class ChampionStats extends Component {
         const { theme } = this.props;
         const { championstats } = this.state;
 
+        var height = 320;
+        if ( this.props.height !== undefined ) {
+            height = this.props.height;
+        }
+
         if (this.state.didMount === false) {
             return <div>
                     <Typography>
@@ -68,7 +73,7 @@ class ChampionStats extends Component {
                     <Typography variant="h6">
                         Role Distribution
                     </Typography>
-                    <Plot useResizeHandler style={{ minWidth: 300, width: '100%', height: '300px' }} data={data} layout={layout} config={PLOTLY_CONFIG} />
+                    <Plot useResizeHandler style={{ minWidth: 300, width: '100%', height: height }} data={data} layout={layout} config={PLOTLY_CONFIG} />
             </div>;
         }
     }

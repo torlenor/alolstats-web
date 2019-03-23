@@ -126,21 +126,21 @@ class Champion extends Component {
                 {/* COLUMN */}
                 <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
                     <Paper style={{ height: 770/2 - themeConstants.padding, padding: themeConstants.padding }}>
-                        <ChampionStats championStats={fetchChampionData}/>
+                        <ChampionStats championStats={fetchChampionData} height={320}/>
                     </Paper>
                     <div style={ {padding: themeConstants.padding }} />
                     <Paper style={{ height: 770/2 - themeConstants.padding, padding: themeConstants.padding }}>
-                        <ChampionPlotDamagePerType championStats={fetchChampionData}/>
+                        <ChampionPlotDamagePerType championStats={fetchChampionData} height={320}/>
                     </Paper>
                 </Grid>
                 {/* COLUMN */}
                 <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
                     <Paper style={{ height: 770/2 - themeConstants.padding, padding: themeConstants.padding }}>
-                        <ChampionHistoryWin championHistoryData={fetchChampionHistoryData} height={300}/>
+                        <ChampionHistoryWin championHistoryData={fetchChampionHistoryData} height={320}/>
                     </Paper>
                     <div style={ {padding: themeConstants.padding }} />
                     <Paper style={{ height: 770/2 - themeConstants.padding, padding: themeConstants.padding }}>
-                        <ChampionHistoryPickBan championHistoryData={fetchChampionHistoryData}/>
+                        <ChampionHistoryPickBan championHistoryData={fetchChampionHistoryData} height={320}/>
                     </Paper>
                 </Grid>
                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>

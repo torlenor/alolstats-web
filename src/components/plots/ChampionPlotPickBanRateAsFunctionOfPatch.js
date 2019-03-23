@@ -88,7 +88,7 @@ function ChampionHistoryPickBan(props) {
             <Typography variant="h6">
                 {displayRole} Pick / Ban Rate
             </Typography>
-            <Plot useResizeHandler style={{ minWidth: '300px', width: '100%', height: '300px' }} data={plotData} layout={layout} config={PLOTLY_CONFIG}/>
+            <Plot useResizeHandler style={{ minWidth: '300px', width: '100%', height: props.height }} data={plotData} layout={layout} config={PLOTLY_CONFIG}/>
         </div>;
 }
 
