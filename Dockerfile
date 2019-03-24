@@ -11,5 +11,6 @@ RUN yarn build
 FROM nginx:1.15.8-alpine
 COPY ./dockerfiles/nginx_image/etc/nginx/conf.d/* /etc/nginx/conf.d/
 COPY --from=builder /usr/src/alolstats-web/build /usr/share/nginx/html
+RUN echo "842cfa02-ad2a-4ec2-a5d5-4787e12775a5" > /usr/share/nginx/html/riot.txt
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
