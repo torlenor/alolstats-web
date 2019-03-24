@@ -22,7 +22,7 @@ export default () =>
         <br />eMail: fuu [at] fuu [dot] la
         <br />
         <br />Disclaimer:
-        <br />Fuu.la is not endorsed in any way by Riot Games and it does not reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends, or Tournaments and Events related to League of Legends. It does not, in any way, aim to profit from Riot Games or any any affiliate by using data from Riot API in any way other than explicitely allowed by Riot Games. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc.
+        <br />Fuu.la is not endorsed in any way by Riot Games and it does not reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends, or Tournaments and Events related to League of Legends. It does not, in any way, aim to profit from Riot Games or any affiliate by using data from Riot API in any way other than explicitely allowed by Riot Games. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc.
         <br />League of Legends © Riot Games, Inc.
     </Typography>
 </div>;
