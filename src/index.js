@@ -7,9 +7,12 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 import { CookiesProvider } from 'react-cookie';
 
+import GA from './utils/GoogleAnalytics'
+
 ReactDOM.render(
     <Router>
         <CookiesProvider>
+            { GA.init() && <GA.RouteTracker /> }
             <App />
         </CookiesProvider>
     </Router>,

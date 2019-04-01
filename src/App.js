@@ -125,7 +125,7 @@ class App extends Component {
                         <Routes versions={this.state.versions} leagues={this.state.leagues} selectedVersion={this.state.patch} selectedLeague={this.state.league}/>
                         <Footer appVersion={VERSION} buildDate={BUILD_DATE}/>
                         <CookieConsent>
-                            This website uses cookies to enhance the user experience.
+                            This website uses cookies to enhance the user experience and Google Analytics.
                         </CookieConsent>
                     </div>
                 </MuiThemeProvider>;
