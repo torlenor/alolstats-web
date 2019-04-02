@@ -9,8 +9,7 @@ render () {
     return (
       <div className='ad'>
         <ins className='adsbygoogle'
-          style={{ display: 'block' }}
-          data-ad-client='ca-pub-2362481387707104' 
+          google_ad_client="ca-pub-2362481387707104"
           enable_page_level_ads="true" />
       </div>
     );
