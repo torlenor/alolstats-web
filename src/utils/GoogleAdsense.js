@@ -11,7 +11,7 @@ render () {
         <ins className='adsbygoogle'
           style={{ display: 'block' }}
           data-ad-client='ca-pub-2362481387707104' 
-          enable_page_level_ads={true} />
+          enable_page_level_ads="true" />
       </div>
     );
   }
