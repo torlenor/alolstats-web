@@ -84,7 +84,7 @@ class Champion extends Component {
         this.getChampionInfo(props);
         this.getChampion(props);
         this.getChampionHistory(props);
-      }
+    }
 
     componentDidMount() {
         this.setState( {parentProps: this.props});
