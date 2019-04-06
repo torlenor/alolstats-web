@@ -138,17 +138,19 @@ class App extends Component {
                 <div className="App"/>
                 </MuiThemeProvider>;
         } else if (this.state.errorVersions || this.state.errorLeagues || this.state.errorQueues) {
-            page = <MuiThemeProvider theme={muiTheme}><div className="App">
-            <Typography variant="h5" gutterBottom component="h3">
-                    <br/>
-                    Sorry for the inconvenience!
-                    <br/>
-                    <br/>
-                    ALoLStats is currently in maintenance.
-                    <br/><br/>
-                    Please try again later.
-                </Typography>
-            </div></MuiThemeProvider>;
+            page = <MuiThemeProvider theme={muiTheme}>
+                <div className="App">
+                    <Typography variant="h5" gutterBottom component="h3" color={'error'}>
+                        <br/>
+                        Sorry for the inconvenience!
+                        <br/>
+                        <br/>
+                        ALoLStats is currently in maintenance.
+                        <br/><br/>
+                        Please try again later.
+                    </Typography>
+                </div>
+            </MuiThemeProvider>;
         } else {
             page =<MuiThemeProvider theme={muiTheme}>
                     <div className="App">
