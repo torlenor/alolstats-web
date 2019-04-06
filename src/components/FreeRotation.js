@@ -17,6 +17,9 @@ import {constants as themeConstants } from '../theme/ConstantsTheme';
 const API_URL = `${process.env.REACT_APP_API_BASE_URL}`;
 const FreeRotationAPI = `${API_URL}/v1/champion-rotations`;
 const API = `${API_URL}/v1/champion/bykey?key=`;
+const GAMEVERSIONPARAMETER = "gameversion=";
+const LEAGUEPARAMETER = `tier=`;
+const QUEUEPARAMETER = `queue=`;
 
 const section = {
     height: "100%",
@@ -33,55 +36,70 @@ export default class FreeRotation extends Component {
         };
     }
 
-    componentDidMount() {
+    getChampionHistory(props) {
         var self = this;
+        if (props.parentProps.selectedVersion !== undefined && props.parentProps.selectedLeague !== undefined && props.parentProps.selectedQueue !== undefined) {
+            const version = props.parentProps.selectedVersion;
+            const league = props.parentProps.selectedLeague.toUpperCase();
+            const queue = props.parentProps.selectedQueue.toUpperCase();
 
-        fetch(FreeRotationAPI).then(response => {
-            if (response.status === 200) {
-                let json = response.json();
-                return json;
-            } else {
-                this.setState({error: true});
-                return null;
-            }
-        }).then(data => {
+            fetch(FreeRotationAPI).then(response => {
+                if (response.status === 200) {
+                    let json = response.json();
+                    return json;
+                } else {
+                    this.setState({error: true, didMount: true})
+                    return null;
+                }
+            }).then(data => {
 
-            if (data.freeChampionIds === null) {
-                this.setState({error: true, didMount: true})
-                return
-            }
+                if (data.freeChampionIds === null) {
+                    this.setState({error: true, didMount: true})
+                    return
+                }
 
-            data
-                .freeChampionIds
-                .forEach(function (champKey) {
-                    fetch(API + champKey).then((response) => {
-                        if (response.ok) {
-                            return response.json();
-                        } else {
-                            throw new Error('Server response wasn\'t OK');
-                        }
-                    }).then((json) => {
-                        let newHits;
-                        if (self.state.hits === null) {
-                            newHits = [];
-                            newHits.push(json);
-                        } else {
-                            newHits = self
-                                .state
-                                .hits
-                                .slice();
-                            newHits.push(json);
-                        }
-                        self.setState({hits: newHits.sort(function (a, b) {
-                            return ('' + a.name).localeCompare(b.name);
-                          })});
-                        self.setState({didMount: true});
-                    })
-                });
-        }).catch(error => {
-            this.setState({error: true, didMount: true});
-            console.log(error);
-        });
+                this.setState({hits: []});
+
+                data
+                    .freeChampionIds
+                    .forEach(function (champKey) {
+                        fetch(API + champKey + "&" + GAMEVERSIONPARAMETER + version + "&" + LEAGUEPARAMETER + league + "&" + QUEUEPARAMETER + queue).then((response) => {
+                            if (response.ok) {
+                                return response.json();
+                            } else {
+                                throw new Error('Server response wasn\'t OK');
+                            }
+                        }).then((json) => {
+                            let newHits;
+                            if (self.state.hits === null) {
+                                newHits = [];
+                                newHits.push(json);
+                            } else {
+                                newHits = self
+                                    .state
+                                    .hits
+                                    .slice();
+                                newHits.push(json);
+                            }
+                            self.setState({hits: newHits.sort(function (a, b) {
+                                return ('' + a.name).localeCompare(b.name);
+                            })});
+                            self.setState({didMount: true});
+                        })
+                    });
+            }).catch(error => {
+                this.setState({error: true, didMount: true});
+                console.log(error);
+            });
+        }
+    }
+
+    componentWillReceiveProps(props) {
+        this.getChampionHistory(props);
+      }
+
+    componentDidMount() {
+        this.getChampionHistory(this.props);
     }
 
     render() {
