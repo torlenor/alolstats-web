@@ -28,8 +28,8 @@ function ChampionHistoryWin(props) {
 
     const winRate = 
         {
-            x: championHistoryData.versions.slice(0, MAX_VERSIONS),
-            y: championHistoryData.winRateHistory.slice(0, MAX_VERSIONS).map(value => value*100),
+            x: championHistoryData.versions !== null ? championHistoryData.versions.slice(0, MAX_VERSIONS) : [],
+            y: championHistoryData.winRateHistory !== null ? championHistoryData.winRateHistory.slice(0, MAX_VERSIONS).map(value => value*100) : [],
             type: 'scatter',
             mode: 'lines+markers',
             'line': {
