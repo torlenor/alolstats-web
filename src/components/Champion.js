@@ -48,7 +48,7 @@ class Champion extends Component {
 
     getChampionInfo(props) {
         let champion = props.match.params.champion;
-        if (props.parentProps.selectedVersion !== undefined && props.parentProps.selectedLeague !== undefined) {
+        if (props.parentProps.selectedVersion !== undefined && props.parentProps.selectedLeague !== undefined && props.parentProps.selectedQueue !== undefined) {
             const version = props.parentProps.selectedVersion;
             const league = props.parentProps.selectedLeague.toUpperCase();
             const queue = props.parentProps.selectedQueue.toUpperCase();
@@ -59,7 +59,7 @@ class Champion extends Component {
 
     getChampion(props) {
         let champion = props.match.params.champion;
-        if (props.parentProps.selectedVersion !== undefined && props.parentProps.selectedLeague !== undefined) {
+        if (props.parentProps.selectedVersion !== undefined && props.parentProps.selectedLeague !== undefined && props.parentProps.selectedQueue !== undefined) {
             const version = props.parentProps.selectedVersion;
             const league = props.parentProps.selectedLeague.toUpperCase();
             const queue = props.parentProps.selectedQueue.toUpperCase();
@@ -70,7 +70,7 @@ class Champion extends Component {
 
     getChampionHistory(props) {
         let champion = props.match.params.champion;
-        if (props.parentProps.selectedVersion !== undefined && props.parentProps.selectedLeague !== undefined) {
+        if (props.parentProps.selectedVersion !== undefined && props.parentProps.selectedLeague !== undefined && props.parentProps.selectedQueue !== undefined) {
             const version = props.parentProps.selectedVersion;
             const league = props.parentProps.selectedLeague.toUpperCase();
             const queue = props.parentProps.selectedQueue.toUpperCase();
