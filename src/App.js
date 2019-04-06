@@ -145,7 +145,7 @@ class App extends Component {
                         Sorry for the inconvenience!
                         <br/>
                         <br/>
-                        ALoLStats is currently in maintenance.
+                        fuu.la is currently in maintenance.
                         <br/><br/>
                         Please try again later.
                     </Typography>
