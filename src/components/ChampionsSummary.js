@@ -33,14 +33,20 @@ function ChampionsSummary(props) {
     let leagueParameter = "";
     let league = "ALL";
     if (props.parentProps.selectedLeague !== undefined) {
-        league = props.parentProps.selectedLeague;
-        league = league.toUpperCase();
+        league = props.parentProps.selectedLeague.toUpperCase();
     }
     leagueParameter = "&tier=" + league;
 
+    let queueParameter = "";
+    let queue = "ALL";
+    if (props.parentProps.selectedQueue !== undefined) {
+        queue = props.parentProps.selectedQueue.toUpperCase();
+    }
+    queueParameter = "&queue=" + queue;
+
     useEffect(() => {
         setIsUpdating(true);
-        fetch(ChampionsStatsAPI + gameversionparameter + leagueParameter).then(response => {
+        fetch(ChampionsStatsAPI + gameversionparameter + leagueParameter + queueParameter).then(response => {
             if (response.status === 200) {
                 let json = response.json();
                 return json;
@@ -75,7 +81,7 @@ function ChampionsSummary(props) {
             setDidLoad(true);
             setError(true);
         });
-    }, [gameversionparameter, leagueParameter]);
+    }, [gameversionparameter, leagueParameter, queueParameter]);
 
     if (didLoad && !error) {
         document.title = "Champions Summary - fuu.la";

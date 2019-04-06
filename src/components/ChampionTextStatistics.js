@@ -27,15 +27,18 @@ class ChampionTextStatistics extends Component {
             createData('Sample Size', championStats.samplesize, null, "Games"),
             createData('Win Rate', (100.0*championStats.winrate).toFixed(2), null, "%"),
             createData('Average Kills', championStats.averagekills.toFixed(2), championStats.stddevkills.toFixed(2)),
-            createData('Median Kills', championStats.mediankills),
             createData('Average Deaths', championStats.averagedeaths.toFixed(2), championStats.stddevdeaths.toFixed(2)),
-            createData('Median Deaths', championStats.mediandeaths),
             createData('Average Assists', championStats.averageassists.toFixed(2), championStats.stddevassists.toFixed(2)),
-            createData('Median Assists', championStats.medianassists),
+
             createData('Average Gold Earned', championStats.average_goldearned.toFixed(0), championStats.stddev_goldearned.toFixed(0)),
             createData('Average Minions Killed', championStats.average_totalminionskilled.toFixed(2), championStats.stddev_totalminionskilled.toFixed(2)),
             createData('Average Total Damage Dealt', championStats.average_totaldamagedealt.toFixed(0), championStats.stddev_totaldamagedealt.toFixed(0)),
             createData('Average Total Damage Taken', championStats.average_totaldamagetaken.toFixed(0), championStats.stddev_totaldamagetaken.toFixed(0)),
+
+            createData('Average Total Damage Dealt To Champs', championStats.average_totaldamagedealttochampions.toFixed(0), championStats.stddev_totaldamagedealttochampions.toFixed(0)),
+            createData('Average Damage Dealt To Objectives', championStats.average_damagedealttoobjectives.toFixed(0), championStats.stddev_damagedealttoobjectives.toFixed(0)),
+            createData('Average Damage Dealt To Turrets', championStats.average_damagedealttoturrets.toFixed(0), championStats.stddev_damagedealttoturrets.toFixed(0)),
+
             createData('Average Heals', championStats.average_totalheal.toFixed(0), championStats.stddev_totalheal.toFixed(0)),
           ];
         } else {
@@ -45,15 +48,17 @@ class ChampionTextStatistics extends Component {
                 createData('Pick Rate', (100.0*championStats.pickrate).toFixed(2), null, "%"),
                 createData('Ban Rate', (100.0*championStats.banrate).toFixed(2), null, "%"),
                 createData('Average Kills', championStats.averagekills.toFixed(2), championStats.stddevkills.toFixed(2)),
-                createData('Median Kills', championStats.mediankills),
                 createData('Average Deaths', championStats.averagedeaths.toFixed(2), championStats.stddevdeaths.toFixed(2)),
-                createData('Median Deaths', championStats.mediandeaths),
                 createData('Average Assists', championStats.averageassists.toFixed(2), championStats.stddevassists.toFixed(2)),
-                createData('Median Assists', championStats.medianassists),
                 createData('Average Gold Earned', championStats.average_goldearned.toFixed(0), championStats.stddev_goldearned.toFixed(0)),
                 createData('Average Minions Killed', championStats.average_totalminionskilled.toFixed(2), championStats.stddev_totalminionskilled.toFixed(2)),
                 createData('Average Total Damage Dealt', championStats.average_totaldamagedealt.toFixed(0), championStats.stddev_totaldamagedealt.toFixed(0)),
                 createData('Average Total Damage Taken', championStats.average_totaldamagetaken.toFixed(0), championStats.stddev_totaldamagetaken.toFixed(0)),
+
+                createData('Average Total Damage Dealt To Champs', championStats.average_totaldamagedealttochampions.toFixed(0), championStats.stddev_totaldamagedealttochampions.toFixed(0)),
+                createData('Average Damage Dealt To Objectives', championStats.average_damagedealttoobjectives.toFixed(0), championStats.stddev_damagedealttoobjectives.toFixed(0)),
+                createData('Average Damage Dealt To Turrets', championStats.average_damagedealttoturrets.toFixed(0), championStats.stddev_damagedealttoturrets.toFixed(0)),
+            
                 createData('Average Heals', championStats.average_totalheal.toFixed(0), championStats.stddev_totalheal.toFixed(0)),
               ];
         }

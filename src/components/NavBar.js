@@ -21,8 +21,6 @@ import ChampionSearch from './ChampionSearch'
 
 import { constants as themeConstants } from "../theme/ConstantsTheme";
 
-import ArrowDropDown from '@material-ui/icons/ArrowDropDown'
-
 const styles = theme => ({
     root: {
         // flexGrow: 1,
@@ -75,20 +73,25 @@ class NavBar extends Component {
         super(props);
         
         if (props.versions !== undefined && props.versions.length > 0
-            && props.leagues !== undefined && props.leagues.length > 0 ) {
+            && props.leagues !== undefined && props.leagues.length > 0
+            && props.queues !== undefined && props.queues.length > 0 ) {
                 this.state = {
                     selectedPatch: props.versions[0], 
                     selectedLeague: props.leagues[0],
+                    selectedQueue: props.queues[0],
                     versions: props.versions,
                     leagues: props.leagues,
+                    queues: props.queues,
                     showDrawer: false,
                 };
             } else {
                 this.state = {
                     selectedPatch: "", 
                     selectedLeague: "",
+                    selectedQueues: "",
                     versions: [],
                     leagues: [],
+                    queues: [],
                     showDrawer: false,
                 };
             }
@@ -109,15 +112,23 @@ class NavBar extends Component {
                         leagues: props.leagues,
                     });
                 }
+                if (this.state.queues !== props.queues && props.queues.length > 0) {
+                    this.setState({
+                        selectedLeague: props.queues[0],
+                        queues: props.queues,
+                    });
+                }
             }
         }
             
     componentDidMount() {
         if (this.props.versions !== undefined && this.props.versions.length > 0
-            && this.props.leagues !== undefined && this.props.leagues.length > 0 ) {
+            && this.props.leagues !== undefined && this.props.leagues.length > 0 
+            && this.props.queues !== undefined && this.props.queues.length > 0 ) {
                 this.setState({
                     versions: this.props.versions,
                     leagues: this.props.leagues,
+                    queues: this.props.queues,
                 });
             }
     }
@@ -130,6 +141,11 @@ class NavBar extends Component {
     handleChangeLeague = (event) => {
         this.setState({selectedLeague: event.target.value});
         this.props.handlerLeague(event.target.value);
+    };
+
+    handleChangeQueue = (event) => {
+        this.setState({selectedQueue: event.target.value});
+        this.props.handlerQueue(event.target.value);
     };
 
     handleMenuButtonClose = (event) => {
@@ -199,7 +215,7 @@ class NavBar extends Component {
                                     ))
                                 }
                             </TextField>
-                            <TextField
+                            {/* <TextField
                                 label="League"
                                 select variant="outlined"
                                 value={this.state.selectedLeague}
@@ -228,6 +244,39 @@ class NavBar extends Component {
                                 onChange={this.handleChangeLeague}>
                                 {
                                     this.state.leagues.map(option => (
+                                    <MenuItem key={option} value={option}>{option}</MenuItem>
+                                    ))
+                                }
+                            </TextField> */}
+                            <TextField
+                                label="Queue"
+                                select variant="outlined"
+                                value={this.state.selectedQueue}
+                                className={classes.textField}
+                                InputLabelProps={{
+                                    classes: {
+                                        root: classes.textFieldLabel,
+                                        focused: classes.textFieldFocused,
+                                    },
+                                }}
+                                InputProps={{
+                                    classes: {
+                                        root: classes.textFieldOutlinedInput,
+                                        focused: classes.textFieldFocused,
+                                        notchedOutline: classes.textFieldNotchedOutline,
+                                        input: classes.textFieldInput,
+                                    },
+                                }}
+                                SelectProps={{
+                                    inputProps: {
+                                        classes: {
+                                            icon: classes.icon,
+                                        },
+                                    }
+                                }}
+                                onChange={this.handleChangeQueue}>
+                                {
+                                    this.state.queues.map(option => (
                                     <MenuItem key={option} value={option}>{option}</MenuItem>
                                     ))
                                 }

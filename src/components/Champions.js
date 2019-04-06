@@ -84,11 +84,12 @@ class Champions extends Component {
       };
 
     getChampions(props) {
-        if (props.parentProps.selectedVersion !== undefined && props.parentProps.selectedLeague !== undefined) {
+        if (props.parentProps.selectedVersion !== undefined && props.parentProps.selectedLeague !== undefined && props.parentProps.selectedQueue !== undefined) {
             const version = props.parentProps.selectedVersion;
             const league = props.parentProps.selectedLeague.toUpperCase();
+            const queue = props.parentProps.selectedQueue.toUpperCase();
             const setState = this.setState.bind(this);
-            fetchChampions(version, league, setState);
+            fetchChampions(version, league, queue, setState);
         }
     }
 

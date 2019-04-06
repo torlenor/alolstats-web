@@ -21,6 +21,10 @@ class ChampionTextStatistics extends Component {
         const {championStats} = this.props;
 
         const rows = [
+            createData('Median Kills', championStats.mediankills),
+            createData('Median Deaths', championStats.mediandeaths),
+            createData('Median Assists', championStats.medianassists),
+
             createData('Average True Damage Dealt', championStats.average_truedamagedealt.toFixed(0), championStats.stddev_truedamagedealt.toFixed(0)),
             createData('Average Magic Damage Dealt', championStats.average_magicdamagedealt.toFixed(0), championStats.stddev_magicdamagedealt.toFixed(0)),
             createData('Average Physical Damage Dealt', championStats.average_physicaldamagedealt.toFixed(0), championStats.stddev_physicaldamagedealt.toFixed(0)),
@@ -30,8 +34,6 @@ class ChampionTextStatistics extends Component {
             createData('Average Magic Damage Dealt To Champs', championStats.average_magicdamagedealttochampions.toFixed(0),championStats.stddev_magicdamagedealttochampions.toFixed(0)),
             createData('Average Physical Damage Dealt To Champs', championStats.average_physicaldamagedealttochampions.toFixed(0), championStats.stddev_physicaldamagedealttochampions.toFixed(0)),
             
-            createData('Average Damage Dealt To Objectives', championStats.average_damagedealttoobjectives.toFixed(0), championStats.stddev_damagedealttoobjectives.toFixed(0)),
-            createData('Average Damage Dealt To Turrets', championStats.average_damagedealttoturrets.toFixed(0), championStats.stddev_damagedealttoturrets.toFixed(0)),
             createData('Average Time CCing Others', championStats.average_timeccingothers.toFixed(0), championStats.stddev_timeccingothers.toFixed(0)),
         ];
       
