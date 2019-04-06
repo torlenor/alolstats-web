@@ -33,6 +33,6 @@ export default () =>
         You may refuse the use of cookies by selecting the appropriate settings on your browser, however please note that if you do this you may not be able to use the full functionality of this website.
         <br />By using this website, you consent to the processing of data about you by Google in the manner and for the purposes set out above.
         <br />
-        <br />You can prevent Google’s collection and use of data (cookies and IP address) by downloading and installing the browser plug-in available under <a href={'https://tools.google.com/dlpage/gaoptout?hl=en'}>https://tools.google.com/dlpage/gaoptout?hl=en</a>.
+        <br />You can prevent Google’s collection and use of data (cookies and IP address) by downloading and installing the browser plug-in available under <a href={'https://tools.google.com/dlpage/gaoptout?hl=en'} target={"_blank"}>https://tools.google.com/dlpage/gaoptout?hl=en</a>.
     </Typography>
 </div>;
