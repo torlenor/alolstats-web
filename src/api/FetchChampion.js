@@ -18,7 +18,7 @@ export const fetchChampion = (champion, gameVersion, league, queue, setState) =>
         }
     }).then(data => {
         if (data !== null) {
-            setState({fetchChampionData: data, fetchChampionsError: false, fetchChampionDone: true});
+            setState({fetchChampionData: data, fetchChampionError: false, fetchChampionDone: true});
         } else {
             setState({fetchChampionData: null, fetchChampionError: true, fetchChampionDone: true});
             console.log("Error fetching Champion, did not get any data");
