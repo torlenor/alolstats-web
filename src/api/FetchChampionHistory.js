@@ -4,9 +4,10 @@ const API_URL = `${process.env.REACT_APP_API_BASE_URL}`;
 const CHAMPION_HISTORY_API = `${API_URL}/v1/stats/championhistory/byid?id=`;
 const GAMEVERSIONPARAMETER = "gameversion=";
 const LEAGUEPARAMETER = `tier=`;
+const QUEUEPARAMETER = `queue=`;
 
-export const fetchChampionHistory = (champion, gameVersion, league, setState) => {
-    fetch(CHAMPION_HISTORY_API + champion + "&" + GAMEVERSIONPARAMETER + gameVersion + "&" + LEAGUEPARAMETER + league).then(response => {
+export const fetchChampionHistory = (champion, gameVersion, league, queue, setState) => {
+    fetch(CHAMPION_HISTORY_API + champion + "&" + GAMEVERSIONPARAMETER + gameVersion + "&" + LEAGUEPARAMETER + league + "&" + QUEUEPARAMETER + queue).then(response => {
         if (response.status === 200) {
             let json = response.json();
             return json;

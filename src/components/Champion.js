@@ -51,8 +51,9 @@ class Champion extends Component {
         if (props.parentProps.selectedVersion !== undefined && props.parentProps.selectedLeague !== undefined) {
             const version = props.parentProps.selectedVersion;
             const league = props.parentProps.selectedLeague.toUpperCase();
+            const queue = props.parentProps.selectedQueue.toUpperCase();
             const setState = this.setState.bind(this);
-            fetchChampionInfo(champion, version, league, setState);
+            fetchChampionInfo(champion, version, league, queue, setState);
         }
     }
 
@@ -61,8 +62,9 @@ class Champion extends Component {
         if (props.parentProps.selectedVersion !== undefined && props.parentProps.selectedLeague !== undefined) {
             const version = props.parentProps.selectedVersion;
             const league = props.parentProps.selectedLeague.toUpperCase();
+            const queue = props.parentProps.selectedQueue.toUpperCase();
             const setState = this.setState.bind(this);
-            fetchChampion(champion, version, league, setState);
+            fetchChampion(champion, version, league, queue, setState);
         }
     }
 
@@ -71,8 +73,9 @@ class Champion extends Component {
         if (props.parentProps.selectedVersion !== undefined && props.parentProps.selectedLeague !== undefined) {
             const version = props.parentProps.selectedVersion;
             const league = props.parentProps.selectedLeague.toUpperCase();
+            const queue = props.parentProps.selectedQueue.toUpperCase();
             const setState = this.setState.bind(this);
-            fetchChampionHistory(champion, version, league, setState);
+            fetchChampionHistory(champion, version, league, queue, setState);
         } 
     }
 

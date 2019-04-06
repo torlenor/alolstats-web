@@ -12,8 +12,9 @@ import { constants as themeConstants } from "../theme/ConstantsTheme";
 
 const API_URL = `${process.env.REACT_APP_API_BASE_URL}`;
 const API = `${API_URL}/v1/stats/champion/byid?id=`;
-const VERSIONPARAMETER = `&gameversion=`;
-const LEAGUEPARAMETER = `&tier=`;
+const VERSIONPARAMETER = `gameversion=`;
+const LEAGUEPARAMETER = `tier=`;
+const QUEUEPARAMETER = `queue=`;
 
 class ChampionComparison extends Component {
 
@@ -51,13 +52,18 @@ class ChampionComparison extends Component {
             league = props.parentProps.selectedLeague.toUpperCase();
         }
 
+        let queue = "";
+        if (props.parentProps.selectedQueue !== undefined) {
+            queue = props.parentProps.selectedQueue.toUpperCase();
+        }
+
         if (champNumber === 1) {
             champion = props.match.params.champion1;
         } else {
             champion = props.match.params.champion2;
         }
         
-        fetch(API + champion + VERSIONPARAMETER + version + LEAGUEPARAMETER + league).then(response => {
+        fetch(API + champion + "&" + VERSIONPARAMETER + version + "&" + LEAGUEPARAMETER + league + "&" + QUEUEPARAMETER + queue).then(response => {
             if (response.status === 200) {
                 let json = response.json();
                 return json;
@@ -92,6 +98,7 @@ class ChampionComparison extends Component {
         const CHAMPION_API = `${API_URL}/v1/champion/byid?id=`;
         const GAMEVERSIONPARAMETER = "gameversion=";
         const LEAGUEPARAMETER = `tier=`;
+        const QUEUEPARAMETER = `queue=`;
 
         let champion = "";
         let version = "";
@@ -106,13 +113,18 @@ class ChampionComparison extends Component {
             league = props.parentProps.selectedLeague.toUpperCase();
         }
 
+        let queue = "";
+        if (props.parentProps.selectedQueue !== undefined) {
+            queue = props.parentProps.selectedQueue.toUpperCase();
+        }
+
         if (champNumber === 1) {
             champion = props.match.params.champion1;
         } else {
             champion = props.match.params.champion2;
         }
 
-        fetch(CHAMPION_API + champion + "&" + GAMEVERSIONPARAMETER + version + "&" + LEAGUEPARAMETER + league).then(response => {
+        fetch(CHAMPION_API + champion + "&" + GAMEVERSIONPARAMETER + version + "&" + LEAGUEPARAMETER + league + "&" + QUEUEPARAMETER + queue).then(response => {
             if (response.status === 200) {
                 let json = response.json();
                 return json;
@@ -168,8 +180,6 @@ class ChampionComparison extends Component {
         const {championstats1, championstats2, championstatsInfo1, championstatsInfo2} = this.state;
 
         let page;
-
-        console.log(this.state);
 
         if (this.state.didMount1 === false || this.state.didMount2 === false || this.state.didMountInfo1 === false || this.state.didMountInfo2 === false) {
             page = <div className="content">

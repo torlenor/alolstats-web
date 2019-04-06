@@ -21,6 +21,7 @@ const BUILD_DATE = `${process.env.REACT_APP_BUILD_DATE}`;
 const API_URL = `${process.env.REACT_APP_API_BASE_URL}`;
 const VERSIONS_API = `${API_URL}/v1/stats/versions`;
 const LEAGUES_API = `${API_URL}/v1/stats/leagues`;
+const QUEUES_API = `${API_URL}/v1/stats/queues`;
 
 class App extends Component {
     constructor(props) {
@@ -29,19 +30,24 @@ class App extends Component {
         this.state = {
             didMountVersions: false,
             didMountLeagues: false,
+            didMountQueues: false,
 
             versions: [],
             leagues: [],
+            queues: [],
             
             errorVersions: true,
             errorLeagues: true,
+            errorQueues: true,
 
             patch: "",
             league: "",
+            queue: "",
         };
     
         this.handlerPatch = this.handlerPatch.bind(this);
         this.handlerLeague = this.handlerLeague.bind(this);
+        this.handlerQueue = this.handlerQueue.bind(this);
     }
     
     handlerPatch(newSelectedPatch) {
@@ -53,6 +59,12 @@ class App extends Component {
     handlerLeague(newSelectedLeague) {
         this.setState({
             league: newSelectedLeague
+        });
+    }
+
+    handlerQueue(newSelectedQueue) {
+        this.setState({
+            queue: newSelectedQueue
         });
     }
 
@@ -82,7 +94,7 @@ class App extends Component {
                 let json = response.json();
                 return json;
             } else {
-                this.setState({errorLeagues: true, didMountLeagues: false});
+                this.setState({errorLeagues: true, didMountLeagues: true});
                 return null;
             }
         }).then(data => {
@@ -96,16 +108,36 @@ class App extends Component {
             this.setState({errorLeagues: true, didMountLeagues: true});
             console.log(error);
         });
+
+        fetch(QUEUES_API).then(response => {
+            if (response.status === 200) {
+                let json = response.json();
+                return json;
+            } else {
+                this.setState({errorQueues: true, didMountQueues: true});
+                return null;
+            }
+        }).then(data => {
+            if (data.queues.length > 0) {
+                this.setState({queues: data.queues, errorQueues: false, didMountQueues: true, queue: data.queues[0]});
+            } else {
+                console.log("Received empty queues response");
+                this.setState({errorQueues: true, didMountQueues: true});
+            }
+        }).catch(error => {
+            this.setState({errorQueues: true, didMountQueues: true});
+            console.log(error);
+        });
     }
 
 
     render() {
         var page;
-        if (this.state.didMountVersions === false || this.state.didMountLeagues === false) {
+        if (this.state.didMountVersions === false || this.state.didMountLeagues === false || this.state.didMountQueues === false) {
             page = <MuiThemeProvider theme={muiTheme}>
                 <div className="App"/>
                 </MuiThemeProvider>;
-        } else if (this.state.errorVersions || this.state.errorLeagues) {
+        } else if (this.state.errorVersions || this.state.errorLeagues || this.state.errorQueues) {
             page = <MuiThemeProvider theme={muiTheme}><div className="App">
             <Typography variant="h5" gutterBottom component="h3">
                     <br/>
@@ -121,8 +153,8 @@ class App extends Component {
             page =<MuiThemeProvider theme={muiTheme}>
                     <div className="App">
                         <CssBaseline />
-                        <NavBar versions={this.state.versions} leagues={this.state.leagues} handlerPatch={this.handlerPatch} handlerLeague={this.handlerLeague} />
-                        <Routes versions={this.state.versions} leagues={this.state.leagues} selectedVersion={this.state.patch} selectedLeague={this.state.league}/>
+                        <NavBar versions={this.state.versions} leagues={this.state.leagues} queues={this.state.queues} handlerPatch={this.handlerPatch} handlerLeague={this.handlerLeague} handlerQueue={this.handlerQueue} />
+                        <Routes versions={this.state.versions} leagues={this.state.leagues} queues={this.state.queues} selectedVersion={this.state.patch} selectedLeague={this.state.league} selectedQueue={this.state.queue}/>
                         <Footer appVersion={VERSION} buildDate={BUILD_DATE}/>
                         <CookieConsent>
                             This website uses cookies to enhance the user experience and Google Analytics.
