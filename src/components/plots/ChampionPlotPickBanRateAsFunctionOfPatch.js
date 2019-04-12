@@ -26,9 +26,11 @@ function ChampionHistoryPickBan(props) {
         displayRole = "Overall";
     }
 
+    const versions = championHistoryData.versions.slice(0, MAX_VERSIONS).reverse()
+
     const pickRate = {
-            x: championHistoryData.versions.slice(0, MAX_VERSIONS),
-            y: championHistoryData.pickRateHistory.slice(0, MAX_VERSIONS).map(value => value*100),
+            x: versions,
+            y: championHistoryData.pickRateHistory.slice(0, MAX_VERSIONS).map(value => value*100).reverse(),
             type: 'scatter',
             mode: 'lines+markers',
             'line': {
@@ -43,8 +45,8 @@ function ChampionHistoryPickBan(props) {
 
     const banRate = 
         {
-            x: championHistoryData.versions.slice(0, MAX_VERSIONS),
-            y: championHistoryData.banRateHistory.slice(0, MAX_VERSIONS).map(value => value*100),
+            x: versions,
+            y: championHistoryData.banRateHistory.slice(0, MAX_VERSIONS).map(value => value*100).reverse(),
             type: 'scatter',
             mode: 'lines+markers',
             'line': {

@@ -27,13 +27,15 @@ function ChampionHistoryKDA(props) {
         displayRole = "Overall";
     }
 
+    const versions = championHistoryData.versions.slice(0, MAX_VERSIONS).reverse();
+
     const kills = 
         {
-            x: championHistoryData.versions.slice(0, MAX_VERSIONS),
-            y: championHistoryData.averagekillsHistory.slice(0, MAX_VERSIONS),
+            x: versions,
+            y: championHistoryData.averagekillsHistory.slice(0, MAX_VERSIONS).reverse(),
             error_y: {
                 type: 'data',
-                array: championHistoryData.stddevkillsHistory.slice(0, MAX_VERSIONS),
+                array: championHistoryData.stddevkillsHistory.slice(0, MAX_VERSIONS).reverse(),
                 visible: true
               },
             type: 'scatter',
@@ -50,11 +52,11 @@ function ChampionHistoryKDA(props) {
 
     const deaths = 
     {
-        x: championHistoryData.versions.slice(0, MAX_VERSIONS),
-        y: championHistoryData.averagedeathsHistory.slice(0, MAX_VERSIONS),
+        x: versions,
+        y: championHistoryData.averagedeathsHistory.slice(0, MAX_VERSIONS).reverse(),
         error_y: {
             type: 'data',
-            array: championHistoryData.stddevdeathsHistory.slice(0, MAX_VERSIONS),
+            array: championHistoryData.stddevdeathsHistory.slice(0, MAX_VERSIONS).reverse(),
             visible: true
           },
         type: 'scatter',
@@ -71,11 +73,11 @@ function ChampionHistoryKDA(props) {
 
     const assists = 
     {
-        x: championHistoryData.versions.slice(0, MAX_VERSIONS),
-        y: championHistoryData.averageassistsHistory.slice(0, MAX_VERSIONS),
+        x: versions,
+        y: championHistoryData.averageassistsHistory.slice(0, MAX_VERSIONS).reverse(),
         error_y: {
             type: 'data',
-            array: championHistoryData.stddevassistsHistory.slice(0, MAX_VERSIONS),
+            array: championHistoryData.stddevassistsHistory.slice(0, MAX_VERSIONS).reverse(),
             visible: true
           },
         type: 'scatter',
