@@ -7,6 +7,7 @@ import ChampionHistoryPickBan from "./plots/ChampionPlotPickBanRateAsFunctionOfP
 import ChampionPlotDamagePerType from "./plots/ChampionPlotDamagePerType";
 import ChampionTextStatistics from './ChampionTextStatistics';
 import ChampionTextStatisticsAdditional from './ChampionTextStatisticsAdditional';
+import SummonerSpells from './SummonerSpells';
 
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -21,6 +22,7 @@ import ChampionInfo from './ChampionInfo';
 import { fetchChampion } from "../api/FetchChampion";
 import { fetchChampionHistory } from "../api/FetchChampionHistory";
 import { fetchChampionInfo } from "../api/FetchChampionInfo";
+import { fetchSummonerSpellsStats } from "../api/FetchSummonerSpellsStats";
 
 import { constants as themeConstants } from "../theme/ConstantsTheme";
 
@@ -41,6 +43,10 @@ class Champion extends Component {
             fetchChampionInfoDone: false,
             fetchChampionInfoData: null,
             fetchChampionInfoError: false,
+
+            fetchSummonerSpellsStatsDone: false,
+            fetchSummonerSpellsStatsData: null,
+            fetchSummonerSpellsStatsError: false,
 
             parentProps: props,
         };
@@ -79,11 +85,23 @@ class Champion extends Component {
         } 
     }
 
+    getSummonerSpellsStats(props) {
+        let champion = props.match.params.champion;
+        if (props.parentProps.selectedVersion !== undefined && props.parentProps.selectedLeague !== undefined && props.parentProps.selectedQueue !== undefined) {
+            const version = props.parentProps.selectedVersion;
+            const league = props.parentProps.selectedLeague.toUpperCase();
+            const queue = props.parentProps.selectedQueue.toUpperCase();
+            const setState = this.setState.bind(this);
+            fetchSummonerSpellsStats(champion, version, league, queue, setState);
+        }
+    }
+
     componentWillReceiveProps(props) {
         this.setState( {parentProps: props});
         this.getChampionInfo(props);
         this.getChampion(props);
         this.getChampionHistory(props);
+        this.getSummonerSpellsStats(props);
     }
 
     componentDidMount() {
@@ -91,22 +109,24 @@ class Champion extends Component {
         this.getChampionInfo(this.props);
         this.getChampion(this.props);
         this.getChampionHistory(this.props);
+        this.getSummonerSpellsStats(this.props);
     }
 
     render() {
         const {fetchChampionData, fetchChampionError, fetchChampionDone,
                fetchChampionHistoryData, fetchChampionHistoryError, fetchChampionHistoryDone,
+               fetchSummonerSpellsStatsData, fetchSummonerSpellsStatsError, fetchSummonerSpellsStatsDone,
                fetchChampionInfoData, fetchChampionInfoError, fetchChampionInfoDone } = this.state;
 
         let page;
 
-        if ( fetchChampionDone === false || fetchChampionHistoryDone === false || fetchChampionInfoDone === false ) {
+        if ( fetchChampionDone === false || fetchChampionHistoryDone === false || fetchChampionInfoDone === false || fetchSummonerSpellsStatsDone === false ) {
             page = <div className="content">
                 <div>
                     <Progress text="Loading Champion Statistics..."/>
                 </div>
             </div>;
-        } else if ( fetchChampionError || fetchChampionHistoryError || fetchChampionInfoError ) {
+        } else if ( fetchChampionError || fetchChampionHistoryError || fetchChampionInfoError || fetchSummonerSpellsStatsError ) {
             page = <div className="content">
                 <Typography variant="h5" gutterBottom>
                     Ooops, something bad happened!<br></br>
@@ -149,20 +169,30 @@ class Champion extends Component {
                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                 {fetchChampionData.roles !== null ? fetchChampionData.roles.map(value => (
                     <Grid container spacing={themeConstants.padding*2} justify="center" key={value+'container'}>
-                    <Grid item xs={12} sm={12} md={6} lg={6} xl={6} key={value+'stats'}>
-                        <Paper style={{ padding: themeConstants.padding }}>
-                            <ChampionTextStatistics championStats={fetchChampionData.statsperrole[value]} role={value}/>
-                        </Paper>
-                    </Grid>
-                    <Grid item xs={12} sm={12} md={6} lg={6} xl={6} key={value+'plot'}>
-                        <Paper style={{ height: 674/2 - themeConstants.padding, padding: themeConstants.padding }}>
-                            <ChampionHistoryWin championHistoryData={fetchChampionHistoryData.historyperrole[value]} role={value} height={280}/>
-                        </Paper>
-                        <div style={ {padding: themeConstants.padding }} key={value+'div'} />
-                        <Paper style={{ height: 674/2 - themeConstants.padding, padding: themeConstants.padding }}>
-                            <ChampionHistoryKDA championHistoryData={fetchChampionHistoryData.historyperrole[value]} role={value} height={280}/>
-                        </Paper>
-                    </Grid>
+                        <Grid item xs={12} sm={12} md={4} lg={4} xl={4} key={value+'stats'}>
+                            <Paper style={{ padding: themeConstants.padding }}>
+                                <ChampionTextStatistics championStats={fetchChampionData.statsperrole[value]} role={value}/>
+                            </Paper>
+                        </Grid>
+                        <Grid item xs={12} sm={12}  md={4} lg={4} xl={4} key={value+'plot'}>
+                            <Paper style={{ height: 674/2 - themeConstants.padding, padding: themeConstants.padding }}>
+                                <ChampionHistoryWin championHistoryData={fetchChampionHistoryData.historyperrole[value]} role={value} height={280}/>
+                            </Paper>
+                            <div style={ {padding: themeConstants.padding }} key={value+'div'} />
+                            <Paper style={{ height: 674/2 - themeConstants.padding, padding: themeConstants.padding }}>
+                                <ChampionHistoryKDA championHistoryData={fetchChampionHistoryData.historyperrole[value]} role={value} height={280}/>
+                            </Paper>
+                        </Grid>
+                        { fetchSummonerSpellsStatsData.statsperrole !== null 
+                            && fetchSummonerSpellsStatsData.statsperrole.hasOwnProperty(value)
+                            && fetchSummonerSpellsStatsData.statsperrole[value] !== null ?
+                            <Grid item xs={12} sm={12}  md={4} lg={4} xl={4} key={value+'spells'}>
+                                <Paper style={{ padding: themeConstants.padding }}>
+                                    <SummonerSpells summonerSpells={fetchSummonerSpellsStatsData.statsperrole[value][Object.keys(fetchSummonerSpellsStatsData.statsperrole[value])[0]]} role={value}/>
+                                </Paper>
+                            </Grid>
+                            : <div></div>
+                        }
                     </Grid>
                 )) : <div></div>}
                 </Grid>
