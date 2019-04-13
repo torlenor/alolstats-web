@@ -35,10 +35,10 @@ function SummonerSpells(props) {
                 {displayRole} Recommended Summoner Spells
         </Typography>
         <Tooltip title={summonerSpells.summonerspells[0].name} classes={{ tooltip: classes.lightTooltip }}>
-            <img src={`http://ddragon.leagueoflegends.com/cdn/9.7.1/img/spell/${summonerSpells.summonerspells[0].image.full}`} height={102} width={102} justify="center" style={{justify: "center", marginRight: 10}} alt="Logo" />
+            <img src={`https://ddragon.leagueoflegends.com/cdn/9.7.1/img/spell/${summonerSpells.summonerspells[0].image.full}`} height={102} width={102} justify="center" style={{justify: "center", marginRight: 10}} alt="Logo" />
         </Tooltip>
         <Tooltip title={summonerSpells.summonerspells[1].name} classes={{ tooltip: classes.lightTooltip }}>
-            <img src={`http://ddragon.leagueoflegends.com/cdn/9.7.1/img/spell/${summonerSpells.summonerspells[1].image.full}`} height={102} width={102} justify="center" style={{justify: "center", marginLeft: 10}} alt="Logo" />
+            <img src={`https://ddragon.leagueoflegends.com/cdn/9.7.1/img/spell/${summonerSpells.summonerspells[1].image.full}`} height={102} width={102} justify="center" style={{justify: "center", marginLeft: 10}} alt="Logo" />
         </Tooltip>
         <Typography variant="subtitle2">
                 Win Rate {(summonerSpells.winrate*100).toFixed(2)} % (Sample Size {summonerSpells.samplesize} Games)
