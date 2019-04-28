@@ -29,6 +29,8 @@ import Checkbox from '@material-ui/core/Checkbox';
 import { TableCell } from './ThemedTableCell';
 import { numberWithCommas } from '../utils/numberMods'
 
+const STATIC_DATA_BASE_URL = `${process.env.REACT_APP_STATIC_DATA_BASE_URL}`;
+
 const MAX_SELECTED = 2;
 
 function desc(a, b, orderBy) {
@@ -421,7 +423,7 @@ function EnhancedTable(props) {
                         </TableCell>
                         <TableCell scope="row" padding="none" style={{ "textDecoration": "none", "justifyContent": "left", "alignItems": "center", "textAlign": "left",}} component={props => <Link to={`/champions/${n.key}`} {...props}/>}>
                             <div style={{ "justifyContent": "left", "alignItems": "center", "textAlign": "left", display: 'flex', flexDirection: 'row',}}>
-                                <img src={`https://ddragon.leagueoflegends.com/cdn/9.5.1/img/champion/${n.key}.png`} height={32} width={32} style={{justify: "left",}} alt="Logo" />
+                                <img src={`${STATIC_DATA_BASE_URL}/${props.gameVersion}.1/${props.gameVersion}.1/img/champion/${n.key}.png`} height={32} width={32} style={{justify: "left",}} alt="Logo" />
                                 <Typography component={'span'} style={{"textDecoration": "none",  "marginLeft": 4}}>
                                     {n.name}
                                 </Typography>

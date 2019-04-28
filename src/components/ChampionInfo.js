@@ -8,6 +8,8 @@ import Typography from '@material-ui/core/Typography';
 
 import { constants as themeConstants } from "../theme/ConstantsTheme";
 
+const STATIC_DATA_BASE_URL = `${process.env.REACT_APP_STATIC_DATA_BASE_URL}`;
+
 const styles = {
     card: {
         paddingTop: themeConstants.padding,
@@ -47,7 +49,7 @@ function ChampionInfo(props) {
 
   return (
       <Card className={classes.card}>
-      <img src={`https://ddragon.leagueoflegends.com/cdn/${champion.version}/img/champion/${champion.id}.png`} height={102} width={102} justify="center" style={{justify: "center",}} alt="Logo" />
+      <img src={`${STATIC_DATA_BASE_URL}/${champion.version}/${champion.version}/img/champion/${champion.id}.png`} height={102} width={102} justify="center" style={{justify: "center",}} alt="Logo" />
       <div className={classes.title}>
             <Typography variant="h4" className={classes.title} style={{float: "left",}}>
                 {champion.name}

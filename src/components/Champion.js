@@ -118,6 +118,8 @@ class Champion extends Component {
                fetchSummonerSpellsStatsData, fetchSummonerSpellsStatsError, fetchSummonerSpellsStatsDone,
                fetchChampionInfoData, fetchChampionInfoError, fetchChampionInfoDone } = this.state;
 
+        const version = this.props.parentProps.selectedVersion;
+
         let page;
 
         if ( fetchChampionDone === false || fetchChampionHistoryDone === false || fetchChampionInfoDone === false || fetchSummonerSpellsStatsDone === false ) {
@@ -188,7 +190,7 @@ class Champion extends Component {
                             && fetchSummonerSpellsStatsData.statsperrole[value] !== null ?
                             <Grid item xs={12} sm={12}  md={4} lg={4} xl={4} key={value+'spells'}>
                                 <Paper style={{ padding: themeConstants.padding }}>
-                                    <SummonerSpells summonerSpells={fetchSummonerSpellsStatsData.statsperrole[value][Object.keys(fetchSummonerSpellsStatsData.statsperrole[value])[0]]} role={value}/>
+                                    <SummonerSpells version={version} summonerSpells={fetchSummonerSpellsStatsData.statsperrole[value][Object.keys(fetchSummonerSpellsStatsData.statsperrole[value])[0]]} role={value}/>
                                 </Paper>
                             </Grid>
                             : <div></div>

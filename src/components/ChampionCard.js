@@ -11,6 +11,8 @@ import Typography from '@material-ui/core/Typography';
 
 import { Link } from 'react-router-dom'
 
+const STATIC_DATA_BASE_URL = `${process.env.REACT_APP_STATIC_DATA_BASE_URL}`;
+
 const styles = {
   card: {
     minWidth: 120,
@@ -44,7 +46,7 @@ function ChampionCard(props) {
         </Typography>
         <CardMedia
           className={classes.media}
-          image={`https://ddragon.leagueoflegends.com/cdn/${champion.version}/img/champion/${champion.id}.png`}
+          image={`${STATIC_DATA_BASE_URL}/${champion.version}/${champion.version}/img/champion/${champion.id}.png`}
           title={`${champion.name}`}
         />
         <Typography component={'span'} className={classes.pos} color="textSecondary">
