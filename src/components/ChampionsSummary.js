@@ -68,10 +68,10 @@ function ChampionsSummary(props) {
                                         );
                 });
                 setData(rows);
-                setDidLoad(true);
-                setError(false);
                 setFetchedGameVersion(gameversion);
                 setFetchedLeague(league);
+                setDidLoad(true);
+                setError(false);
                 setIsUpdating(false);
             } else {
                 setDidLoad(true);
@@ -83,7 +83,7 @@ function ChampionsSummary(props) {
         });
     }, [gameversionparameter, leagueParameter, queueParameter]);
 
-    if (didLoad && !error) {
+    if (didLoad && !error && fetchedGameVersion !== "") {
         document.title = "Champions Summary - fuu.la";
         return <div style={{marginLeft: themeConstants.padding, marginRight: themeConstants.padding}}>
                 <ChampionsSummaryTable data={data} gameVersion={fetchedGameVersion} league={fetchedLeague} isUpdating={isUpdating} routerHistory={props.routerHistory} cookies={props.cookies}/>
