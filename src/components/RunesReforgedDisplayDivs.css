@@ -1,0 +1,38 @@
+@media screen {
+    .primary-runes {
+      display: table;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    .primary-runes > div {
+      display: table-row;
+    }
+    .primary-runes .primary-rune {
+      display: table-cell;
+      /* border: 1px solid #3f3f3f; */
+    }
+
+    .keystones {
+        display: table;
+        border-collapse: collapse;
+        width: 100%;
+    }
+    .keystones > div {
+        display: table-row;
+    }
+    .keystones .keystone {
+    display: table-cell;
+    /* border: 1px solid #3f3f3f; */
+    }
+  }
+  
+  @media screen and (max-width: 640px) {
+    /** reset all primary-rune gallery elements to display as block and fill screen **/
+    .primary-runes,
+    .primary-runes > div,
+    .primary-runes .primary-rune {
+      display: block;
+      width: 100%;
+    }
+  }
+  

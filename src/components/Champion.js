@@ -18,6 +18,8 @@ import Progress from './Progress';
 
 import ChampionInfo from './ChampionInfo';
 
+import RunesReforgedDisplay from './RunesReforgedDisplayDivs'
+
 // API
 import { fetchChampion } from "../api/FetchChampion";
 import { fetchChampionHistory } from "../api/FetchChampionHistory";
@@ -191,6 +193,10 @@ class Champion extends Component {
                             <Grid item xs={12} sm={12}  md={4} lg={4} xl={4} key={value+'spells'}>
                                 <Paper style={{ padding: themeConstants.padding }}>
                                     <SummonerSpells version={version} summonerSpells={fetchSummonerSpellsStatsData.statsperrole[value][Object.keys(fetchSummonerSpellsStatsData.statsperrole[value])[0]]} role={value}/>
+                                </Paper>
+                                <div style={ {padding: themeConstants.padding }} key={value+'div'} />
+                                <Paper style={{ padding: themeConstants.padding }}>
+                                    <RunesReforgedDisplay/>
                                 </Paper>
                             </Grid>
                             : <div></div>
