@@ -1,5 +1,5 @@
 variables:
-  CONTAINER_IMAGE: git.abyle.org:5000/$CI_PROJECT_PATH
+  CONTAINER_IMAGE: gdr.abyle.org/$CI_PROJECT_PATH
 
 stages:
   - build_image
@@ -16,7 +16,7 @@ create_docker_image:
   only:
     - master
   script:
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN git.abyle.org:5000
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN gdr.abyle.org
     - docker pull $CONTAINER_IMAGE:latest_dev || true
     - docker build --cache-from $CONTAINER_IMAGE:latest_dev --tag $CONTAINER_IMAGE:$CI_COMMIT_SHA .
     - docker tag $CONTAINER_IMAGE:$CI_COMMIT_SHA $CONTAINER_IMAGE:latest_dev
@@ -27,7 +27,7 @@ create_docker_image:
 #   stage: deploy
 #   dependencies:
 #     - create_docker_image
-#   image: git.abyle.org:5000/abyle/dockerfiles/abyle-acicddeploy:latest
+#   image: gdr.abyle.org/abyle/dockerfiles/abyle-acicddeploy:latest
 #   environment: testing
 #   before_script:
 #     - mkdir -p "${HOME}/.ssh/"
@@ -68,7 +68,7 @@ release:
   tags:
     - docker-from-docker
   script:
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN git.abyle.org:5000
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN gdr.abyle.org
     - docker pull $CONTAINER_IMAGE:$CI_COMMIT_SHA
     - docker tag $CONTAINER_IMAGE:$CI_COMMIT_SHA $CONTAINER_IMAGE:$CI_COMMIT_TAG
     - docker tag $CONTAINER_IMAGE:$CI_COMMIT_SHA $CONTAINER_IMAGE:latest
@@ -84,7 +84,7 @@ deploy_production:
   dependencies:
     - release
   dependencies:
-  image: git.abyle.org:5000/abyle/dockerfiles/abyle-acicddeploy:latest
+  image: gdr.abyle.org/abyle/dockerfiles/abyle-acicddeploy:latest
   environment: production
   before_script:
     - mkdir -p "${HOME}/.ssh/"
