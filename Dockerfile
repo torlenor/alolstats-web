@@ -3,7 +3,10 @@ FROM node:11.13.0 as builder
 RUN mkdir /usr/src/alolstats-web
 WORKDIR /usr/src/alolstats-web
 ENV PATH /usr/src/alolstats-web/node_modules/.bin:$PATH
+ARG app_ga_tracking_id
+ENV REACT_APP_GA_TRACKING_ID=$app_ga_tracking_id
 COPY . /usr/src/alolstats-web
+RUN echo $REACT_APP_GA_TRACKING_ID
 RUN yarn install --silent
 RUN yarn build
 

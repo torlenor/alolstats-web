@@ -18,7 +18,7 @@ create_docker_image:
   script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN gdr.abyle.org
     - docker pull $CONTAINER_IMAGE:latest_dev || true
-    - docker build --cache-from $CONTAINER_IMAGE:latest_dev --tag $CONTAINER_IMAGE:$CI_COMMIT_SHA .
+    - docker build --cache-from $CONTAINER_IMAGE:latest_dev --build-arg app_ga_tracking_id=${REACT_APP_GA_TRACKING_ID} --tag $CONTAINER_IMAGE:$CI_COMMIT_SHA .
     - docker tag $CONTAINER_IMAGE:$CI_COMMIT_SHA $CONTAINER_IMAGE:latest_dev
     - docker push $CONTAINER_IMAGE:$CI_COMMIT_SHA
     - docker push $CONTAINER_IMAGE:latest_dev
