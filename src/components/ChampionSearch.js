@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
 
+// API
+import { fetchChampionNames } from "../api/FetchChampions"
+
 // THEME
 import reactSelectTheme from '../theme/ReactSelectTheme';
-
-const API_URL = `${process.env.REACT_APP_API_BASE_URL}`;
-const ChampionsAPI = `${API_URL}/v1/champions`;
-const LEAGUEPARAMETER = `&tier=`;
 
 function ChampionSearch(props) {
     const [data, setData] = useState([]);
@@ -14,59 +13,20 @@ function ChampionSearch(props) {
     const [error, setError] = useState(false);
     const [selected, setSelected] = useState("");
 
-    let gameversionparameter = "";
-    let version = "";
-    if (props.selectedVersion !== undefined) {
-        version = props.selectedVersion;
-    }
-    gameversionparameter = "?gameversion=" + version;
-
-    let league = "";
-    if (props.selectedLeague !== undefined) {
-        league = props.selectedLeague.toUpperCase();
-    }
-
     useEffect(() => {
-        fetch(ChampionsAPI + gameversionparameter + LEAGUEPARAMETER + league).then(response => {
-            if (response.status === 200) {
-                let json = response.json();
-                return json;
-            } else {
-                setDidLoad(true);
-                setError(true);
-                return null;
-            }
-        }).then(jsonData => {
-            if (jsonData !== null) {
-                let newHits = [];
-                for (var key in jsonData) {
-                    if (jsonData.hasOwnProperty(key)) {
-                        newHits.push( { value: jsonData[key].id, label: jsonData[key].name } );
-                    }
-                }
-                setData(newHits.sort(function (a, b) {
-                    return ('' + a.name).localeCompare(b.name);
-                    }));
-                setDidLoad(true);
-                setError(false);
-            } else {
-                setDidLoad(true);
-                setError(true);
-            }
-        }).catch(error => {
-            setDidLoad(true);
-            setError(true);
-        });
-    }, [gameversionparameter, league]);
+        if (props.selectedVersion !== undefined && props.selectedLeague !== undefined && props.selectedQueue !== undefined) {
+            fetchChampionNames(props.selectedVersion, props.selectedLeague, props.selectedQueue, setData, setError, setDidLoad);
+        }
+    }, [props.selectedVersion, props.selectedLeague, props.selectedQueue]);
 
 
     const state = {
-    isClearable: true,
-    isDisabled: false,
-    isLoading: false,
-    isRtl: false,
-    isSearchable: true,
-  };
+        isClearable: true,
+        isDisabled: false,
+        isLoading: false,
+        isRtl: false,
+        isSearchable: true,
+    };
 
     const {
       isClearable,

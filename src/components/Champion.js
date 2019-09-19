@@ -115,7 +115,7 @@ class Champion extends Component {
     render() {
         const {fetchChampionData, fetchChampionError, fetchChampionDone,
                fetchChampionHistoryData, fetchChampionHistoryError, fetchChampionHistoryDone,
-               fetchSummonerSpellsStatsData, fetchSummonerSpellsStatsError, fetchSummonerSpellsStatsDone,
+               fetchSummonerSpellsStatsData, fetchSummonerSpellsStatsDone,
                fetchChampionInfoData, fetchChampionInfoError, fetchChampionInfoDone } = this.state;
 
         const version = this.props.parentProps.selectedVersion;
@@ -128,7 +128,7 @@ class Champion extends Component {
                     <Progress text="Loading Champion Statistics..."/>
                 </div>
             </div>;
-        } else if ( fetchChampionError || fetchChampionHistoryError || fetchChampionInfoError || fetchSummonerSpellsStatsError ) {
+        } else if ( fetchChampionError || fetchChampionHistoryError || fetchChampionInfoError ) {
             page = <div className="content">
                 <Typography variant="h5" gutterBottom>
                     Ooops, something bad happened!<br></br>
@@ -185,7 +185,8 @@ class Champion extends Component {
                                 <ChampionHistoryKDA championHistoryData={fetchChampionHistoryData.historyperrole[value]} role={value} height={280}/>
                             </Paper>
                         </Grid>
-                        { fetchSummonerSpellsStatsData.statsperrole !== null 
+                        { fetchSummonerSpellsStatsData !== null
+                            && fetchSummonerSpellsStatsData.statsperrole !== null 
                             && fetchSummonerSpellsStatsData.statsperrole.hasOwnProperty(value)
                             && fetchSummonerSpellsStatsData.statsperrole[value] !== null ?
                             <Grid item xs={12} sm={12}  md={4} lg={4} xl={4} key={value+'spells'}>

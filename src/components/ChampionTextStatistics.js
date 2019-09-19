@@ -26,6 +26,7 @@ class ChampionTextStatistics extends Component {
         rows = [
             createData('Sample Size', championStats.samplesize, null, "Games"),
             createData('Win Rate', (100.0*championStats.winrate).toFixed(2), null, "%"),
+            createData('Red vs Blue Side Win Ratio', (1.0*championStats.redwinrate).toFixed(2), null, "-"),
             createData('Average Kills', championStats.averagekills.toFixed(2), championStats.stddevkills.toFixed(2)),
             createData('Average Deaths', championStats.averagedeaths.toFixed(2), championStats.stddevdeaths.toFixed(2)),
             createData('Average Assists', championStats.averageassists.toFixed(2), championStats.stddevassists.toFixed(2)),
@@ -36,7 +37,6 @@ class ChampionTextStatistics extends Component {
             createData('Average Total Damage Taken', championStats.average_totaldamagetaken.toFixed(0), championStats.stddev_totaldamagetaken.toFixed(0)),
 
             createData('Average Total Damage Dealt To Champs', championStats.average_totaldamagedealttochampions.toFixed(0), championStats.stddev_totaldamagedealttochampions.toFixed(0)),
-            createData('Average Damage Dealt To Objectives', championStats.average_damagedealttoobjectives.toFixed(0), championStats.stddev_damagedealttoobjectives.toFixed(0)),
             createData('Average Damage Dealt To Turrets', championStats.average_damagedealttoturrets.toFixed(0), championStats.stddev_damagedealttoturrets.toFixed(0)),
 
             createData('Average Heals', championStats.average_totalheal.toFixed(0), championStats.stddev_totalheal.toFixed(0)),
@@ -45,6 +45,7 @@ class ChampionTextStatistics extends Component {
             rows = [
                 createData('Sample Size', championStats.samplesize, null, "Games"),
                 createData('Win Rate', (100.0*championStats.winrate).toFixed(2), null, "%"),
+                createData('Red vs Blue Side Win Ratio', (1.0*championStats.redwinrate).toFixed(2), null, "-"),
                 createData('Pick Rate', (100.0*championStats.pickrate).toFixed(2), null, "%"),
                 createData('Ban Rate', (100.0*championStats.banrate).toFixed(2), null, "%"),
                 createData('Average Kills', championStats.averagekills.toFixed(2), championStats.stddevkills.toFixed(2)),
@@ -56,7 +57,6 @@ class ChampionTextStatistics extends Component {
                 createData('Average Total Damage Taken', championStats.average_totaldamagetaken.toFixed(0), championStats.stddev_totaldamagetaken.toFixed(0)),
 
                 createData('Average Total Damage Dealt To Champs', championStats.average_totaldamagedealttochampions.toFixed(0), championStats.stddev_totaldamagedealttochampions.toFixed(0)),
-                createData('Average Damage Dealt To Objectives', championStats.average_damagedealttoobjectives.toFixed(0), championStats.stddev_damagedealttoobjectives.toFixed(0)),
                 createData('Average Damage Dealt To Turrets', championStats.average_damagedealttoturrets.toFixed(0), championStats.stddev_damagedealttoturrets.toFixed(0)),
             
                 createData('Average Heals', championStats.average_totalheal.toFixed(0), championStats.stddev_totalheal.toFixed(0)),

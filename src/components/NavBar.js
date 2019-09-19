@@ -178,7 +178,7 @@ class NavBar extends Component {
 
                             <div className={classes.grow}></div>
 
-                            <ChampionSearch selectedVersion={this.state.selectedPatch} selectedLeague={this.state.selectedLeague} routerHistory={this.props.history}/>
+                            <ChampionSearch selectedVersion={this.state.selectedPatch} selectedLeague={this.state.selectedLeague} selectedQueue={this.state.selectedQueue} routerHistory={this.props.history}/>
 
                             <TextField
                                 label="Patch"

@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
 import Typography from '@material-ui/core/Typography';
 import Tooltip from '@material-ui/core/Tooltip';
+
+// API
+import { fetchSummonerSpells } from "../api/FetchSummonerSpell"
 
 const STATIC_DATA_BASE_URL = `${process.env.REACT_APP_STATIC_DATA_BASE_URL}`;
 
@@ -18,7 +21,10 @@ const styles = theme => ({
   });
 
 function SummonerSpells(props) {
-    
+    const [data, setData] = useState([]);
+    const [didLoad, setDidLoad] = useState(false);
+    const [error, setError] = useState(false);
+
     if (props.summonerSpells === undefined) {
         return <div></div>;
     }
@@ -26,14 +32,29 @@ function SummonerSpells(props) {
     if (props.version === undefined) {
         return <div></div>;
     }
+
+    useEffect(() => {
+        if (props.version !== undefined) {
+            fetchSummonerSpells(props.version, "en_US", setData, setError, setDidLoad);
+        }
+    }, [props.version]);
     
     const { summonerSpells, version, classes } = props;
+
+    if (data != null) {
+        console.log(data.toString())
+    }
 
     var displayRole = "";
     if (props.role !== undefined) {
         displayRole = props.role;
     } else {
         displayRole = "Overall";
+    }
+
+    console.log(summonerSpells);
+    if (didLoad !== true || error !== false || summonerSpells === null || summonerSpells === undefined || summonerSpells.summonerspells.length === 0) {
+        return <div></div>;
     }
 
     return <div>
