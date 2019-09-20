@@ -1,0 +1,927 @@
+{
+    "championid": 84,
+    "championrealid": "Akali",
+    "championname": "Akali",
+    "gameversion": "9.18",
+    "tier": "ALL",
+    "queue": "RANKED_SOLO",
+    "samplesize": 282,
+    "timestamp": "2019-09-20T10:26:27.462Z",
+    "RunesReforgedStatsValues": [
+        {
+            "samplesize": 21,
+            "hash": "8000_8010_9111_9105_8014_8100_8139_8135_5008_5008_5002",
+            "runesreforged": {
+                "slotprimary": {
+                    "ID": 8000,
+                    "Rune0": {
+                        "ID": 8010
+                    },
+                    "Rune1": {
+                        "ID": 9111
+                    },
+                    "Rune2": {
+                        "ID": 9105
+                    },
+                    "Rune3": {
+                        "ID": 8014
+                    }
+                },
+                "slotsecondary": {
+                    "ID": 8100,
+                    "Rune0": {
+                        "ID": 8139
+                    },
+                    "Rune1": {
+                        "ID": 8135
+                    }
+                },
+                "statperks": {
+                    "Perk0": {
+                        "ID": 5008
+                    },
+                    "Perk1": {
+                        "ID": 5008
+                    },
+                    "Perk2": {
+                        "ID": 5002
+                    }
+                }
+            },
+            "pickrate": 0.07446808510638298,
+            "winrate": 0.47619047619047616
+        },
+        {
+            "samplesize": 16,
+            "hash": "8100_8112_8139_8138_8135_8400_8473_8451_5008_5008_5003",
+            "runesreforged": {
+                "slotprimary": {
+                    "ID": 8100,
+                    "Rune0": {
+                        "ID": 8112
+                    },
+                    "Rune1": {
+                        "ID": 8139
+                    },
+                    "Rune2": {
+                        "ID": 8138
+                    },
+                    "Rune3": {
+                        "ID": 8135
+                    }
+                },
+                "slotsecondary": {
+                    "ID": 8400,
+                    "Rune0": {
+                        "ID": 8473
+                    },
+                    "Rune1": {
+                        "ID": 8451
+                    }
+                },
+                "statperks": {
+                    "Perk0": {
+                        "ID": 5008
+                    },
+                    "Perk1": {
+                        "ID": 5008
+                    },
+                    "Perk2": {
+                        "ID": 5003
+                    }
+                }
+            },
+            "pickrate": 0.05673758865248227,
+            "winrate": 0.4375
+        },
+        {
+            "samplesize": 10,
+            "hash": "8000_8010_9111_9105_8014_8400_8473_8451_5008_5008_5003",
+            "runesreforged": {
+                "slotprimary": {
+                    "ID": 8000,
+                    "Rune0": {
+                        "ID": 8010
+                    },
+                    "Rune1": {
+                        "ID": 9111
+                    },
+                    "Rune2": {
+                        "ID": 9105
+                    },
+                    "Rune3": {
+                        "ID": 8014
+                    }
+                },
+                "slotsecondary": {
+                    "ID": 8400,
+                    "Rune0": {
+                        "ID": 8473
+                    },
+                    "Rune1": {
+                        "ID": 8451
+                    }
+                },
+                "statperks": {
+                    "Perk0": {
+                        "ID": 5008
+                    },
+                    "Perk1": {
+                        "ID": 5008
+                    },
+                    "Perk2": {
+                        "ID": 5003
+                    }
+                }
+            },
+            "pickrate": 0.03546099290780142,
+            "winrate": 0.4
+        },
+        {
+            "samplesize": 7,
+            "hash": "8000_8010_9111_9105_8014_8400_8473_8451_5008_5008_5002",
+            "runesreforged": {
+                "slotprimary": {
+                    "ID": 8000,
+                    "Rune0": {
+                        "ID": 8010
+                    },
+                    "Rune1": {
+                        "ID": 9111
+                    },
+                    "Rune2": {
+                        "ID": 9105
+                    },
+                    "Rune3": {
+                        "ID": 8014
+                    }
+                },
+                "slotsecondary": {
+                    "ID": 8400,
+                    "Rune0": {
+                        "ID": 8473
+                    },
+                    "Rune1": {
+                        "ID": 8451
+                    }
+                },
+                "statperks": {
+                    "Perk0": {
+                        "ID": 5008
+                    },
+                    "Perk1": {
+                        "ID": 5008
+                    },
+                    "Perk2": {
+                        "ID": 5002
+                    }
+                }
+            },
+            "pickrate": 0.024822695035460994,
+            "winrate": 0.42857142857142855
+        },
+        {
+            "samplesize": 5,
+            "hash": "8000_8021_9101_9105_8014_8100_8139_8135_5008_5008_5003",
+            "runesreforged": {
+                "slotprimary": {
+                    "ID": 8000,
+                    "Rune0": {
+                        "ID": 8021
+                    },
+                    "Rune1": {
+                        "ID": 9101
+                    },
+                    "Rune2": {
+                        "ID": 9105
+                    },
+                    "Rune3": {
+                        "ID": 8014
+                    }
+                },
+                "slotsecondary": {
+                    "ID": 8100,
+                    "Rune0": {
+                        "ID": 8139
+                    },
+                    "Rune1": {
+                        "ID": 8135
+                    }
+                },
+                "statperks": {
+                    "Perk0": {
+                        "ID": 5008
+                    },
+                    "Perk1": {
+                        "ID": 5008
+                    },
+                    "Perk2": {
+                        "ID": 5003
+                    }
+                }
+            },
+            "pickrate": 0.01773049645390071,
+            "winrate": 0.4
+        }
+    ],
+    "statsperrole": {
+        "BOTTOM_UNKNOWN": [
+            {
+                "samplesize": 1,
+                "hash": "8000_8010_9111_9105_8014_8400_8473_8453_5008_5008_5002",
+                "runesreforged": {
+                    "slotprimary": {
+                        "ID": 8000,
+                        "Rune0": {
+                            "ID": 8010
+                        },
+                        "Rune1": {
+                            "ID": 9111
+                        },
+                        "Rune2": {
+                            "ID": 9105
+                        },
+                        "Rune3": {
+                            "ID": 8014
+                        }
+                    },
+                    "slotsecondary": {
+                        "ID": 8400,
+                        "Rune0": {
+                            "ID": 8473
+                        },
+                        "Rune1": {
+                            "ID": 8453
+                        }
+                    },
+                    "statperks": {
+                        "Perk0": {
+                            "ID": 5008
+                        },
+                        "Perk1": {
+                            "ID": 5008
+                        },
+                        "Perk2": {
+                            "ID": 5002
+                        }
+                    }
+                },
+                "pickrate": 1,
+                "winrate": 0
+            }
+        ],
+        "JUNGLE": [
+            {
+                "samplesize": 1,
+                "hash": "8000_8010_9111_9103_8014_8400_8473_8453_5008_5008_5002",
+                "runesreforged": {
+                    "slotprimary": {
+                        "ID": 8000,
+                        "Rune0": {
+                            "ID": 8010
+                        },
+                        "Rune1": {
+                            "ID": 9111
+                        },
+                        "Rune2": {
+                            "ID": 9103
+                        },
+                        "Rune3": {
+                            "ID": 8014
+                        }
+                    },
+                    "slotsecondary": {
+                        "ID": 8400,
+                        "Rune0": {
+                            "ID": 8473
+                        },
+                        "Rune1": {
+                            "ID": 8453
+                        }
+                    },
+                    "statperks": {
+                        "Perk0": {
+                            "ID": 5008
+                        },
+                        "Perk1": {
+                            "ID": 5008
+                        },
+                        "Perk2": {
+                            "ID": 5002
+                        }
+                    }
+                },
+                "pickrate": 1,
+                "winrate": 0
+            }
+        ],
+        "MIDDLE": [
+            {
+                "samplesize": 11,
+                "hash": "8100_8112_8139_8138_8135_8400_8473_8451_5008_5008_5003",
+                "runesreforged": {
+                    "slotprimary": {
+                        "ID": 8100,
+                        "Rune0": {
+                            "ID": 8112
+                        },
+                        "Rune1": {
+                            "ID": 8139
+                        },
+                        "Rune2": {
+                            "ID": 8138
+                        },
+                        "Rune3": {
+                            "ID": 8135
+                        }
+                    },
+                    "slotsecondary": {
+                        "ID": 8400,
+                        "Rune0": {
+                            "ID": 8473
+                        },
+                        "Rune1": {
+                            "ID": 8451
+                        }
+                    },
+                    "statperks": {
+                        "Perk0": {
+                            "ID": 5008
+                        },
+                        "Perk1": {
+                            "ID": 5008
+                        },
+                        "Perk2": {
+                            "ID": 5003
+                        }
+                    }
+                },
+                "pickrate": 0.09401709401709402,
+                "winrate": 0.5454545454545454
+            },
+            {
+                "samplesize": 8,
+                "hash": "8000_8010_9111_9105_8014_8400_8473_8451_5008_5008_5003",
+                "runesreforged": {
+                    "slotprimary": {
+                        "ID": 8000,
+                        "Rune0": {
+                            "ID": 8010
+                        },
+                        "Rune1": {
+                            "ID": 9111
+                        },
+                        "Rune2": {
+                            "ID": 9105
+                        },
+                        "Rune3": {
+                            "ID": 8014
+                        }
+                    },
+                    "slotsecondary": {
+                        "ID": 8400,
+                        "Rune0": {
+                            "ID": 8473
+                        },
+                        "Rune1": {
+                            "ID": 8451
+                        }
+                    },
+                    "statperks": {
+                        "Perk0": {
+                            "ID": 5008
+                        },
+                        "Perk1": {
+                            "ID": 5008
+                        },
+                        "Perk2": {
+                            "ID": 5003
+                        }
+                    }
+                },
+                "pickrate": 0.06837606837606838,
+                "winrate": 0.5
+            },
+            {
+                "samplesize": 6,
+                "hash": "8100_8112_8139_8138_8135_8400_8473_8451_5008_5008_5002",
+                "runesreforged": {
+                    "slotprimary": {
+                        "ID": 8100,
+                        "Rune0": {
+                            "ID": 8112
+                        },
+                        "Rune1": {
+                            "ID": 8139
+                        },
+                        "Rune2": {
+                            "ID": 8138
+                        },
+                        "Rune3": {
+                            "ID": 8135
+                        }
+                    },
+                    "slotsecondary": {
+                        "ID": 8400,
+                        "Rune0": {
+                            "ID": 8473
+                        },
+                        "Rune1": {
+                            "ID": 8451
+                        }
+                    },
+                    "statperks": {
+                        "Perk0": {
+                            "ID": 5008
+                        },
+                        "Perk1": {
+                            "ID": 5008
+                        },
+                        "Perk2": {
+                            "ID": 5002
+                        }
+                    }
+                },
+                "pickrate": 0.05128205128205128,
+                "winrate": 0.6666666666666666
+            },
+            {
+                "samplesize": 5,
+                "hash": "8000_8010_9111_9105_8299_8100_8138_8135_5008_5008_5003",
+                "runesreforged": {
+                    "slotprimary": {
+                        "ID": 8000,
+                        "Rune0": {
+                            "ID": 8010
+                        },
+                        "Rune1": {
+                            "ID": 9111
+                        },
+                        "Rune2": {
+                            "ID": 9105
+                        },
+                        "Rune3": {
+                            "ID": 8299
+                        }
+                    },
+                    "slotsecondary": {
+                        "ID": 8100,
+                        "Rune0": {
+                            "ID": 8138
+                        },
+                        "Rune1": {
+                            "ID": 8135
+                        }
+                    },
+                    "statperks": {
+                        "Perk0": {
+                            "ID": 5008
+                        },
+                        "Perk1": {
+                            "ID": 5008
+                        },
+                        "Perk2": {
+                            "ID": 5003
+                        }
+                    }
+                },
+                "pickrate": 0.042735042735042736,
+                "winrate": 0.2
+            },
+            {
+                "samplesize": 4,
+                "hash": "8100_8112_8139_8138_8135_8400_8473_8453_5008_5008_5003",
+                "runesreforged": {
+                    "slotprimary": {
+                        "ID": 8100,
+                        "Rune0": {
+                            "ID": 8112
+                        },
+                        "Rune1": {
+                            "ID": 8139
+                        },
+                        "Rune2": {
+                            "ID": 8138
+                        },
+                        "Rune3": {
+                            "ID": 8135
+                        }
+                    },
+                    "slotsecondary": {
+                        "ID": 8400,
+                        "Rune0": {
+                            "ID": 8473
+                        },
+                        "Rune1": {
+                            "ID": 8453
+                        }
+                    },
+                    "statperks": {
+                        "Perk0": {
+                            "ID": 5008
+                        },
+                        "Perk1": {
+                            "ID": 5008
+                        },
+                        "Perk2": {
+                            "ID": 5003
+                        }
+                    }
+                },
+                "pickrate": 0.03418803418803419,
+                "winrate": 0.25
+            }
+        ],
+        "TOP": [
+            {
+                "samplesize": 13,
+                "hash": "8000_8010_9111_9105_8014_8100_8139_8135_5008_5008_5002",
+                "runesreforged": {
+                    "slotprimary": {
+                        "ID": 8000,
+                        "Rune0": {
+                            "ID": 8010
+                        },
+                        "Rune1": {
+                            "ID": 9111
+                        },
+                        "Rune2": {
+                            "ID": 9105
+                        },
+                        "Rune3": {
+                            "ID": 8014
+                        }
+                    },
+                    "slotsecondary": {
+                        "ID": 8100,
+                        "Rune0": {
+                            "ID": 8139
+                        },
+                        "Rune1": {
+                            "ID": 8135
+                        }
+                    },
+                    "statperks": {
+                        "Perk0": {
+                            "ID": 5008
+                        },
+                        "Perk1": {
+                            "ID": 5008
+                        },
+                        "Perk2": {
+                            "ID": 5002
+                        }
+                    }
+                },
+                "pickrate": 0.12380952380952381,
+                "winrate": 0.5384615384615384
+            },
+            {
+                "samplesize": 4,
+                "hash": "8000_8010_9111_9105_8014_8100_8139_8135_5008_5008_5003",
+                "runesreforged": {
+                    "slotprimary": {
+                        "ID": 8000,
+                        "Rune0": {
+                            "ID": 8010
+                        },
+                        "Rune1": {
+                            "ID": 9111
+                        },
+                        "Rune2": {
+                            "ID": 9105
+                        },
+                        "Rune3": {
+                            "ID": 8014
+                        }
+                    },
+                    "slotsecondary": {
+                        "ID": 8100,
+                        "Rune0": {
+                            "ID": 8139
+                        },
+                        "Rune1": {
+                            "ID": 8135
+                        }
+                    },
+                    "statperks": {
+                        "Perk0": {
+                            "ID": 5008
+                        },
+                        "Perk1": {
+                            "ID": 5008
+                        },
+                        "Perk2": {
+                            "ID": 5003
+                        }
+                    }
+                },
+                "pickrate": 0.0380952380952381,
+                "winrate": 1
+            },
+            {
+                "samplesize": 3,
+                "hash": "8100_8112_8139_8138_8135_8400_8473_8451_5008_5008_5002",
+                "runesreforged": {
+                    "slotprimary": {
+                        "ID": 8100,
+                        "Rune0": {
+                            "ID": 8112
+                        },
+                        "Rune1": {
+                            "ID": 8139
+                        },
+                        "Rune2": {
+                            "ID": 8138
+                        },
+                        "Rune3": {
+                            "ID": 8135
+                        }
+                    },
+                    "slotsecondary": {
+                        "ID": 8400,
+                        "Rune0": {
+                            "ID": 8473
+                        },
+                        "Rune1": {
+                            "ID": 8451
+                        }
+                    },
+                    "statperks": {
+                        "Perk0": {
+                            "ID": 5008
+                        },
+                        "Perk1": {
+                            "ID": 5008
+                        },
+                        "Perk2": {
+                            "ID": 5002
+                        }
+                    }
+                },
+                "pickrate": 0.02857142857142857,
+                "winrate": 0.3333333333333333
+            },
+            {
+                "samplesize": 2,
+                "hash": "8100_8112_8139_8138_8106_8400_8473_8451_5008_5008_5002",
+                "runesreforged": {
+                    "slotprimary": {
+                        "ID": 8100,
+                        "Rune0": {
+                            "ID": 8112
+                        },
+                        "Rune1": {
+                            "ID": 8139
+                        },
+                        "Rune2": {
+                            "ID": 8138
+                        },
+                        "Rune3": {
+                            "ID": 8106
+                        }
+                    },
+                    "slotsecondary": {
+                        "ID": 8400,
+                        "Rune0": {
+                            "ID": 8473
+                        },
+                        "Rune1": {
+                            "ID": 8451
+                        }
+                    },
+                    "statperks": {
+                        "Perk0": {
+                            "ID": 5008
+                        },
+                        "Perk1": {
+                            "ID": 5008
+                        },
+                        "Perk2": {
+                            "ID": 5002
+                        }
+                    }
+                },
+                "pickrate": 0.01904761904761905,
+                "winrate": 0
+            },
+            {
+                "samplesize": 1,
+                "hash": "8000_8010_9111_9105_8299_8400_8473_8453_5008_5008_5003",
+                "runesreforged": {
+                    "slotprimary": {
+                        "ID": 8000,
+                        "Rune0": {
+                            "ID": 8010
+                        },
+                        "Rune1": {
+                            "ID": 9111
+                        },
+                        "Rune2": {
+                            "ID": 9105
+                        },
+                        "Rune3": {
+                            "ID": 8299
+                        }
+                    },
+                    "slotsecondary": {
+                        "ID": 8400,
+                        "Rune0": {
+                            "ID": 8473
+                        },
+                        "Rune1": {
+                            "ID": 8453
+                        }
+                    },
+                    "statperks": {
+                        "Perk0": {
+                            "ID": 5008
+                        },
+                        "Perk1": {
+                            "ID": 5008
+                        },
+                        "Perk2": {
+                            "ID": 5003
+                        }
+                    }
+                },
+                "pickrate": 0.009523809523809525,
+                "winrate": 0
+            }
+        ],
+        "UNKNOWN": [
+            {
+                "samplesize": 5,
+                "hash": "8100_8112_8139_8138_8135_8400_8473_8451_5008_5008_5003",
+                "runesreforged": {
+                    "slotprimary": {
+                        "ID": 8100,
+                        "Rune0": {
+                            "ID": 8112
+                        },
+                        "Rune1": {
+                            "ID": 8139
+                        },
+                        "Rune2": {
+                            "ID": 8138
+                        },
+                        "Rune3": {
+                            "ID": 8135
+                        }
+                    },
+                    "slotsecondary": {
+                        "ID": 8400,
+                        "Rune0": {
+                            "ID": 8473
+                        },
+                        "Rune1": {
+                            "ID": 8451
+                        }
+                    },
+                    "statperks": {
+                        "Perk0": {
+                            "ID": 5008
+                        },
+                        "Perk1": {
+                            "ID": 5008
+                        },
+                        "Perk2": {
+                            "ID": 5003
+                        }
+                    }
+                },
+                "pickrate": 0.08620689655172414,
+                "winrate": 0.2
+            },
+            {
+                "samplesize": 3,
+                "hash": "8000_8021_9111_9105_8014_8100_8139_8135_5008_5008_5002",
+                "runesreforged": {
+                    "slotprimary": {
+                        "ID": 8000,
+                        "Rune0": {
+                            "ID": 8021
+                        },
+                        "Rune1": {
+                            "ID": 9111
+                        },
+                        "Rune2": {
+                            "ID": 9105
+                        },
+                        "Rune3": {
+                            "ID": 8014
+                        }
+                    },
+                    "slotsecondary": {
+                        "ID": 8100,
+                        "Rune0": {
+                            "ID": 8139
+                        },
+                        "Rune1": {
+                            "ID": 8135
+                        }
+                    },
+                    "statperks": {
+                        "Perk0": {
+                            "ID": 5008
+                        },
+                        "Perk1": {
+                            "ID": 5008
+                        },
+                        "Perk2": {
+                            "ID": 5002
+                        }
+                    }
+                },
+                "pickrate": 0.05172413793103448,
+                "winrate": 1
+            },
+            {
+                "samplesize": 2,
+                "hash": "8000_8010_9111_9105_8014_8100_8139_8135_5008_5008_5003",
+                "runesreforged": {
+                    "slotprimary": {
+                        "ID": 8000,
+                        "Rune0": {
+                            "ID": 8010
+                        },
+                        "Rune1": {
+                            "ID": 9111
+                        },
+                        "Rune2": {
+                            "ID": 9105
+                        },
+                        "Rune3": {
+                            "ID": 8014
+                        }
+                    },
+                    "slotsecondary": {
+                        "ID": 8100,
+                        "Rune0": {
+                            "ID": 8139
+                        },
+                        "Rune1": {
+                            "ID": 8135
+                        }
+                    },
+                    "statperks": {
+                        "Perk0": {
+                            "ID": 5008
+                        },
+                        "Perk1": {
+                            "ID": 5008
+                        },
+                        "Perk2": {
+                            "ID": 5003
+                        }
+                    }
+                },
+                "pickrate": 0.034482758620689655,
+                "winrate": 0
+            },
+            {
+                "samplesize": 1,
+                "hash": "8100_8112_8143_8138_8135_8400_8446_8451_5008_5008_5001",
+                "runesreforged": {
+                    "slotprimary": {
+                        "ID": 8100,
+                        "Rune0": {
+                            "ID": 8112
+                        },
+                        "Rune1": {
+                            "ID": 8143
+                        },
+                        "Rune2": {
+                            "ID": 8138
+                        },
+                        "Rune3": {
+                            "ID": 8135
+                        }
+                    },
+                    "slotsecondary": {
+                        "ID": 8400,
+                        "Rune0": {
+                            "ID": 8446
+                        },
+                        "Rune1": {
+                            "ID": 8451
+                        }
+                    },
+                    "statperks": {
+                        "Perk0": {
+                            "ID": 5008
+                        },
+                        "Perk1": {
+                            "ID": 5008
+                        },
+                        "Perk2": {
+                            "ID": 5001
+                        }
+                    }
+                },
+                "pickrate": 0.017241379310344827,
+                "winrate": 1
+            }
+        ]
+    }
+}
