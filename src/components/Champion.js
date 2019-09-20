@@ -25,6 +25,7 @@ import { fetchChampionInfo } from "../api/FetchChampionInfo";
 import { fetchSummonerSpellsStats } from "../api/FetchSummonerSpellsStats";
 
 import { constants as themeConstants } from "../theme/ConstantsTheme";
+import ItemStats from './ItemStats';
 
 class Champion extends Component {
 
@@ -118,7 +119,9 @@ class Champion extends Component {
                fetchSummonerSpellsStatsData, fetchSummonerSpellsStatsDone,
                fetchChampionInfoData, fetchChampionInfoError, fetchChampionInfoDone } = this.state;
 
-        const version = this.props.parentProps.selectedVersion;
+        const version = this.state.parentProps.parentProps.selectedVersion;
+        const queue = this.state.parentProps.parentProps.selectedQueue;
+        const league = this.state.parentProps.parentProps.selectedLeague;
 
         let page;
 
@@ -189,9 +192,13 @@ class Champion extends Component {
                             && fetchSummonerSpellsStatsData.statsperrole !== null 
                             && fetchSummonerSpellsStatsData.statsperrole.hasOwnProperty(value)
                             && fetchSummonerSpellsStatsData.statsperrole[value] !== null ?
-                            <Grid item xs={12} sm={12}  md={4} lg={4} xl={4} key={value+'spells'}>
+                            <Grid item xs={12} sm={12}  md={4} lg={4} xl={4} key={value+'build'}>
                                 <Paper style={{ padding: themeConstants.padding }}>
                                     <SummonerSpells version={version} summonerSpells={fetchSummonerSpellsStatsData.statsperrole[value][Object.keys(fetchSummonerSpellsStatsData.statsperrole[value])[0]]} role={value}/>
+                                </Paper>
+                                <div style={ {padding: themeConstants.padding }} key={value+'div'} />
+                                <Paper style={{ padding: themeConstants.padding }}>
+                                    <ItemStats championID={this.props.match.params.champion} version={version} queue={queue} league={league} role={value}/>
                                 </Paper>
                             </Grid>
                             : <div></div>
