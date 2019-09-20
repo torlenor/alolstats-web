@@ -13,8 +13,6 @@ create_docker_image:
   stage: build_image
   tags:
     - docker-from-docker
-  only:
-    - master
   script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN gdr.abyle.org
     - docker pull $CONTAINER_IMAGE:latest_dev || true
@@ -120,3 +118,4 @@ deploy_production:
   except:
     - branches
   when: manual
+
