@@ -156,7 +156,7 @@ class App extends Component {
                     <div className="App">
                         <CssBaseline />
                         <NavBar versions={this.state.versions} leagues={this.state.leagues} queues={this.state.queues} handlerPatch={this.handlerPatch} handlerLeague={this.handlerLeague} handlerQueue={this.handlerQueue} />
-                        <Routes versions={this.state.versions} leagues={this.state.leagues} queues={this.state.queues} selectedVersion={this.state.patch} selectedLeague={this.state.league} selectedQueue={this.state.queue}/>
+                        <Routes versions={this.state.versions} leagues={this.state.leagues} queues={this.state.queues} selectedVersion={this.state.patch} selectedLeague={this.state.league.toUpperCase()} selectedQueue={this.state.queue.toUpperCase()}/>
                         <Footer appVersion={VERSION} buildDate={BUILD_DATE}/>
                         <CookieConsent>
                             This website uses cookies to enhance the user experience and Google Analytics.
